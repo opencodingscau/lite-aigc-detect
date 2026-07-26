@@ -38,8 +38,9 @@ Likewise, FatFormer, VIB-Net, CO-SPY, and Beyond Generation~\cite{liu2024fatform
 
 \subsection{Limitations}
 
-Training used a fixed no-pretraining recipe, a single training seed, and two DF training sources.
-Bootstrap intervals quantify test-sample uncertainty but do \emph{not} capture variability across independently trained models.
+Training used a fixed no-pretraining recipe and two DF training sources; primary tables remain seed~42.
+A three-seed probe (42/43/44) for LiteSSM-A and EfficientNet-B0 is reported in Appendix~\ref{app:seed} and does not replace primary rankings.
+Bootstrap intervals quantify test-sample uncertainty and remain distinct from training-seed variance.
 UFD Macro depends on the chosen subset list and per-class caps.
 JPEG analysis focuses on Q70 for the main claim; a multi-quality ID sweep ($Q\in\{95,85,70\}$) is provided in Appendix~\ref{app:jpeg} without upgrading the claim to general compression robustness.
 External reference detectors (UnivFD, NPR) use publicly released pretrained weights and native preprocessing; they contextualize performance and are not training-matched competitors.

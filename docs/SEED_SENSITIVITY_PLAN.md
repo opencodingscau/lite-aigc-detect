@@ -1,28 +1,26 @@
-# Seed sensitivity (P1) — protocol only until GPU run
+# Seed sensitivity (P1) — completed minimal sweep
 
-Local machine has **no CUDA**; AutoDL password env `AUTODL_PASS` was not set in this session.
-Do **not** invent multi-seed numbers. Main manuscript remains single-seed (seed 42) with bootstrap CIs = test-sample uncertainty only.
+Primary manuscript tables remain **single-seed (42)** with bootstrap CIs = test-sample uncertainty only.
+Appendix C reports a locked-recipe probe for LiteSSM-A and EfficientNet-B0 on seeds `{42,43,44}`.
 
-## Minimal planned sweep (when GPU available)
+## Results (from AutoDL RTX 4090D, 2026-07-27)
 
-| Model | Seeds | Metrics |
-|-------|-------|---------|
-| LiteSSM-A (`mobilemamba_lite`) | 42, 43, 44 | ID AUC, UFD Macro |
-| EfficientNet-B0 | 42, 43, 44 | ID AUC, UFD Macro |
+Source artifact: `formal/seed_sweep_results/summary.json` (also mirrored under `docs/seed_sweep_summary.json` if synced).
 
-- Same frozen manifests / recipe as main Panel A.
-- Report mean±std in **Appendix only**; do not replace primary tables.
-- If Macro std is small (e.g. ≤0.01), cite as stability evidence under the locked recipe.
-- If large, keep single-seed limitation explicit.
+| Model | Metric | s42 | s43 | s44 | Mean±std (population) |
+|-------|--------|-----|-----|-----|------------------------|
+| LiteSSM-A | ID | 0.946 | 0.939 | 0.939 | 0.941±0.004 |
+| LiteSSM-A | UFD Macro | 0.718 | 0.712 | 0.733 | 0.721±0.009 |
+| EfficientNet-B0 | ID | 0.929 | 0.923 | 0.930 | 0.927±0.003 |
+| EfficientNet-B0 | UFD Macro | 0.667 | 0.674 | 0.624 | 0.655±0.022 |
 
-## Remote command sketch
+- LiteSSM-A Macro std ≤0.01 → cite as stability under the locked recipe (appendix only).
+- EfficientNet-B0 Macro std ≈0.022 → keep single-seed primary ranking; do not overclaim CNN stability.
+- Do **not** merge means into `freeze/frozen_numbers.json` primary rows.
 
-```bash
-# on training host, from repo root with data mounted
-for s in 42 43 44; do
-  python -m lite_aigc.train --model mobilemamba_lite --seed $s --out outputs/seed_sweep/mobilemamba_lite_s$s
-  python -m lite_aigc.train --model efficientnet_b0 --seed $s --out outputs/seed_sweep/efficientnet_b0_s$s
-done
-```
+## Protocol (executed)
 
-Exact flags must match the locked bake-off config used for `v1.0.0-paper.2`. After runs, add Appendix Table A3 and update `docs/BIB_AUDIT.md` / gates — do not silently merge into freeze primary numbers.
+- Manifests: frozen `3200/400/400/5600` (seed 42 splits).
+- Recipe: 15 epochs, batch 64, AdamW lr 1e-4, CosineAnnealingLR.
+- Seed 42: reused bake-off / baseline `best.pt`; seeds 43/44: full retrain.
+- Metrics: ID test AUC from `metrics.json`; UFD Macro = `ufd_mean_auc` from `eval_by_source.py`.

@@ -1,6 +1,6 @@
 # Study-Specific SSM Architectures (Gate B)
 
-**LiteSSM-A** denotes the compact baseline SSM classifier, whereas **LiteSSM-B** extends it with a BiViM-inspired bidirectional SelectiveSSM design. Both models are study-specific pure-PyTorch implementations rather than official reproductions of an existing architecture.
+**LiteSSM-A** denotes the compact baseline SSM classifier, whereas **LiteSSM-B** extends it with a Vision Mamba (Vim)-inspired bidirectional SelectiveSSM design. Both models are study-specific pure-PyTorch implementations rather than official reproductions of an existing architecture.
 
 ## Frozen registry → paper display names
 
@@ -36,7 +36,7 @@ Used inside both LiteSSM-A blocks and LiteSSM-B blocks.
 | Item | Setting |
 |------|---------|
 | Input | `B×L×D` |
-| Expansion | LiteSSM-A MRFFI: `expand=1`, `d_state=8`; LiteSSM-B BiViM: `expand=1`, `d_state=16` |
+| Expansion | LiteSSM-A MRFFI: `expand=1`, `d_state=8`; LiteSSM-B Bi-SSM: `expand=1`, `d_state=16` |
 | Depthwise conv | `Conv1d` k=3, groups=`d_inner` |
 | Discretization | softplus Δ; `A = -exp(A_log)`; sequential recurrence over `L` |
 | Gate | SiLU on z-branch (GLU-style) |
@@ -95,10 +95,10 @@ x ─→ LayerNorm ─┬─→ DWConv1d{k=3,5,7} (sum) ─┐
 | Stem-3 | 28×28 | 192 | Conv3×3/s2, BN, GELU |
 | Stem-4 | 14×14 | 192 | Conv3×3/s2, BN, GELU |
 | Tokenize | L=196 | 192 | flatten + pos emb |
-| Blocks ×4 | L=196 | 192 | BiViMBlock |
+| Blocks ×4 | L=196 | 192 | Bi-SSM block (`BiViMBlock` in code) |
 | Head | 1 | 2 | LN, mean pool, Linear |
 
-### BiViMBlock (bidirectional SelectiveSSM)
+### Bi-SSM block (code: `BiViMBlock`; bidirectional SelectiveSSM)
 
 ```text
 x ─→ LayerNorm ─┬─→ SelectiveSSM_fwd ──────────────┐
@@ -107,7 +107,7 @@ x ─→ LayerNorm ─┬─→ SelectiveSSM_fwd ──────────�
 
 - Forward and backward SelectiveSSM (`d_state=16`, `expand=1`).
 - Mix: `Linear(2C → C)` then residual.
-- Distinctive operator is bidirectional SelectiveSSM; naming follows the real implementation.
+- Manuscript display name: bidirectional SelectiveSSM / Bi-SSM; `BiViMBlock` is the frozen implementation class name only.
 
 **Locked size:** Params 2.48M; FLOPs 0.853G (`thop`).
 

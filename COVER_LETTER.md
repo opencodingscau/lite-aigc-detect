@@ -1,12 +1,12 @@
 # Cover Letter — Applied Sciences (MDPI)
 
-**Subject:** Submission of manuscript — Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift
+**Subject:** Submission of manuscript — Compact AI-Generated Image Detection under Compression and Cross-Generator Shift
 
 Dear Editors,
 
 Please find enclosed the manuscript entitled:
 
-**“Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift: A Reproducible Study of CNN, Frequency-Aware, and State-Space Models.”**
+**“Compact AI-Generated Image Detection under Compression and Cross-Generator Shift: A Reproducible Study of CNN, Frequency-Aware, and State-Space Models.”**
 
 This work is a controlled, low-data empirical study of **compact** detectors for still-image AI-generated content (not deepfake video). Under a locked no-pretraining protocol, it compares CNN baselines, a gated frequency-aware CNN, and two study-specific pure-PyTorch state-space classifiers (**LiteSSM-A** and **LiteSSM-B**), and reports Params/FLOPs, locked batch-1 latency and batch-32 throughput, JPEG Q70 behavior, content-domain splits, and per-generator UniversalFakeDetect results. An unmatched FLUX probe appears only in the appendix and is not used for architecture claims.
 

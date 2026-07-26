@@ -10,7 +10,7 @@ We therefore treat \textbf{UFD Macro as the primary cross-generator summary} for
 Across ID, UFD Macro, and bedroom-domain ID, LiteSSM-A occupies a favorable accuracy--size region under the evaluated protocol.
 LiteSSM-B is close on ID and competitive on several OOD views, but is heavier and slower; the LiteSSM-A--LiteSSM-B ID gap is CI-overlapping.
 These gains do \emph{not} imply a universal or generator-agnostic detector: worst-generator AUC remains near chance for both SSMs.
-The appropriate claim is narrower---under a matched lightweight protocol, SSM backbones improved average transfer relative to compact CNN baselines, while generator-specific collapse persisted.
+The appropriate claim is narrower---under a matched compact-model protocol, SSM backbones improved average transfer relative to compact CNN baselines, while generator-specific collapse persisted.
 LiteSSM-A is preferred for its highest Panel~A UFD Macro together with a locked batch-32 throughput of 226 images/s, \emph{not} because it minimizes absolute batch-1 latency (p50 144.4\,ms versus $\approx$4--7\,ms for several CNNs).
 We therefore describe LiteSSM-A as the preferred \textbf{generalization--efficiency operating point} among protocol-matched compact models, rather than as a real-time, edge-ready, or lowest-latency detector.
 

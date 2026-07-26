@@ -6,7 +6,7 @@
 > Panel B = inference-only public checkpoints; **not** training-matched.
 > Registry keys (`mobilemamba_lite` / `mambapsa_cls`) remain on disk; display = LiteSSM-A/B.
 
-## Table 2. Overall Performance and Deployment Trade-Offs
+## Table 2. Overall Performance and Efficiency / Operating-Point Trade-Offs
 
 ### Panel A. Controlled lightweight models (frozen from-scratch protocol)
 

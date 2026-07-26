@@ -1,3 +1,9 @@
+# SUPERSEDED — use `COVER_LETTER.md`
+
+This draft is kept only for history. Authoritative cover letter: **`COVER_LETTER.md`**.
+
+---
+
 # Cover Letter Draft — Applied Sciences (MDPI)
 
 **Subject:** Submission of manuscript — Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift

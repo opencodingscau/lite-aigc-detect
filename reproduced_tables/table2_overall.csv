@@ -1,0 +1,9 @@
+model,registry_key,arch,params_M,flops_G,batch1_p50_ms,batch1_p95_ms,thr_bs32,id_auc,ufd_macro,worst_auc,ood_pooled
+LiteSSM-A,mobilemamba_lite,SSM,1.74,0.705,144.4,171.52,226.3,0.946,0.718,0.504,0.712
+LiteSSM-B,mambapsa_cls,SSM,2.478,0.853,237.57,264.57,119.8,0.945,0.7,0.483,0.722
+EfficientNet-B0,efficientnet_b0,CNN,4.01,0.414,6.64,8.95,4338.2,0.929,0.667,0.519,0.671
+LiteFreqNet v2,lite_freq_net_v2,CNN+FFT,1.127,0.18,6.15,8.35,4746.8,0.906,0.645,0.451,0.698
+MobileNetV3-S,mobilenet_v3_small,CNN,1.52,0.061,4.3,5.61,7230.7,0.89,0.636,0.455,0.7
+ShuffleNet-x0.5,shufflenet_v2_x0_5,CNN,0.344,0.044,6.21,7.47,4816.8,0.88,0.674,0.467,0.633
+UnivFD (Panel B ref),univfd,REF,427.617,,11.86,16.77,,0.608,0.948,0.861,0.95
+NPR (Panel B ref),npr,REF,1.438,,2.89,3.38,,0.947,0.976,0.837,0.983

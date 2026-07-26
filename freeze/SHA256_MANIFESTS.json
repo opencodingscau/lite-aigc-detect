@@ -1,0 +1,46 @@
+{
+  "manifests/train.jsonl": {
+    "sha256": "f3c0884adcfcd026074ce8c85a6f290a557dd41f494344f3c54c20e091303fe3",
+    "bytes": 457428
+  },
+  "manifests/val.jsonl": {
+    "sha256": "c44fc4ea6048d80228ec3d6f8cc8aee34da5934092574eec87814515d6307484",
+    "bytes": 57176
+  },
+  "manifests/test.jsonl": {
+    "sha256": "2d28f5ab62d9d4d4186f1bc26ff5f477424cebc3a74011d16630d4e17e8f7127",
+    "bytes": 57176
+  },
+  "manifests/test_ood.jsonl": {
+    "sha256": "8415c93b43ed983c9da8a7bfcc1b8b128802e01f0cb74a69a9381a12188f63b1",
+    "bytes": 840290
+  },
+  "manifests/ufd_eval.jsonl": {
+    "sha256": "70015c20e028ba48fb79ba3f9af1ca7ae6d2f626b1b6cf34a9b8e10587955de5",
+    "bytes": 856400
+  },
+  "checkpoints/efficientnet_b0/best.pt": {
+    "sha256": "aee1cc38ea2a926290e01dc434a8d15f022db1cdb1a0b7f25e90f49471149278",
+    "bytes": 16319710
+  },
+  "checkpoints/mobilenet_v3_small/best.pt": {
+    "sha256": "7268ea65ee82b7c1ccbc247dcc816ee2a18cdf168440f1927986fd18e1c9b60a",
+    "bytes": 6202722
+  },
+  "checkpoints/shufflenet_v2_x0_5/best.pt": {
+    "sha256": "fbedb56558b13a9bfe6501279b05a69ad3b62ac07fe3d365b818310e5a578867",
+    "bytes": 1505228
+  },
+  "checkpoints/lite_freq_net_v2/best.pt": {
+    "sha256": "f1ba7eb3e18d00dd1cf8fb64b4a4ea7ebb9a75521aa69f6a47ccac1ae3c88b2d",
+    "bytes": 4638748
+  },
+  "checkpoints/mobilemamba_lite/best.pt": {
+    "sha256": "e939d33cc1136659719550bc0a84d5d03602e352768d922ec4b8ebdb470e6cae",
+    "bytes": 6993669
+  },
+  "checkpoints/mambapsa_cls/best.pt": {
+    "sha256": "b51f58f8a0de9048b90e5534844ee1f888a9a279c9724a5003d6e311567b0607",
+    "bytes": 9949961
+  }
+}

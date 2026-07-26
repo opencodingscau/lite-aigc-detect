@@ -1,0 +1,8 @@
+We conducted a reproducible, protocol-matched comparison of compact CNN, frequency-aware, and state-space detectors for AI-generated still-image detection.
+Using frozen splits, a shared from-scratch training recipe, and clearly separated metrics---especially \textbf{UFD Macro} versus \textbf{OOD Pooled}---we find that \textbf{LiteSSM-A} offers the most favorable generalization--efficiency operating point under the evaluated latency budget, combining strong ID performance, the highest UFD Macro AUC among Panel~A models, and improved bedroom-domain behavior at moderate model size, with a locked batch-32 throughput of 226 images/s.
+LiteSSM-B remains a competitive SSM alternative under some aggregates (including a higher OOD Pooled AUC of 0.722).
+
+Equally important are the boundaries that remain: DALL·E detection stays near chance for all architectures; CelebA-HQ saturation masks bedroom difficulty in pooled ID scores; JPEG Q70 leaves all evaluated compact models nearly unchanged without crowning a frequency-specific winner; and frequency branches do not universally improve SSM or CNN transfer.
+These results support selecting LiteSSM-A as a practical lightweight operating point while rejecting narratives of universal, domain-invariant, or compression-robust detection beyond the evaluated settings.
+
+Future work may enlarge newer-generator probes under matched imaging pipelines, report multi-seed training variance, and harden worst-generator monitoring without abandoning the lightweight, fully disclosed protocol used here.

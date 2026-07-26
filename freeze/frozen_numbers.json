@@ -1,0 +1,146 @@
+{
+  "protocol": {
+    "gpu": "NVIDIA GeForce RTX 4090 D",
+    "pytorch": "2.3.0+cu121",
+    "dtype": "FP32",
+    "batch1_warmup": 50,
+    "batch1_iters": 500,
+    "cuda_synchronize": true,
+    "latency_scope": "model_only_synthetic_tensor_excludes_disk_io_and_preprocess",
+    "throughput_scope": "batch32_images_per_second_same_locked_session",
+    "primary_ood_metric": "ufd_macro_auc",
+    "superseded_notes": {
+      "mobilemamba_lite_fps_bs32_preliminary": {
+        "value": 367,
+        "status": "superseded",
+        "reason": "Preliminary throughput not produced under the final locked batch-1 latency protocol; excluded from the manuscript."
+      }
+    }
+  },
+  "display_name": {
+    "mobilemamba_lite": "LiteSSM-A",
+    "mambapsa_cls": "LiteSSM-B",
+    "efficientnet_b0": "EfficientNet-B0",
+    "lite_freq_net_v2": "LiteFreqNet v2",
+    "mobilenet_v3_small": "MobileNetV3-S",
+    "shufflenet_v2_x0_5": "ShuffleNet-x0.5",
+    "univfd": "UnivFD",
+    "npr": "NPR"
+  },
+  "registry_keys_frozen": {
+    "LiteSSM-A": "mobilemamba_lite",
+    "LiteSSM-B": "mambapsa_cls"
+  },
+  "models": {
+    "LiteSSM-A": {
+      "registry_key": "mobilemamba_lite",
+      "id_auc": 0.946,
+      "id_ci95": [
+        0.926,
+        0.964
+      ],
+      "ufd_macro_auc": 0.718,
+      "ufd_macro_ci95": [
+        0.707,
+        0.73
+      ],
+      "ood_pooled_auc": 0.712,
+      "worst_auc": 0.504,
+      "bedroom_auc": 0.812,
+      "celebahq_auc": 0.999,
+      "params_M": 1.74,
+      "flops_G": 0.705,
+      "batch1_p50_ms": 144.4,
+      "batch1_p95_ms": 171.5,
+      "batch32_fps": 226,
+      "jpeg_clean": 0.946,
+      "jpeg_q70": 0.948,
+      "jpeg_delta": 0.002,
+      "flux_auc_appendix_only": 0.782
+    },
+    "LiteSSM-B": {
+      "registry_key": "mambapsa_cls",
+      "id_auc": 0.945,
+      "id_ci95": [
+        0.924,
+        0.964
+      ],
+      "ufd_macro_auc": 0.7,
+      "ufd_macro_ci95": [
+        0.688,
+        0.711
+      ],
+      "ood_pooled_auc": 0.722,
+      "worst_auc": 0.483,
+      "bedroom_auc": 0.815,
+      "celebahq_auc": 0.998,
+      "params_M": 2.48,
+      "flops_G": 0.853,
+      "batch1_p50_ms": 237.6,
+      "batch1_p95_ms": 264.6,
+      "batch32_fps": 120,
+      "jpeg_clean": 0.945,
+      "jpeg_q70": 0.946,
+      "jpeg_delta": 0.001,
+      "flux_auc_appendix_only": 0.757
+    },
+    "EfficientNet-B0": {
+      "registry_key": "efficientnet_b0",
+      "id_auc": 0.929,
+      "ufd_macro_auc": 0.667,
+      "ood_pooled_auc": 0.671,
+      "worst_auc": 0.519,
+      "bedroom_auc": 0.777,
+      "celebahq_auc": 0.996,
+      "params_M": 4.01,
+      "flops_G": 0.414,
+      "batch1_p50_ms": 6.64,
+      "batch1_p95_ms": 8.95,
+      "batch32_fps": 4338
+    },
+    "LiteFreqNet v2": {
+      "registry_key": "lite_freq_net_v2",
+      "id_auc": 0.906,
+      "ufd_macro_auc": 0.645,
+      "worst_auc": 0.451,
+      "bedroom_auc": 0.713,
+      "celebahq_auc": 0.998,
+      "params_M": 1.13,
+      "flops_G": 0.18,
+      "batch1_p50_ms": 6.15,
+      "batch1_p95_ms": 8.35,
+      "batch32_fps": 4747
+    },
+    "MobileNetV3-S": {
+      "registry_key": "mobilenet_v3_small",
+      "id_auc": 0.89,
+      "ufd_macro_auc": 0.636,
+      "worst_auc": 0.455,
+      "bedroom_auc": 0.688,
+      "celebahq_auc": 0.999,
+      "params_M": 1.52,
+      "flops_G": 0.061,
+      "batch1_p50_ms": 4.3,
+      "batch1_p95_ms": 5.61,
+      "batch32_fps": 7231
+    },
+    "ShuffleNet-x0.5": {
+      "registry_key": "shufflenet_v2_x0_5",
+      "id_auc": 0.88,
+      "ufd_macro_auc": 0.674,
+      "worst_auc": 0.467,
+      "bedroom_auc": 0.677,
+      "celebahq_auc": 0.992,
+      "params_M": 0.344,
+      "flops_G": 0.044,
+      "batch1_p50_ms": 6.21,
+      "batch1_p95_ms": 7.47,
+      "batch32_fps": 4817
+    }
+  },
+  "deltas": {
+    "LiteSSM-A_minus_LiteSSM-B_ufd_macro": 0.019,
+    "LiteSSM-A_minus_LiteSSM-B_id": 0.001,
+    "LiteSSM-A_minus_LiteSSM-B_flux_appendix": 0.026
+  }
+}

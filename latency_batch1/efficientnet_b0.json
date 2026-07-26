@@ -1,0 +1,20 @@
+{
+  "model": "efficientnet_b0",
+  "ckpt": "checkpoints/efficientnet_b0/best.pt",
+  "params": 4010110,
+  "params_M": 4.01,
+  "flops": 413867584.0,
+  "flops_G": 0.414,
+  "batch1_latency": {
+    "warmup": 50,
+    "iters": 500,
+    "dtype": "float32",
+    "p50_ms": 6.639064493356273,
+    "p95_ms": 8.946748441667296,
+    "mean_ms": 6.780367672210559,
+    "scope": "model_only_synthetic_tensor_includes_fft_modules",
+    "gpu": "NVIDIA GeForce RTX 4090 D"
+  },
+  "fps_bs32": 4338.247036676941,
+  "throughput_bs32_img_s": 4338.247036676941
+}

@@ -1,0 +1,258 @@
+{
+  "generated_at_utc": "2026-07-26T05:17:17.735243+00:00",
+  "git_commit": null,
+  "freeze_package": "E:\\sciencecre\\aigc_datasets\\lite-aigc-detect\\freeze\\freeze_package.json",
+  "freeze_package_sha256": "d9cd1b4bc14fc5d4e447b57bb68f68d839091bd1b5ea344bf8f2d9d8aa13ca0a",
+  "latency_summary_sha256": "5933a9be6c1439c220b613782e5bc8d9cd7d398706e5db447eb299fa93823997",
+  "external_summary_sha256": "a40ec3a8cc60184c6bd9bbbfb3fcac6eaa18442470b93061214cf47f5c3dbe33",
+  "tol": 0.0005,
+  "max_abs_err": 0.0,
+  "all_pass": true,
+  "diffs": [
+    {
+      "model": "mobilemamba_lite",
+      "metric": "id",
+      "expected": 0.946,
+      "got": 0.946,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilemamba_lite",
+      "metric": "ufd_macro",
+      "expected": 0.718,
+      "got": 0.718,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilemamba_lite",
+      "metric": "bedroom",
+      "expected": 0.812,
+      "got": 0.812,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilemamba_lite",
+      "metric": "celebahq",
+      "expected": 0.999,
+      "got": 0.999,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilemamba_lite",
+      "metric": "worst",
+      "expected": 0.504,
+      "got": 0.504,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mambapsa_cls",
+      "metric": "id",
+      "expected": 0.945,
+      "got": 0.945,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mambapsa_cls",
+      "metric": "ufd_macro",
+      "expected": 0.7,
+      "got": 0.7,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mambapsa_cls",
+      "metric": "bedroom",
+      "expected": 0.815,
+      "got": 0.815,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mambapsa_cls",
+      "metric": "celebahq",
+      "expected": 0.998,
+      "got": 0.998,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mambapsa_cls",
+      "metric": "worst",
+      "expected": 0.483,
+      "got": 0.483,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "efficientnet_b0",
+      "metric": "id",
+      "expected": 0.929,
+      "got": 0.929,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "efficientnet_b0",
+      "metric": "ufd_macro",
+      "expected": 0.667,
+      "got": 0.667,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "efficientnet_b0",
+      "metric": "bedroom",
+      "expected": 0.777,
+      "got": 0.777,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "efficientnet_b0",
+      "metric": "celebahq",
+      "expected": 0.996,
+      "got": 0.996,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "efficientnet_b0",
+      "metric": "worst",
+      "expected": 0.519,
+      "got": 0.519,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "lite_freq_net_v2",
+      "metric": "id",
+      "expected": 0.906,
+      "got": 0.906,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "lite_freq_net_v2",
+      "metric": "ufd_macro",
+      "expected": 0.645,
+      "got": 0.645,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "lite_freq_net_v2",
+      "metric": "bedroom",
+      "expected": 0.713,
+      "got": 0.713,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "lite_freq_net_v2",
+      "metric": "celebahq",
+      "expected": 0.998,
+      "got": 0.998,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "lite_freq_net_v2",
+      "metric": "worst",
+      "expected": 0.451,
+      "got": 0.451,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "metric": "id",
+      "expected": 0.89,
+      "got": 0.89,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "metric": "ufd_macro",
+      "expected": 0.636,
+      "got": 0.636,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "metric": "bedroom",
+      "expected": 0.688,
+      "got": 0.688,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "metric": "celebahq",
+      "expected": 0.999,
+      "got": 0.999,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "metric": "worst",
+      "expected": 0.455,
+      "got": 0.455,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "shufflenet_v2_x0_5",
+      "metric": "id",
+      "expected": 0.88,
+      "got": 0.88,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "shufflenet_v2_x0_5",
+      "metric": "ufd_macro",
+      "expected": 0.674,
+      "got": 0.674,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "shufflenet_v2_x0_5",
+      "metric": "bedroom",
+      "expected": 0.677,
+      "got": 0.677,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "shufflenet_v2_x0_5",
+      "metric": "celebahq",
+      "expected": 0.992,
+      "got": 0.992,
+      "abs_err": 0.0,
+      "pass": true
+    },
+    {
+      "model": "shufflenet_v2_x0_5",
+      "metric": "worst",
+      "expected": 0.467,
+      "got": 0.467,
+      "abs_err": 0.0,
+      "pass": true
+    }
+  ],
+  "notes": [
+    "AUC values verified against locked 3-decimal manuscript targets.",
+    "batch-1 latency / Panel B rows come from companion JSON summaries when present.",
+    "FPS@bs32 in freeze_package.json may differ from latency_batch1/summary.json; prefer the locked batch-1 session for latency claims."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "model": "mobilemamba_lite",
+  "ckpt": "checkpoints/mobilemamba_lite/best.pt",
+  "params": 1739906,
+  "params_M": 1.74,
+  "flops": 705073536.0,
+  "flops_G": 0.705,
+  "batch1_latency": {
+    "warmup": 50,
+    "iters": 500,
+    "dtype": "float32",
+    "p50_ms": 144.40477651078254,
+    "p95_ms": 171.5154350124066,
+    "mean_ms": 146.8711716668913,
+    "scope": "model_only_synthetic_tensor_includes_fft_modules",
+    "gpu": "NVIDIA GeForce RTX 4090 D"
+  },
+  "fps_bs32": 226.3482833548021,
+  "throughput_bs32_img_s": 226.3482833548021
+}

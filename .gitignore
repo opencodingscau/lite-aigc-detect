@@ -1,0 +1,138 @@
+# --- secrets / local env ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+autodl*.txt
+*_PASS*
+.ssh/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# --- editors / OS ---
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- datasets (never commit raw images) ---
+aigc_datasets/
+DiffusionForensics/
+UniversalFakeDetect/
+GANGen-Detection/
+flux_sd3_eval/
+data/
+datasets/
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.bmp
+!docs/**/*.png
+!freeze/figures/*.png
+!latex/figures/*.png
+!assets/*.png
+
+# --- large model weights / local runs ---
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+checkpoints/
+runs/
+outputs/
+wandb/
+lightning_logs/
+*.onnx
+
+# keep tiny placeholder trackers if needed
+!**/best.pt.gitkeep
+
+# --- external clones (install separately) ---
+external/
+UniversalFakeDetect/
+NPR-DeepfakeDetection/
+
+# --- Hugging Face / caches ---
+.cache/
+huggingface/
+~/.cache/
+
+# --- LaTeX build ---
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+latex/**/*.pdf
+!latex/figures/**
+
+# --- local agent / scratch helpers (not for public repo) ---
+_ssh_once.py
+_ssh*.py
+_diag_*.py
+_diag*.py
+_fix_*.py
+_fix*.py
+_poll_*.py
+_poll*.py
+_fetch_*.py
+_fetch*.py
+_hash_*.py
+_hash*.py
+_check_*.py
+_check*.py
+_relaunch_*.py
+_relaunch*.py
+_start_*.py
+_start*.py
+_inspect*.py
+_debug*.py
+_launch*.py
+launch_*.py
+*_remote.py
+deploy_and_run.py
+bc_orchestrator*.py
+e8_*.py
+ssm_align*.py
+run_e*.py
+run_diagnose*.py
+e5_runner*.py
+agent-transcripts/
+public_release/
+
+# --- secrets ---
+.hf_token
+**/hf_token*
+*_PASS*
+autodl*
+
+# --- optional: keep freeze JSON, ignore huge pred dumps locally ---
+# freeze/predictions/
+*.jsonl.bak

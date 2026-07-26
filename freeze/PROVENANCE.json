@@ -1,0 +1,11 @@
+{
+  "predictions": "freeze/predictions",
+  "manifest_md5": {
+    "id": "23f33813abb0ece88308534acfda1dd2",
+    "ood_pooled": "b33415ea4a0635f8ee15eb1da71dfd93",
+    "ufd": "7070d04bb0bd7c61fc5e5885a15d0270",
+    "flux": "a6a65fe56c610f525be762ab582b241d"
+  },
+  "n_boot": 1000,
+  "seed": 42
+}

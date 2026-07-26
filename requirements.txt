@@ -1,0 +1,21 @@
+# Lite AIGC Detect — dependency pin (draft)
+
+# Core
+torch>=2.1
+torchvision>=0.16
+numpy>=1.24
+Pillow>=9.5
+scikit-learn>=1.3
+tqdm>=4.66
+matplotlib>=3.7
+
+# Efficiency (optional but used in paper)
+thop>=0.1.1
+
+# External refs (Panel B)
+# UnivFD vendors CLIP under its repo; also works with:
+#   pip install ftfy regex packaging 'setuptools<81'
+# NPR: use upstream networks/ + NPR.pth (unwrap state['model'], strip module.)
+
+# Not required for Panel A:
+# diffusers, transformers  # only for historical FLUX appendix generation

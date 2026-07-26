@@ -1,0 +1,140 @@
+\subsection{Problem Setting}
+
+We study binary still-image classification (label $0$: real; label $1$: AI-generated) under compact-model constraints.
+Video deepfakes, legal-forensics certification, and large-scale foundation-model detectors are out of scope.
+The intended use case is offline or server-side screening where Params/FLOPs/latency and honest OOD boundaries matter alongside ID AUC.
+
+\subsection{Datasets and Splits}
+
+\paragraph{Training and ID evaluation}
+use DiffusionForensics (DF) images from two content domains present in training: ADM bedroom and Stable Diffusion~v2 CelebA-HQ, each with real and fake folders.
+Frozen JSONL manifests (seed \textbf{42}) contain train/val/test/ood splits of sizes \textbf{3200/400/400/5600}.
+No test or OOD image is used for training, validation AUC selection, or threshold fitting.
+
+\paragraph{UniversalFakeDetect (UFD)}
+provides the primary cross-generator suite~\cite{ojha2023ufd}.
+For each subset we sample up to 400 real and 400 fake images (seed 42).
+Subsets in the frozen package include \texttt{dalle}, \texttt{glide\_100\_10}, \texttt{glide\_100\_27}, \texttt{glide\_50\_27}, \texttt{guided}, \texttt{ldm\_100}, \texttt{ldm\_200}, and \texttt{ldm\_200\_cfg}.
+
+\paragraph{Exploratory FLUX set (appendix only).}
+Independently of training, we generated 100 images with \texttt{black-forest-labs/FLUX.1-schnell}~\cite{flux2024} and paired them with 100 DF real images (seed 42).
+Because real/fake subsets were not content- and acquisition-matched, results appear only in Appendix~\ref{app:flux} and are never used for model selection or architecture claims.
+
+\subsection{Preprocessing}
+
+All pipelines resize images to $224\times224$, convert to RGB, and apply ImageNet mean/std normalization.
+Training adds random horizontal flip; evaluation is deterministic.
+JPEG experiments recompress decoded RGB images to JPEG quality $Q\in\{95,85,70\}$ in memory before the same resize/normalize stack; the main robustness table freezes \textbf{Q70} versus clean.
+
+\subsection{Models}
+
+\begin{itemize}
+\item EfficientNet-B0, MobileNetV3-Small, ShuffleNetV2-x0.5: \texttt{torchvision} classifiers with \texttt{weights=None}~\cite{tan2019efficientnet,howard2019mobilenetv3,ma2018shufflenet}.
+\item LiteFreqNet~v2: spatial stem + FFT-magnitude branch with gated residual fusion $\mathrm{LN}(s+\sigma(\alpha)f)$ and mid-band prior; early-concat and no-frequency variants used as ablations.
+\item Two study-specific SSM classifiers, detailed in Section~\ref{sec:litessm}.
+\end{itemize}
+No ImageNet pretrained weights are used for any Panel~A model.
+
+\subsection{Study-Specific SSM Classifiers (LiteSSM-A / LiteSSM-B)}
+\label{sec:litessm}
+
+\textbf{LiteSSM-A} denotes the compact baseline SSM classifier, whereas \textbf{LiteSSM-B} extends it with a BiViM-inspired bidirectional SelectiveSSM design.
+Both models are study-specific pure-PyTorch implementations rather than official reproductions of an existing architecture.
+Frozen experiment artifacts retain the registry keys \texttt{mobilemamba\_lite} (LiteSSM-A) and \texttt{mambapsa\_cls} (LiteSSM-B) so that checkpoints and hashes remain unchanged; the manuscript uses only the LiteSSM names.
+Optional \texttt{*\_freq} DualBranch wrappers attach the gated frequency branch for ablation only and are not main-table models.
+
+\paragraph{Shared pipeline.}
+Inputs are $B\times3\times224\times224$.
+A four-stage stride-2 convolutional stem (Conv $3\times3$, BatchNorm, GELU) yields a $14\times14\times192$ map, which is flattened to $L=196$ tokens of width $C=192$, summed with a learnable positional embedding, processed by depth~$=4$ residual blocks, LayerNormed, mean-pooled over tokens, and classified by a linear head to two logits.
+
+\paragraph{Selective scan without vendor kernels.}
+Both models use a pure-PyTorch \texttt{SelectiveSSM}: input projection, depthwise Conv1d ($k=3$), input-dependent $\Delta,B,C$, and an explicit sequential recurrence over $L$ (no CUDA/\texttt{mamba\_ssm} kernel).
+This choice keeps Params/FLOPs/latency comparisons portable but can inflate absolute latency relative to fused official kernels; reported batch-1 times are therefore \emph{model-only measurements under the pure-PyTorch stack}.
+
+\paragraph{LiteSSM-A block (MRFFILite).}
+After LayerNorm, a multi-receptive local branch (depthwise Conv1d kernels $\{3,5,7\}$ summed) is concatenated with a SelectiveSSM global branch ($d_{\mathrm{state}}=8$, expand~$=1$), projected by a linear layer, and added residually.
+
+\paragraph{LiteSSM-B block (BiViM).}
+After LayerNorm, forward and time-reversed SelectiveSSM branches ($d_{\mathrm{state}}=16$, expand~$=1$) are concatenated, linearly mixed, and added residually.
+
+\begin{table}[H]
+\caption{Architecture configuration of the study-specific SSM models.
+Both use input $224\times224$, stem downsampling $\times16$, token length $L=196$, width $C=192$, and depth~$=4$ residual blocks.\label{tab:ssm-arch}}
+\begin{tabularx}{\textwidth}{l R l l}
+\toprule
+\textbf{Stage} & \textbf{Out size} & \textbf{LiteSSM-A} & \textbf{LiteSSM-B} \\
+\midrule
+Stem-1 & $112\times112$ & Conv/s2, BN, GELU (64) & Conv/s2, BN, GELU (96) \\
+Stem-2 & $56\times56$ & Conv/s2, BN, GELU (128) & Conv/s2, BN, GELU (96) \\
+Stem-3 & $28\times28$ & Conv/s2, BN, GELU (192) & Conv/s2, BN, GELU (192) \\
+Stem-4 & $14\times14$ & Conv/s2, BN, GELU (192) & Conv/s2, BN, GELU (192) \\
+Blocks & $L{=}196$ & $4\times$ MRFFILite (SSM $d_s{=}8$) & $4\times$ BiViM (SSM $d_s{=}16$) \\
+Head & $1$ & LN, mean pool, Linear$\to$2 & LN, mean pool, Linear$\to$2 \\
+\midrule
+Params / FLOPs & -- & 1.74\,M / 0.705\,G & 2.48\,M / 0.853\,G \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/fig_ssm_architecture.png}
+\caption{Overview of LiteSSM-A and LiteSSM-B.
+Both share a $\times16$ stem and $L{=}196$ token interface; blocks differ (multi-receptive+SSM vs.\ bidirectional SSM).
+No official CUDA selective-scan kernel is used.\label{fig:ssm-arch}}
+\end{figure}
+
+\paragraph{Efficiency accounting.}
+Trainable parameter counts sum \texttt{requires\_grad} tensors; FLOPs use \texttt{thop} on a $1\times3\times224\times224$ tensor.
+All reported efficiency numbers come from one locked measurement session on an RTX~4090D (PyTorch~2.3, CUDA~12.1, FP32): batch-1 latency with $\ge$50 warmup and 500 timed iterations under \texttt{torch.cuda.synchronize()}, and batch-32 throughput in the same session.
+Latency/throughput are \textbf{model-only} on synthetic tensors and exclude disk I/O and torchvision preprocessing; FFT modules are included when present in the evaluated network.
+
+\subsection{Training Recipe (Locked)}
+
+Every main-table model uses 15 epochs, batch size 64, AdamW ($\mathrm{lr}=10^{-4}$, weight decay $10^{-4}$), CosineAnnealingLR, cross-entropy loss, input size 224, and seed 42 on one NVIDIA GeForce RTX~4090D (PyTorch~2.3).
+After each epoch we keep the checkpoint with the best validation AUC.
+A decision threshold is then fit on validation probabilities by maximizing Youden's $J=\mathrm{TPR}-\mathrm{FPR}$.
+Primary ranking metrics in this paper are AUC-based.
+
+\subsection{Metrics and Statistical Protocol}
+\label{sec:metrics}
+
+\textbf{UFD Macro AUC} (primary OOD) equals the equal-weight mean of per-generator AUCs on UFD subsets.
+\textbf{Worst-generator AUC} is the minimum subset AUC.
+\textbf{OOD Pooled AUC} (supplementary) is a single AUC on all rows of \texttt{test\_ood.jsonl} and is \emph{not} interchangeable with UFD Macro.
+Domain AUCs partition the ID test set by \texttt{celebahq} vs.\ \texttt{bedroom} source strings.
+JPEG $\Delta$AUC is $\mathrm{AUC}_{Q70}-\mathrm{AUC}_{\mathrm{clean}}$ on the ID test set.
+
+Efficiency metrics are taken exclusively from the locked session summarized in \texttt{freeze/frozen\_numbers.json}: Params, FLOPs, batch-1 p50/p95 latency, and batch-32 throughput.
+Preliminary throughput figures produced outside that protocol are superseded and are not reported in the manuscript.
+
+Unless stated otherwise, percentile 95\% confidence intervals use $B=1000$ resamples with seed~42 on frozen per-sample scores.
+For UFD Macro, each bootstrap redraws within every generator subset then re-averages.
+Paired $\Delta$AUC CIs redraw the same indices for both models.
+
+\subsection{JPEG Evaluation Protocol}
+
+Clean and JPEG evaluations share the ID test manifest.
+For quality $Q$, each image is loaded as RGB, encoded to JPEG at quality $Q$, decoded, then passed through the evaluation transform.
+We report Q70 as the primary robustness operating point in Table~\ref{tab:jpeg}.
+
+\subsection{Exploratory FLUX Generation Protocol}
+\label{sec:flux-protocol}
+
+Protocol details and the unmatched-subset caveat are given in Appendix~\ref{app:flux}; the main text does not use FLUX scores for architecture claims.
+
+\subsection{External Reference Detectors (Inference Only)}
+\label{sec:external-refs}
+
+To contextualize Panel~A without breaking the from-scratch fairness claim, we evaluate two publicly released detectors on the same frozen manifests using their native preprocessing and pretrained weights:
+\begin{itemize}
+\item UnivFD (CLIP ViT-L/14 linear probe)~\cite{ojha2023ufd};
+\item NPR (neighboring-pixel-relationship CNN)~\cite{tan2024npr}.
+\end{itemize}
+DIRE~\cite{wang2023dire} is discussed in Related Work only and is not re-run.
+Results form Panel~B and are captioned as references, not training-matched competitors.
+
+\subsection{Implementation Artifacts}
+
+Training/evaluation code, freeze/bootstrap scripts, prediction shards, table exports, and SHA256 digests of manifests/checkpoints/predictions are retained so statistics can be recomputed without retraining.
+A public repository and archival DOI are planned before submission; Data Availability will list original dataset providers, license limits on redistribution, manifest hashes, and code/weight locations.

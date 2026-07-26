@@ -1,0 +1,202 @@
+{
+  "univfd": {
+    "detector": "univfd",
+    "meta": {
+      "ckpt": "external/UniversalFakeDetect/pretrained_weights/fc_weights.pth",
+      "params": 427617282,
+      "preprocess": "official_centercrop224+CLIP_norm (min-side pad if needed)"
+    },
+    "splits": {
+      "id_test": {
+        "n": 400,
+        "pooled_auc": 0.6083,
+        "ufd_macro_auc": null,
+        "worst_generator": null,
+        "worst_auc": null,
+        "per_source": {
+          "adm_bedroom_fake": {
+            "n": 100,
+            "auc": null
+          },
+          "adm_bedroom_real": {
+            "n": 100,
+            "auc": null
+          },
+          "sdv2_celebahq_fake": {
+            "n": 100,
+            "auc": null
+          },
+          "sdv2_celebahq_real": {
+            "n": 100,
+            "auc": null
+          }
+        },
+        "domain": {
+          "bedroom": {
+            "n": 200,
+            "auc": 0.8212
+          },
+          "celebahq": {
+            "n": 200,
+            "auc": 0.41979999999999995
+          }
+        },
+        "id_auc": 0.6083,
+        "preds": "outputs/external_refs/univfd_id_test_preds.jsonl"
+      },
+      "ufd_eval": {
+        "n": 6400,
+        "pooled_auc": 0.9495730468750001,
+        "ufd_macro_auc": 0.94823046875,
+        "worst_generator": "ufd_guided",
+        "worst_auc": 0.86059375,
+        "per_source": {
+          "ufd_dalle": {
+            "n": 800,
+            "auc": 0.9690875
+          },
+          "ufd_glide_100_10": {
+            "n": 800,
+            "auc": 0.94160625
+          },
+          "ufd_glide_100_27": {
+            "n": 800,
+            "auc": 0.9557937499999999
+          },
+          "ufd_glide_50_27": {
+            "n": 800,
+            "auc": 0.9617812499999999
+          },
+          "ufd_guided": {
+            "n": 800,
+            "auc": 0.86059375
+          },
+          "ufd_ldm_100": {
+            "n": 800,
+            "auc": 0.988775
+          },
+          "ufd_ldm_200": {
+            "n": 800,
+            "auc": 0.99205
+          },
+          "ufd_ldm_200_cfg": {
+            "n": 800,
+            "auc": 0.91615625
+          }
+        },
+        "preds": "outputs/external_refs/univfd_ufd_eval_preds.jsonl"
+      }
+    },
+    "latency_batch1": {
+      "batch": 1,
+      "input_size": 224,
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 11.857231991598383,
+      "p95_ms": 16.770013963105157,
+      "mean_ms": 12.082513646455482,
+      "scope": "model_only_synthetic_tensor"
+    }
+  },
+  "npr": {
+    "detector": "npr",
+    "meta": {
+      "ckpt": "external/NPR-DeepfakeDetection/NPR.pth",
+      "params": 1437761,
+      "preprocess": "resize224_no_crop+ImageNet_norm+NPR"
+    },
+    "splits": {
+      "id_test": {
+        "n": 400,
+        "pooled_auc": 0.9471,
+        "ufd_macro_auc": null,
+        "worst_generator": null,
+        "worst_auc": null,
+        "per_source": {
+          "adm_bedroom_fake": {
+            "n": 100,
+            "auc": null
+          },
+          "adm_bedroom_real": {
+            "n": 100,
+            "auc": null
+          },
+          "sdv2_celebahq_fake": {
+            "n": 100,
+            "auc": null
+          },
+          "sdv2_celebahq_real": {
+            "n": 100,
+            "auc": null
+          }
+        },
+        "domain": {
+          "bedroom": {
+            "n": 200,
+            "auc": 0.9945999999999999
+          },
+          "celebahq": {
+            "n": 200,
+            "auc": 0.98
+          }
+        },
+        "id_auc": 0.9471,
+        "preds": "outputs/external_refs/npr_id_test_preds.jsonl"
+      },
+      "ufd_eval": {
+        "n": 6400,
+        "pooled_auc": 0.982949169921875,
+        "ufd_macro_auc": 0.9762890625,
+        "worst_generator": "ufd_guided",
+        "worst_auc": 0.837490625,
+        "per_source": {
+          "ufd_dalle": {
+            "n": 800,
+            "auc": 0.9904000000000001
+          },
+          "ufd_glide_100_10": {
+            "n": 800,
+            "auc": 0.995446875
+          },
+          "ufd_glide_100_27": {
+            "n": 800,
+            "auc": 0.995015625
+          },
+          "ufd_glide_50_27": {
+            "n": 800,
+            "auc": 0.9959375
+          },
+          "ufd_guided": {
+            "n": 800,
+            "auc": 0.837490625
+          },
+          "ufd_ldm_100": {
+            "n": 800,
+            "auc": 0.99943125
+          },
+          "ufd_ldm_200": {
+            "n": 800,
+            "auc": 0.997634375
+          },
+          "ufd_ldm_200_cfg": {
+            "n": 800,
+            "auc": 0.99895625
+          }
+        },
+        "preds": "outputs/external_refs/npr_ufd_eval_preds.jsonl"
+      }
+    },
+    "latency_batch1": {
+      "batch": 1,
+      "input_size": 256,
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 2.8874294948764145,
+      "p95_ms": 3.3800502511439845,
+      "mean_ms": 3.023214777582325,
+      "scope": "model_only_synthetic_tensor"
+    }
+  }
+}

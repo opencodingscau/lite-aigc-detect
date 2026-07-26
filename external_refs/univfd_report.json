@@ -1,0 +1,100 @@
+{
+  "detector": "univfd",
+  "meta": {
+    "ckpt": "external/UniversalFakeDetect/pretrained_weights/fc_weights.pth",
+    "params": 427617282,
+    "preprocess": "official_centercrop224+CLIP_norm (min-side pad if needed)"
+  },
+  "splits": {
+    "id_test": {
+      "n": 400,
+      "pooled_auc": 0.6083,
+      "ufd_macro_auc": null,
+      "worst_generator": null,
+      "worst_auc": null,
+      "per_source": {
+        "adm_bedroom_fake": {
+          "n": 100,
+          "auc": null
+        },
+        "adm_bedroom_real": {
+          "n": 100,
+          "auc": null
+        },
+        "sdv2_celebahq_fake": {
+          "n": 100,
+          "auc": null
+        },
+        "sdv2_celebahq_real": {
+          "n": 100,
+          "auc": null
+        }
+      },
+      "domain": {
+        "bedroom": {
+          "n": 200,
+          "auc": 0.8212
+        },
+        "celebahq": {
+          "n": 200,
+          "auc": 0.41979999999999995
+        }
+      },
+      "id_auc": 0.6083,
+      "preds": "outputs/external_refs/univfd_id_test_preds.jsonl"
+    },
+    "ufd_eval": {
+      "n": 6400,
+      "pooled_auc": 0.9495730468750001,
+      "ufd_macro_auc": 0.94823046875,
+      "worst_generator": "ufd_guided",
+      "worst_auc": 0.86059375,
+      "per_source": {
+        "ufd_dalle": {
+          "n": 800,
+          "auc": 0.9690875
+        },
+        "ufd_glide_100_10": {
+          "n": 800,
+          "auc": 0.94160625
+        },
+        "ufd_glide_100_27": {
+          "n": 800,
+          "auc": 0.9557937499999999
+        },
+        "ufd_glide_50_27": {
+          "n": 800,
+          "auc": 0.9617812499999999
+        },
+        "ufd_guided": {
+          "n": 800,
+          "auc": 0.86059375
+        },
+        "ufd_ldm_100": {
+          "n": 800,
+          "auc": 0.988775
+        },
+        "ufd_ldm_200": {
+          "n": 800,
+          "auc": 0.99205
+        },
+        "ufd_ldm_200_cfg": {
+          "n": 800,
+          "auc": 0.91615625
+        }
+      },
+      "preds": "outputs/external_refs/univfd_ufd_eval_preds.jsonl"
+    }
+  },
+  "latency_batch1": {
+    "batch": 1,
+    "input_size": 224,
+    "warmup": 50,
+    "iters": 500,
+    "dtype": "float32",
+    "p50_ms": 11.857231991598383,
+    "p95_ms": 16.770013963105157,
+    "mean_ms": 12.082513646455482,
+    "scope": "model_only_synthetic_tensor"
+  }
+}

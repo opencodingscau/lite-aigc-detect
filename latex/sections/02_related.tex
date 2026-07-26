@@ -1,0 +1,59 @@
+\subsection{CNN and Artifact-Based Detection}
+\label{sec:rw-cnn}
+
+CNN-based detectors remain the dominant practical baseline for still-image real/fake classification.
+Early work showed that CNN-generated images leave transferable forensic cues that a ResNet-style classifier can exploit across several GAN families~\cite{wang2020cnn}.
+Subsequent studies emphasized local texture, upsampling footprints, and neighboring-pixel dependencies as more stable signals than global semantics alone.
+In particular, Neighboring Pixel Relationships (NPR) treat the local interdependence induced by generator upsampling operators as a transferable artifact representation and report strong cross-generator behavior under their official training and evaluation protocol~\cite{tan2024npr}.
+We treat NPR as an \emph{external pretrained reference} rather than a training-matched competitor: its native preprocessing and released weights are used for inference-only contextualization on our frozen manifests.
+
+Compact ImageNet-style backbones (EfficientNet, MobileNet, ShuffleNet) are widely used when parameter count and throughput matter~\cite{tan2019efficientnet,howard2019mobilenetv3,ma2018shufflenet}.
+In this study they form the controlled lightweight CNN panel trained from scratch under a locked recipe.
+
+\subsection{Pretrained and CLIP-Based Universal Detectors}
+\label{sec:rw-univfd}
+
+A complementary line of work avoids learning a heavily tuned ``fake'' detector and instead probes large pretrained feature spaces.
+UniversalFakeDetect (UnivFD) uses frozen CLIP ViT-L/14 features with a linear probe (or nearest-neighbor variants) and demonstrates improved transfer to unseen generative families relative to detectors trained end-to-end on a single generator breed~\cite{ojha2023ufd}.
+The strength of this approach is precisely its large-scale pretraining; therefore UnivFD is \emph{not} comparable under an identical from-scratch lightweight protocol.
+We include the publicly released UnivFD checkpoint as a second external reference panel to situate our compact models, while keeping Panel~A (training-matched) and Panel~B (pretrained references) separate in the results tables.
+
+\subsection{Diffusion-Specific and Reconstruction-Based Detection}
+\label{sec:rw-dire}
+
+Diffusion-oriented detectors often exploit reconstruction error or diffusion-specific representations.
+DIRE distinguishes real and generated images via the discrepancy between an input and its diffusion reconstruction~\cite{wang2023dire}.
+Such pipelines can improve robustness on diffusion imagery, but they introduce a heavy generative-model reconstruction stage that differs from the lightweight direct-classification deployment target studied here.
+We therefore discuss DIRE and related reconstruction approaches as literature context and do \emph{not} re-run them as efficiency-matched baselines.
+Complementary analyses of compression, resizing, and diffusion-specific forensics further caution that reported generalization depends on acquisition and post-processing assumptions~\cite{corvi2023diffusion}.
+
+\subsection{Frequency-Aware and Lightweight Detection}
+\label{sec:rw-freq}
+
+Frequency-domain cues---spectral peaks, mid/high-band energy, and residual spectra---have long been used to expose generative artifacts~\cite{frank2020freq}.
+Whether a frequency module helps, however, is backbone- and protocol-dependent.
+We instantiate LiteFreqNet~v2 (gated FFT-magnitude fusion) under the same from-scratch recipe as the CNN and SSM panels to test transferability of frequency injection rather than to claim a universal spectral solution.
+Lightweight SSMs inspired by selective state-space models~\cite{gu2023mamba} are evaluated as compact alternatives; our \textbf{LiteSSM-A} and \textbf{LiteSSM-B} implementations are \emph{study-specific pure-PyTorch} classifiers rather than official reproductions of any existing named architecture.
+
+\subsection{Positioning of This Study}
+\label{sec:rw-position}
+
+Prior work has demonstrated strong cross-generator detection using large pretrained feature extractors, reconstruction-based diffusion representations, and generator-artifact modeling.
+In contrast, this study does not seek a new state of the art across heterogeneous training protocols.
+Instead, it conducts a controlled, training-from-scratch comparison of compact CNN, frequency-aware, and state-space architectures, with explicit reporting of generator-macro performance, content-domain gaps, JPEG Q70 behavior, and measured deployment efficiency.
+Table~\ref{tab:protocol} summarizes the protocol-level contrast between representative external methods and our setting.
+
+\begin{table}[H]
+\caption{Protocol-level comparison of representative detectors.
+Entries describe published settings rather than a single shared leaderboard.\label{tab:protocol}}
+\begin{tabularx}{\textwidth}{l l l l l l}
+\toprule
+\textbf{Method} & \textbf{Pretrained} & \textbf{Paradigm} & \textbf{Cross-gen.} & \textbf{Domain} & \textbf{Deploy.} \\
+\midrule
+DIRE~\cite{wang2023dire} & Diffusion recon. & Reconstruction & Yes & Limited & Heavy pipeline \\
+UnivFD~\cite{ojha2023ufd} & CLIP ViT-L/14 & Linear/NN probe & Yes & Limited & Large backbone \\
+NPR~\cite{tan2024npr} & Official release & Artifact CNN & Yes & Limited & Official weights \\
+Ours & None & Controlled lite train & Yes & Yes & Params/latency \\
+\bottomrule
+\end{tabularx}
+\end{table}

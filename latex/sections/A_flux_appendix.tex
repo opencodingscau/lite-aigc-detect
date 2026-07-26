@@ -1,0 +1,24 @@
+\section*{Appendix A. Exploratory Evaluation on the Unmatched FLUX Subset}
+\label{app:flux}
+
+An exploratory FLUX evaluation was conducted independently of the locked training protocol.
+We generated 100 images with \texttt{black-forest-labs/FLUX.1-schnell}~\cite{flux2024} (Diffusers \texttt{FluxPipeline}, \texttt{bfloat16}, CPU offload, 4 steps, guidance 0.0, \texttt{max\_sequence\_length}=256, seeds $42+i$, ten cycled English prompts) and paired them with 100 DiffusionForensics real images (seed~42).
+Because the real and synthetic subsets were \textbf{not} content- and acquisition-matched---native resolutions differ, PNG vs.\ JPEG containers differ, and residual pipeline cues cannot be ruled out---these results are reported only as supplementary evidence and are \textbf{not} used to support architecture-level conclusions in the main text.
+
+Table~\ref{tab:flux-app} lists AUCs with bootstrap 95\% CIs ($B=1000$, seed~42).
+The LiteSSM-A vs.\ LiteSSM-B difference CI includes zero ($\Delta$AUC $+0.026$ $[-0.006,\ 0.057]$).
+
+\begin{table}[H]
+\caption{Appendix Table~A1. Exploratory evaluation on the unmatched FLUX subset ($n=200$).\label{tab:flux-app}}
+\begin{tabularx}{\textwidth}{l l RR}
+\toprule
+\textbf{Model} & \textbf{Arch} & \textbf{AUC} & \textbf{95\% CI} \\
+\midrule
+LiteSSM-A & SSM & 0.782 & $[0.719,\ 0.841]$ \\
+LiteSSM-B & SSM & 0.757 & $[0.688,\ 0.819]$ \\
+MobileNetV3-Small & CNN & 0.685 & $[0.606,\ 0.758]$ \\
+LiteFreqNet~v2 & CNN+FFT & 0.677 & $[0.601,\ 0.749]$ \\
+EfficientNet-B0 & CNN & 0.657 & $[0.579,\ 0.728]$ \\
+\bottomrule
+\end{tabularx}
+\end{table}

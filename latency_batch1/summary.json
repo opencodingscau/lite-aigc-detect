@@ -1,0 +1,122 @@
+{
+  "shufflenet_v2_x0_5": {
+    "model": "shufflenet_v2_x0_5",
+    "ckpt": "checkpoints/shufflenet_v2_x0_5/best.pt",
+    "params": 343842,
+    "params_M": 0.344,
+    "flops": 43550112.0,
+    "flops_G": 0.044,
+    "batch1_latency": {
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 6.209536484675482,
+      "p95_ms": 7.466113183181732,
+      "mean_ms": 6.450063959695399,
+      "scope": "model_only_synthetic_tensor_includes_fft_modules",
+      "gpu": "NVIDIA GeForce RTX 4090 D"
+    },
+    "fps_bs32": 4816.779414181855,
+    "throughput_bs32_img_s": 4816.779414181855
+  },
+  "mobilenet_v3_small": {
+    "model": "mobilenet_v3_small",
+    "ckpt": "checkpoints/mobilenet_v3_small/best.pt",
+    "params": 1519906,
+    "params_M": 1.52,
+    "flops": 61455992.0,
+    "flops_G": 0.061,
+    "batch1_latency": {
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 4.3001724989153445,
+      "p95_ms": 5.6063999654725185,
+      "mean_ms": 4.5650483863428235,
+      "scope": "model_only_synthetic_tensor_includes_fft_modules",
+      "gpu": "NVIDIA GeForce RTX 4090 D"
+    },
+    "fps_bs32": 7230.662579529477,
+    "throughput_bs32_img_s": 7230.662579529477
+  },
+  "efficientnet_b0": {
+    "model": "efficientnet_b0",
+    "ckpt": "checkpoints/efficientnet_b0/best.pt",
+    "params": 4010110,
+    "params_M": 4.01,
+    "flops": 413867584.0,
+    "flops_G": 0.414,
+    "batch1_latency": {
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 6.639064493356273,
+      "p95_ms": 8.946748441667296,
+      "mean_ms": 6.780367672210559,
+      "scope": "model_only_synthetic_tensor_includes_fft_modules",
+      "gpu": "NVIDIA GeForce RTX 4090 D"
+    },
+    "fps_bs32": 4338.247036676941,
+    "throughput_bs32_img_s": 4338.247036676941
+  },
+  "lite_freq_net_v2": {
+    "model": "lite_freq_net_v2",
+    "ckpt": "checkpoints/lite_freq_net_v2/best.pt",
+    "params": 1127078,
+    "params_M": 1.127,
+    "flops": 180290040.0,
+    "flops_G": 0.18,
+    "batch1_latency": {
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 6.15073402877897,
+      "p95_ms": 8.349165879189968,
+      "mean_ms": 6.516477848170325,
+      "scope": "model_only_synthetic_tensor_includes_fft_modules",
+      "gpu": "NVIDIA GeForce RTX 4090 D"
+    },
+    "fps_bs32": 4746.828957066324,
+    "throughput_bs32_img_s": 4746.828957066324
+  },
+  "mobilemamba_lite": {
+    "model": "mobilemamba_lite",
+    "ckpt": "checkpoints/mobilemamba_lite/best.pt",
+    "params": 1739906,
+    "params_M": 1.74,
+    "flops": 705073536.0,
+    "flops_G": 0.705,
+    "batch1_latency": {
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 144.40477651078254,
+      "p95_ms": 171.5154350124066,
+      "mean_ms": 146.8711716668913,
+      "scope": "model_only_synthetic_tensor_includes_fft_modules",
+      "gpu": "NVIDIA GeForce RTX 4090 D"
+    },
+    "fps_bs32": 226.3482833548021,
+    "throughput_bs32_img_s": 226.3482833548021
+  },
+  "mambapsa_cls": {
+    "model": "mambapsa_cls",
+    "ckpt": "checkpoints/mambapsa_cls/best.pt",
+    "params": 2478050,
+    "params_M": 2.478,
+    "flops": 852590976.0,
+    "flops_G": 0.853,
+    "batch1_latency": {
+      "warmup": 50,
+      "iters": 500,
+      "dtype": "float32",
+      "p50_ms": 237.57422997732647,
+      "p95_ms": 264.5734059100505,
+      "mean_ms": 240.33426512381993,
+      "scope": "model_only_synthetic_tensor_includes_fft_modules",
+      "gpu": "NVIDIA GeForce RTX 4090 D"
+    },
+    "fps_bs32": 119.78201624372304,
+    "throughput_bs32_img_s": 119.78201624372304
+  }
+}

@@ -1,0 +1,58 @@
+# Submission gates (objective definition)
+
+Aligned with the pre-submission plan: scientific evidence is largely frozen;
+remaining work is **auditability**. Do not submit until all boxes below pass.
+
+## Gate A — Public repro package usable by a third party
+
+- [x] Public layout built (`../lite-aigc-detect/`); absolute cloud paths sanitized in JSON
+- [x] `LICENSE` (MIT draft)
+- [x] `CITATION.cff` (authors/DOI still TODO — fill after real ORCID + Zenodo)
+- [x] `environment.yml` + `requirements.txt`
+- [x] `scripts/remap_manifest_paths.py`
+- [x] `scripts/build_tables.py` cold-start rebuild (**local PASS**, max_abs_err=0)
+- [x] `scripts/make_sha256sums.py` → `hashes/SHA256SUMS`
+- [ ] GitHub repo created and pushed (use sanitized tree `lite-aigc-detect/`)
+- [ ] Tag `v1.0.0-paper`
+- [ ] Fresh clone + `python scripts/build_tables.py ...` PASS on another machine/env
+- [ ] Zenodo release DOI minted **then** back-filled into README / CITATION / paper
+- [ ] Checkpoints redistributed only if license-safe; prediction shards hashed
+- [ ] Data Availability contains real URLs (no placeholder DOI)
+
+## Gate B — Method identity verifiable
+
+- [x] Canonical names: **LiteSSM-A** / **LiteSSM-B** (registry mapping once in repro docs)
+- [x] Naming follows real implementation (LiteSSM-B = bidirectional SelectiveSSM)
+- [x] `docs/model_architectures.md` with stem/block/scan details
+- [x] Architecture figure `fig_ssm_architecture.png`
+- [x] LaTeX Method § with Table `tab:ssm-arch` + Fig `fig:ssm-arch`
+- [x] Abstract / Results / Discussion / Conclusion / cover letter use LiteSSM-A/B
+- [x] Efficiency locked to batch-1 session: **144.4 ms** / **226** img/s (367 superseded)
+- [ ] Optional code registry aliases `litessm_a` / `litessm_b` (keep old keys for ckpt load)
+
+## Gate C — Zero placeholders, compile, internal consistency
+
+- [ ] Real authors / affiliation / email / ORCID
+- [ ] Real CRediT contributions / Funding / Acknowledgments
+- [x] Removed fake `wang2021deepfake` (2103.XXXX) citation
+- [ ] Full bibliography mechanical check (title/authors/venue/pages/DOI)
+- [ ] Overleaf clean compile (no undef refs / missing figs)
+- [ ] PDF vs freeze numbers checklist (Macro 0.718/0.700; FLUX appendix-only; JPEG=Q70)
+- [ ] Cover letter last (draft updated; final after author metadata)
+
+## Locked efficiency (do not reopen)
+
+| Claim | Locked value | Status |
+|-------|-------------:|--------|
+| LiteSSM-A B=1 p50 | **144.4 ms** | Manuscript source |
+| LiteSSM-A B=1 p95 | **171.5 ms** | Manuscript source |
+| LiteSSM-A B=32 thr | **226** img/s | Manuscript source |
+| Preliminary 367 img/s | — | **Superseded**; provenance only in `frozen_numbers.json` |
+
+## Suggested execution order
+
+1. ~~Finish Gate B naming + efficiency lock~~ (done for manuscript surface).
+2. Desensitize public tree → push GitHub + third-party cold start.
+3. Zenodo DOI → back-fill.
+4. Author metadata + bib QC.
+5. Overleaf + final cover letter.

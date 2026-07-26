@@ -2,7 +2,7 @@
 
 Date: 2026-07-27  
 Source: `latex/main.tex` `thebibliography`  
-Target: **24** entries (was 11)
+Target: **26** entries (was 11 → 24 → 26)
 
 ## Added for positioning (2024–2026)
 

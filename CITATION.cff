@@ -16,7 +16,7 @@ keywords:
   - state-space models
   - reproducible benchmarking
 license: MIT
-repository-code: "https://github.com/TODO/lite-aigc-detect"
+repository-code: "https://github.com/opencodingscau/lite-aigc-detect"
 # Fill AFTER Zenodo minting — do not leave a fake DOI in the submitted PDF.
 # doi: 10.5281/zenodo.TODO
 # identifiers:

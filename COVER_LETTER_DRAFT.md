@@ -19,9 +19,10 @@ This manuscript is original, not under consideration elsewhere, and all co-autho
 Thank you for considering our submission.
 
 Sincerely,  
-[Author names]  
-[Affiliations]  
-[Corresponding author email]
+Kaihao Chen  
+College of Software Engineering, South China Agricultural University, Guangzhou, Guangdong, China  
+ORCID: https://orcid.org/0009-0001-4945-6733  
+3427603873@qq.com
 
 ---
 

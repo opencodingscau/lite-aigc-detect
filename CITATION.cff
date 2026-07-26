@@ -2,12 +2,16 @@ cff-version: 1.2.0
 title: "Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift"
 message: >-
   If you use this software or the frozen table-rebuild package, please cite it
-  using these metadata. Replace author names/ORCID with the manuscript authors
-  before journal submission.
+  using these metadata.
 type: software
 authors:
-  - name: "opencodingscau"
-    website: "https://github.com/opencodingscau"
+  - family-names: "Chen"
+    given-names: "Kaihao"
+    orcid: "https://orcid.org/0009-0001-4945-6733"
+    affiliation: >-
+      College of Software Engineering, South China Agricultural University,
+      Guangzhou, Guangdong, China
+    email: "3427603873@qq.com"
 abstract: >-
   Protocol-locked comparison of compact CNN, frequency-aware, and study-specific
   state-space detectors for still-image real/fake classification, with UFD Macro

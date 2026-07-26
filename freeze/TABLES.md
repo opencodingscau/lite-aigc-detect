@@ -37,7 +37,7 @@ Table note: RTX 4090D; PyTorch 2.3 / CUDA 12.1; FP32; warmup≥50 / 500 timed it
 
 ## Narrative (locked)
 
-> LiteSSM-A achieved the highest UFD Macro AUC among the controlled lightweight models while retaining a batch-32 throughput of 226 images/s. It is therefore selected as the preferred generalization–efficiency operating point, rather than the model with the lowest absolute latency.
+> LiteSSM-A achieved the highest UFD Macro AUC among the controlled compact models while retaining a batch-32 throughput of 226 images/s. It is therefore selected as the preferred generalization–efficiency operating point, rather than the model with the lowest absolute latency.
 
 ## Experiment freeze status
 

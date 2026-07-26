@@ -98,7 +98,8 @@ Table~\ref{tab:ufd} reports per-subset AUCs on UFD~\cite{ojha2023ufd}.
 SSM detectors obtain higher Macro averages than the CNN/frequency suite.
 Generator identity dominates architecture: Glide subsets are comparatively easy, LDM subsets are weaker, and rankings change across columns.
 \textbf{DALL·E remained close to chance for every Panel~A detector (0.451--0.519)}, including both SSMs; the failure is not specific to LiteFreqNet.
-On the \emph{same} frozen DALL·E subset, Panel~B pretrained references remain strong (UnivFD $\approx$0.969; NPR $\approx$0.990; see also Table~\ref{tab:external} for panel-level Macro context), indicating a protocol/panel gap rather than an absolute undetectability claim.
+Table~\ref{tab:ufd-ext} places the same frozen UFD subsets next to Panel~B pretrained references: UnivFD and NPR remain strong on DALL·E (0.969 / 0.990) and reach substantially higher Macro AUCs.
+This contrast indicates a \emph{protocol/panel gap} rather than absolute undetectability of DALL·E under every training paradigm; Panel~B scores are contextual and are \emph{not} ranked against Panel~A under a shared recipe.
 Figure~\ref{fig:heatmap} visualizes the Panel~A UFD generator--model matrix.
 
 \begin{table}[H]
@@ -118,6 +119,20 @@ ShuffleNet-x0.5 & 0.467 & 0.805 & 0.802 & 0.835 & 0.755 & 0.617 & 0.570 & 0.537 
 \end{tabularx}
 \vspace{2pt}
 {\footnotesize G10/G27/G50: Glide$_{100,10}$ / Glide$_{100,27}$ / Glide$_{50,27}$; L100/L200/Lcfg: LDM$_{100}$ / LDM$_{200}$ / LDM$_{200,\mathrm{cfg}}$.}
+\end{table}
+
+\begin{table}[H]
+\caption{External reference (Panel~B) per-generator AUCs on the same frozen UFD subsets.
+Scores are inference-only with public checkpoints and native preprocessing; they contextualize the remaining gap to large-scale pretrained detectors and are not protocol-matched competitors.\label{tab:ufd-ext}}
+\scriptsize
+\begin{tabularx}{\textwidth}{l *{9}{R}}
+\toprule
+\textbf{Detector} & \textbf{DALL·E} & \textbf{G10} & \textbf{G27} & \textbf{G50} & \textbf{Guid.} & \textbf{L100} & \textbf{L200} & \textbf{Lcfg} & \textbf{Mac.} \\
+\midrule
+UnivFD~\cite{ojha2023ufd} & 0.969 & 0.942 & 0.956 & 0.962 & 0.861 & 0.989 & 0.992 & 0.916 & 0.948 \\
+NPR~\cite{tan2024npr} & 0.990 & 0.995 & 0.995 & 0.996 & 0.837 & 0.999 & 0.998 & 0.999 & 0.976 \\
+\bottomrule
+\end{tabularx}
 \end{table}
 
 \begin{figure}[H]

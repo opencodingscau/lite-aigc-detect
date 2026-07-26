@@ -20,9 +20,11 @@ Target: **24** entries (was 11)
 | `lokner2024lightweight` | Related MDPI lightweight CNN | AI 5, 1575–1593 |
 | `man2026mdp` | Related *Appl. Sci.* multi-domain Transformer | Appl. Sci. 16, 533 |
 | `durall2020watch` | Spectral fingerprint classic | CVPR 2020 pp. 7890–7899 |
-| `bird2024cifake` | CIFAKE dataset context | IEEE Access 12 |
+| `guillaro2025bfree` | Bias-controlled training pairs | CVPR 2025 pp. 18685–18694 |
+| `liu2024vmamba` | Visual SSM backbone context | NeurIPS 2024 |
 
-## Prior entries retained
+Target count: **26** `\bibitem` entries.
+
 
 EfficientNet, MobileNetV3, ShuffleNetV2, UnivFD, CNNSpot, Frank freq., Mamba, NPR, DIRE, Corvi, FLUX.
 

@@ -19,7 +19,8 @@ UniversalFakeDetect (UnivFD) uses frozen CLIP ViT-L/14 features with a linear pr
 FatFormer adapts CLIP with forgery-aware image/frequency adapters and language-guided alignment~\cite{liu2024fatformer}.
 VIB-Net filters task-irrelevant multimodal features via a variational information bottleneck~\cite{zhang2025vib}, while CO-SPY adaptively fuses semantic and pixel-level artifact cues and releases a large multi-generator evaluation suite~\cite{cheng2025cospy}.
 Beyond Generation reframes detection as one-class modeling of low-level photographic features extracted with a diffusion model used as a denoiser rather than a generator~\cite{zhong2025beyond}.
-
+B-Free emphasizes bias-controlled training pairs and content-aligned fakes to reduce spurious correlations that inflate apparent transfer~\cite{guillaro2025bfree}.
+We cite these works as complementary protocol lessons rather than as training-matched baselines.
 Diffusion-oriented detectors often exploit reconstruction error or diffusion-specific representations.
 DIRE distinguishes real and generated images via the discrepancy between an input and its diffusion reconstruction~\cite{wang2023dire}.
 Such pipelines can improve robustness on diffusion imagery, but they introduce a heavy generative-model reconstruction stage that differs from the compact direct-classification setting studied here.
@@ -66,8 +67,8 @@ External refs & Multiple SOTA & DIRE/related & UnivFD/NPR (separate panel) \\
 \subsection{State-Space Vision Models and Study Positioning}
 \label{sec:rw-ssm}
 
-Selective state-space models provide linear-time sequence modeling~\cite{gu2023mamba}, and Vision Mamba (Vim) shows that bidirectional SSM blocks can serve as efficient vision backbones~\cite{zhu2024vim}.
-Our \textbf{LiteSSM-A} and \textbf{LiteSSM-B} classifiers are \emph{study-specific pure-PyTorch} detectors inspired by these ideas (LiteSSM-B uses a bidirectional SelectiveSSM design), not official reproductions of Vim or any vendor Mamba release.
+Selective state-space models provide linear-time sequence modeling~\cite{gu2023mamba}, and Vision Mamba (Vim) shows that bidirectional SSM blocks can serve as efficient vision backbones~\cite{zhu2024vim}; related visual state-space backbones such as VMamba further explore this design space~\cite{liu2024vmamba}.
+Our \textbf{LiteSSM-A} and \textbf{LiteSSM-B} classifiers are \emph{study-specific pure-PyTorch} detectors inspired by these ideas (LiteSSM-B uses a bidirectional SelectiveSSM design), not official reproductions of Vim, VMamba, or any vendor Mamba release.
 
 Table~\ref{tab:protocol} situates representative external paradigms against our controlled setting.
 Prior work has demonstrated strong cross-generator detection using large pretrained feature extractors, reconstruction-based diffusion representations, generator-artifact modeling, and GenImage-scale lightweight benchmarks.

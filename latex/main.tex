@@ -54,7 +54,7 @@ $^{1}$ \quad College of Software Engineering, South China Agricultural Universit
 % Structured abstract without headings (MDPI style); keep $\approx$200 words
 \abstract{Background: Compact AI-generated still-image detectors must balance accuracy with efficiency under compression and generator shift, yet many comparisons mix training protocols or rely on pretrained backbones. Methods: We compare compact CNNs, a gated frequency-aware CNN (LiteFreqNet~v2), and two study-specific pure-PyTorch state-space classifiers (\textbf{LiteSSM-A} and \textbf{LiteSSM-B}) trained from scratch under a locked recipe on DiffusionForensics (ADM bedroom + SDv2 CelebA-HQ). Models are selected by validation AUC and evaluated with Params/FLOPs, locked batch-1 latency, batch-32 throughput, JPEG Q70, content-domain splits, and UniversalFakeDetect (UFD) per-generator scores. Public UnivFD and NPR checkpoints provide a separate pretrained reference panel. We treat UFD Macro AUC as the primary cross-generator metric. Results: Among protocol-matched compact models, LiteSSM-A attains the highest UFD Macro (0.718; ID 0.946; bedroom $\approx$0.81) at 1.74M parameters, with locked batch-1 p50 latency 144.4\,ms and batch-32 throughput 226 images/s (FP32, RTX~4090D); pretrained references reach higher absolute Macro (UnivFD 0.948; NPR 0.976) under different training paradigms. DALL·E remains near chance for all Panel~A models while Panel~B references remain strong on the same subset; JPEG Q70 changes AUC by at most 0.003; frequency modules are not universally helpful. Conclusions: LiteSSM-A is the preferred generalization--efficiency operating point within the studied compact protocol rather than the lowest-latency model, while generator- and domain-specific boundaries preclude overgeneralized detection claims.}
 
-\keyword{AI-generated image detection; compact neural networks; state-space models; frequency features; out-of-distribution generalization; JPEG compression; reproducible benchmarking}
+\keyword{AI-generated image detection; compact neural networks; state-space models; frequency features; cross-generator evaluation; JPEG compression; reproducible benchmarking}
 
 % Optional for Applied Sciences
 \featuredapplication{Compact still-image AIGC screening on GPU servers where parameter count, measured throughput, stability under the evaluated JPEG~Q70 setting, and honest cross-generator failure reporting matter more than peak in-distribution accuracy or minimum batch-1 latency alone.}
@@ -94,6 +94,7 @@ $^{1}$ \quad College of Software Engineering, South China Agricultural Universit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
 \input{sections/A_flux_appendix}
+\input{sections/B_jpeg_appendix}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt}
@@ -208,6 +209,12 @@ Durall, R.; Keuper, M.; Keuper, J. Watch your up-convolution: CNN based generati
 
 \bibitem[Bird and Lotfi(2024)]{bird2024cifake}
 Bird, J.J.; Lotfi, A. CIFAKE: Image classification and explainable identification of AI-generated synthetic images. {\em IEEE Access} {\bf 2024}, {\em 12}, 15642--15650. https://doi.org/10.1109/ACCESS.2024.3356122.
+
+\bibitem[Guillaro et al.(2025)]{guillaro2025bfree}
+Guillaro, F.; Zingarini, G.; Usman, B.; Sud, A.; Cozzolino, D.; Verdoliva, L. A bias-free training paradigm for more general AI-generated image detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~18685--18694.
+
+\bibitem[Liu et al.(2024b)]{liu2024vmamba}
+Liu, Y.; Tian, Y.; Zhao, Y.; Yu, H.; Xie, L.; Wang, Y.; Ye, Q.; Jiao, J.; Liu, Y. VMamba: Visual state space model. In Advances in Neural Information Processing Systems (NeurIPS), Vancouver, BC, Canada, 10--15 December 2024; Vol.~37.
 
 \end{thebibliography}
 }

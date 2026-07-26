@@ -10,7 +10,7 @@ We therefore treat \textbf{UFD Macro as the primary cross-generator summary} for
 Across ID, UFD Macro, and bedroom-domain ID, LiteSSM-A occupies a favorable accuracy--size region under the evaluated protocol.
 LiteSSM-B is close on ID and competitive on several OOD views, but is heavier and slower; the LiteSSM-A--LiteSSM-B ID gap is CI-overlapping.
 These gains do \emph{not} imply a universal or generator-agnostic detector: worst-generator AUC remains near chance for both SSMs.
-The appropriate claim is narrower---under a matched compact-model protocol, SSM backbones improved average transfer relative to compact CNN baselines, while generator-specific collapse persisted.
+The appropriate claim is narrower---under a matched compact-model protocol, SSM backbones attain higher UFD Macro AUC under the evaluated generator set relative to compact CNN baselines, while generator-specific collapse persisted.
 LiteSSM-A is preferred for its highest Panel~A UFD Macro together with a locked batch-32 throughput of 226 images/s, \emph{not} because it minimizes absolute batch-1 latency (p50 144.4\,ms versus $\approx$4--7\,ms for several CNNs).
 We therefore describe LiteSSM-A as the preferred \textbf{generalization--efficiency operating point} among protocol-matched compact models, rather than as a real-time, edge-ready, or lowest-latency detector.
 
@@ -41,7 +41,7 @@ Likewise, FatFormer, VIB-Net, CO-SPY, and Beyond Generation~\cite{liu2024fatform
 Training used a fixed no-pretraining recipe, a single training seed, and two DF training sources.
 Bootstrap intervals quantify test-sample uncertainty but do \emph{not} capture variability across independently trained models.
 UFD Macro depends on the chosen subset list and per-class caps.
-JPEG analysis focuses on Q70 for the main claim.
+JPEG analysis focuses on Q70 for the main claim; a multi-quality ID sweep ($Q\in\{95,85,70\}$) is provided in Appendix~\ref{app:jpeg} without upgrading the claim to general compression robustness.
 External reference detectors (UnivFD, NPR) use publicly released pretrained weights and native preprocessing; they contextualize performance and are not training-matched competitors.
 An unmatched FLUX subset is reported only in Appendix~\ref{app:flux}~\cite{flux2024}.
 Reported SSMs are study-specific pure-PyTorch classifiers for controlled comparison, not official architecture releases or vendor-kernel peaks.

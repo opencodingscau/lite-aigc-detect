@@ -56,4 +56,6 @@ Expected: `[PASS] max_abs_err=0`, Tables 2–5 CSV under `reproduced_tables/`, h
 
 ## Zenodo
 
-Version DOI will be added after archival of this tag. Do not invent a placeholder DOI in the PDF until Zenodo returns one.
+- **Version DOI (cite this):** https://doi.org/10.5281/zenodo.21604045 (`v1.0.0-paper.2`)
+- **Concept DOI:** https://doi.org/10.5281/zenodo.21604044
+

@@ -8,7 +8,7 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 - [x] Public GitHub tree: https://github.com/opencodingscau/lite-aigc-detect
 - [x] Absolute cloud paths sanitized in public JSON
 - [x] `LICENSE` (MIT draft)
-- [x] `CITATION.cff` (authors/DOI still TODO — fill after real ORCID + Zenodo)
+- [x] `CITATION.cff` (author + Zenodo DOI filled)
 - [x] `environment.yml` + `requirements.txt`
 - [x] `scripts/remap_manifest_paths.py`
 - [x] `scripts/build_tables.py` cold-start rebuild (**PASS**, max_abs_err=0)
@@ -16,10 +16,10 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 - [x] `.gitattributes` LF normalization for hash-stable text files
 - [x] `checkpoints/README.md` distribution / license policy (weights not in git)
 - [x] `scripts/make_sha256sums.py` → `hashes/SHA256SUMS`
-- [ ] Tag `v1.0.0-paper` + GitHub Release
-- [ ] Zenodo version DOI minted **then** back-filled into README / CITATION / paper
+- [x] Tag `v1.0.0-paper` / `v1.0.0-paper.2` + GitHub Release published
+- [x] Zenodo version DOI **10.5281/zenodo.21604045** (concept **10.5281/zenodo.21604044**) back-filled
 - [ ] Panel A checkpoints published only if dataset license allows derived weights
-- [ ] Data Availability contains real URLs (no placeholder DOI)
+- [x] Data Availability contains real GitHub + Zenodo URLs
 
 ## Gate B — Method identity verifiable
 

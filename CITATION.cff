@@ -1,11 +1,13 @@
 cff-version: 1.2.0
 title: "Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift"
-message: "If you use this software or freeze package, please cite it using these metadata."
+message: >-
+  If you use this software or the frozen table-rebuild package, please cite it
+  using these metadata. Replace author names/ORCID with the manuscript authors
+  before journal submission.
 type: software
 authors:
-  - family-names: "TODO"
-    given-names: "TODO"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
+  - name: "opencodingscau"
+    website: "https://github.com/opencodingscau"
 abstract: >-
   Protocol-locked comparison of compact CNN, frequency-aware, and study-specific
   state-space detectors for still-image real/fake classification, with UFD Macro
@@ -17,11 +19,5 @@ keywords:
   - reproducible benchmarking
 license: MIT
 repository-code: "https://github.com/opencodingscau/lite-aigc-detect"
-# Fill AFTER Zenodo minting — do not leave a fake DOI in the submitted PDF.
-# doi: 10.5281/zenodo.TODO
-# identifiers:
-#   - type: doi
-#     value: 10.5281/zenodo.TODO
-#     description: Zenodo release DOI for v1.0.0-paper
-version: "1.0.0-paper"
+version: "1.0.0"
 date-released: "2026-07-26"

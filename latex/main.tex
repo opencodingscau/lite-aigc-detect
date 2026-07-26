@@ -47,9 +47,9 @@
 }
 
 \address{%
-$^{1}$ \quad College of Software Engineering, South China Agricultural University, Guangzhou, Guangdong, China; 3427603873@qq.com}
+$^{1}$ \quad College of Software Engineering, South China Agricultural University, Guangzhou, Guangdong, China; 13543148496@163.com}
 
-\corres{Correspondence: 3427603873@qq.com}
+\corres{Correspondence: 13543148496@163.com}
 
 % Structured abstract without headings (MDPI style); keep $\approx$200 words
 \abstract{Background: Deployable AI-generated still-image detectors must balance accuracy with efficiency under compression and generator shift, yet many comparisons mix training protocols or rely on pretrained backbones. Methods: We compare compact CNNs, a gated frequency-aware CNN (LiteFreqNet~v2), and two study-specific pure-PyTorch state-space classifiers (\textbf{LiteSSM-A} and \textbf{LiteSSM-B}) trained from scratch under a locked recipe on DiffusionForensics (ADM bedroom + SDv2 CelebA-HQ). Models are selected by validation AUC and evaluated with Params/FLOPs, locked batch-1 latency, batch-32 throughput, JPEG Q70, content-domain splits, and UniversalFakeDetect (UFD) per-generator scores. Public UnivFD and NPR checkpoints provide a separate pretrained reference panel. We treat UFD Macro AUC as the primary cross-generator metric. Results: Among protocol-matched compact models, LiteSSM-A attains the highest UFD Macro (0.718; ID 0.946; bedroom $\approx$0.81) at 1.74M parameters, with locked batch-1 p50 latency 144.4\,ms and batch-32 throughput 226 images/s (FP32, RTX~4090D); pretrained references reach higher absolute Macro (UnivFD 0.948; NPR 0.976) under different training paradigms. DALL·E remains near chance for all Panel~A models; JPEG Q70 changes AUC by at most 0.003; frequency modules are not universally helpful. Conclusions: LiteSSM-A is the preferred generalization--efficiency operating point within the studied lightweight protocol, while generator- and domain-specific boundaries preclude overgeneralized detection claims.}

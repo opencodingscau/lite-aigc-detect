@@ -6,15 +6,28 @@ latex/
   main.tex                 # 入口（journal=applsci）
   Definitions/             # 官方 MDPI 类文件（勿改路径）
   figures/
-    fig2_pareto_ufd_macro.png
-    fig3_generator_heatmap.png
+    fig_protocol_overview.png
     fig_ssm_architecture.png
+    fig2_pareto_ufd_macro.png
+    fig_domain_gap.png
+    fig3_generator_heatmap.png
+    fig_jpeg_quality_sweep.png
+    fig_seed_sensitivity.png
+    fig_graphical_abstract.png   # MDPI graphical abstract upload (not inlined)
   sections/
     01_introduction.tex … 06_conclusions.tex
     A_flux_appendix.tex
+    B_jpeg_appendix.tex
+    C_seed_appendix.tex
   mdpi_official/           # 原始 template 备份
   README.md                # 本文件
 ```
+
+## 重新生成图
+```bash
+python scripts/render_paper_figures.py
+```
+（从仓库根目录运行；数字来自 `freeze/` / `jpeg_results/` / `docs/seed_sweep_summary.json`。）
 
 ## 编译
 在 `latex/` 目录下：
@@ -25,6 +38,7 @@ pdflatex main
 （参考文献为 `thebibliography`，一般无需 bibtex。）
 
 Overleaf：上传整个 `latex/`（含 `Definitions/` 与 `figures/`），主文件设为 `main.tex`。
+投稿时可另传 `figures/fig_graphical_abstract.png` 作为 graphical abstract。
 
 ## 命名与数字
 - 正文模型名：**LiteSSM-A** / **LiteSSM-B**（勿写 MobileMamba / MambaPSA / PSA）

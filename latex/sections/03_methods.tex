@@ -3,6 +3,15 @@
 We study binary still-image classification (label $0$: real; label $1$: AI-generated) under compact-model constraints.
 Video deepfakes, legal-forensics certification, and large-scale foundation-model detectors are out of scope.
 The intended use case is offline or server-side screening where Params/FLOPs/latency and honest OOD boundaries matter alongside ID AUC.
+Figure~\ref{fig:protocol} summarizes the locked protocol: frozen manifests, a single from-scratch training recipe for Panel~A, inference-only Panel~B references, and the metric suite used throughout.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_protocol_overview.png}
+\caption{Overview of the locked evaluation protocol.
+Panel~A models are trained from scratch under one recipe; Panel~B detectors are pretrained references evaluated on the same frozen manifests.
+UFD Macro is the primary cross-generator metric; FLUX is appendix-only.\label{fig:protocol}}
+\end{figure}
 
 \subsection{Datasets and Splits}
 
@@ -80,7 +89,7 @@ Params / FLOPs & -- & 1.74\,M / 0.705\,G & 2.48\,M / 0.853\,G \\
 \centering
 \includegraphics[width=0.98\textwidth]{figures/fig_ssm_architecture.png}
 \caption{Overview of LiteSSM-A and LiteSSM-B.
-Both share a $\times16$ stem and $L{=}196$ token interface; blocks differ (multi-receptive+SSM vs.\ bidirectional SSM).
+Both use a matched $\times16$ stem to an $L{=}196$ token interface; sequence blocks differ (multi-receptive+SSM vs.\ bidirectional SSM).
 No official CUDA selective-scan kernel is used.\label{fig:ssm-arch}}
 \end{figure}
 

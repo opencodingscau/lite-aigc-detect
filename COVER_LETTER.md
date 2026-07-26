@@ -32,3 +32,8 @@ ORCID: https://orcid.org/0009-0001-4945-6733
 2. Explicit positioning against LAID/LOTA and modern pretrained detectors without unfair score merging.  
 3. LiteSSM-A recommended as the preferred compact generalization–efficiency operating point (not lowest absolute latency).  
 4. Honest failure boundaries: Panel A DALL·E ≈ chance; bedroom domain gap; frequency not universally helpful.
+
+## Graphical abstract (optional upload)
+
+File: `latex/figures/fig_graphical_abstract.png` (also under `freeze/figures/`).
+Summarizes locked protocol, operating-point plot, and main takeaway/boundaries for the MDPI graphical-abstract slot.

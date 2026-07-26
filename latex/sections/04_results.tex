@@ -64,16 +64,25 @@ LiteSSM-A is therefore selected as the preferred generalization--efficiency oper
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig2_pareto_ufd_macro.png}
-\caption{Accuracy--efficiency plot using UFD Macro AUC versus batch-1 latency (ms/image, FP32, model-only p50; log $x$-axis). Filled markers: Panel~A. Hollow diamonds: Panel~B references. Marker size scales with Params.\label{fig:pareto}}
+\caption{Accuracy--efficiency plot using UFD Macro AUC versus batch-1 latency (ms/image, FP32, model-only p50; log $x$-axis).
+Filled markers: Panel~A; hollow diamonds: Panel~B references; marker size scales with Params.
+LiteSSM-A is marked as the preferred Panel~A operating point (highest Macro, not lowest latency).\label{fig:pareto}}
 \end{figure}
 
 \subsection{Within-ID Performance by Content Domain}
 \label{sec:domain}
 
-Table~\ref{tab:domain} reports domain-wise AUCs on the ID test split.
+Table~\ref{tab:domain} and Figure~\ref{fig:domain} report domain-wise AUCs on the ID test split.
 CelebA-HQ AUCs were near saturation for all models (0.992--0.999).
 Bedroom AUCs were substantially lower and separated detectors: SSM models reached $\approx$0.81, EfficientNet-B0 0.777, and remaining compact CNNs 0.677--0.713.
 Aggregate ID improvements therefore primarily reflect gains on the harder bedroom domain.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/fig_domain_gap.png}
+\caption{Within-ID AUCs by content domain.
+CelebA-HQ is near saturation for all Panel~A models; bedroom AUC is the discriminative axis.\label{fig:domain}}
+\end{figure}
 
 \begin{table}[H]
 \caption{Within-ID AUCs by content domain.\label{tab:domain}}
@@ -138,7 +147,8 @@ NPR~\cite{tan2024npr} & 0.990 & 0.995 & 0.995 & 0.996 & 0.837 & 0.999 & 0.998 & 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.98\textwidth]{figures/fig3_generator_heatmap.png}
-\caption{Generator--model AUC heatmap for UFD subsets.\label{fig:heatmap}}
+\caption{Generator--model AUC heatmap for UFD subsets (Panel~A).
+The outlined DALL·E column remains near chance for every training-matched compact model.\label{fig:heatmap}}
 \end{figure}
 
 \subsection{Robustness under JPEG Q70 Recompression}
@@ -148,6 +158,7 @@ Table~\ref{tab:jpeg} compares clean ID AUC with JPEG $Q=70$.
 Absolute AUC changes were at most \textbf{0.003} for all models.
 LiteFreqNet~v2 did not exhibit a unique robustness advantage.
 The shared observation is stability of the evaluated compact detectors under the evaluated JPEG Q70 recompression setting, not frequency-module superiority.
+A multi-quality visualization ($Q\in\{95,85,70\}$) is given in Appendix~\ref{app:jpeg}.
 
 \begin{table}[H]
 \caption{ID AUC under JPEG Q70 recompression.\label{tab:jpeg}}

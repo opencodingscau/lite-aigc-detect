@@ -4,6 +4,13 @@
 The main-text robustness claim is restricted to JPEG quality~$Q{=}70$ versus clean ID AUC (Table~\ref{tab:jpeg}).
 For completeness, Table~\ref{tab:jpeg-app} reports ID test AUCs under the same locked checkpoints when decoded RGB images are recompressed at $Q\in\{95,85,70\}$ before the shared resize/normalize stack.
 Absolute changes relative to clean remain within $0.003$ across qualities for all listed models; we do \emph{not} reinterpret these rows as broad compression robustness beyond the evaluated settings.
+Figure~\ref{fig:jpeg-app} plots the same locked-checkpoint sweep.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/fig_jpeg_quality_sweep.png}
+\caption{ID test AUC under JPEG recompression at $Q\in\{95,85,70\}$ for locked Panel~A checkpoints.\label{fig:jpeg-app}}
+\end{figure}
 
 \begin{table}[H]
 \caption{ID test AUC under JPEG recompression at multiple qualities (locked Panel~A checkpoints).\label{tab:jpeg-app}}

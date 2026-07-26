@@ -19,6 +19,7 @@ We therefore describe LiteSSM-A as the preferred \textbf{generalization--efficie
 Near-ceiling CelebA-HQ AUCs show that aggregate ID scores can look strong even when a substantial content domain remains difficult (Section~\ref{sec:domain}).
 Bedroom performance ($\approx$0.68--0.81) is where models separate and where SSM gains are most visible.
 DALL·E exposes an orthogonal \textbf{generator} boundary: chance-level AUCs across all Panel~A CNN and SSM detectors (0.451--0.519) indicate that the limitation is not an artifact of LiteFreqNet alone (Section~\ref{sec:ufd}).
+Score-level diagnostics (Figure~\ref{fig:dalle-diag}) show near-complete real/fake overlap for Panel~A models on DALL·E while NPR remains separated, consistent with a protocol/panel gap rather than absolute undetectability.
 Importantly, Panel~B pretrained references remain strong on the same DALL·E subset (UnivFD $\approx$0.969; NPR $\approx$0.990), so the failure is characteristic of the controlled from-scratch compact panel rather than an intrinsic impossibility of DALL·E detection under every training paradigm.
 This contrast supports a failure-aware takeaway: large-scale pretraining or official artifact pipelines can retain DALL·E signal that our low-data Panel~A models do not learn.
 

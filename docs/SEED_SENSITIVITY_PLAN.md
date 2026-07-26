@@ -10,12 +10,12 @@ Source artifact: `formal/seed_sweep_results/summary.json` (also mirrored under `
 | Model | Metric | s42 | s43 | s44 | Mean±std (population) |
 |-------|--------|-----|-----|-----|------------------------|
 | LiteSSM-A | ID | 0.946 | 0.939 | 0.939 | 0.941±0.004 |
-| LiteSSM-A | UFD Macro | 0.718 | 0.712 | 0.733 | 0.721±0.009 |
+| LiteSSM-A | UFD Macro | 0.718 | 0.712 | 0.733 | 0.721±0.011 |
 | EfficientNet-B0 | ID | 0.929 | 0.923 | 0.930 | 0.927±0.003 |
-| EfficientNet-B0 | UFD Macro | 0.667 | 0.674 | 0.624 | 0.655±0.022 |
+| EfficientNet-B0 | UFD Macro | 0.667 | 0.674 | 0.624 | 0.655±0.027 |
 
-- LiteSSM-A Macro std ≤0.01 → cite as stability under the locked recipe (appendix only).
-- EfficientNet-B0 Macro std ≈0.022 → keep single-seed primary ranking; do not overclaim CNN stability.
+- Mean±std uses **sample** standard deviation ($n{-}1$) over three fixed seeds (descriptive sensitivity set).
+- LiteSSM-A Macro sample std ≈0.011; EfficientNet-B0 Macro ≈0.027.
 - Do **not** merge means into `freeze/frozen_numbers.json` primary rows.
 
 ## Protocol (executed)

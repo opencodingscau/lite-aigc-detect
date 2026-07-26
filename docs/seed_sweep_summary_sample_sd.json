@@ -1,0 +1,48 @@
+{
+  "LiteSSM-A": {
+    "runs": [
+      {
+        "seed": 42,
+        "id_auc": 0.94625,
+        "ufd_macro_auc": 0.7184390625
+      },
+      {
+        "seed": 43,
+        "id_auc": 0.9392,
+        "ufd_macro_auc": 0.7117249999999999
+      },
+      {
+        "seed": 44,
+        "id_auc": 0.9385,
+        "ufd_macro_auc": 0.73308671875
+      }
+    ],
+    "id_auc_mean": 0.9413166666666667,
+    "id_auc_std_sample": 0.004286704250742454,
+    "ufd_macro_mean": 0.72108359375,
+    "ufd_macro_std_sample": 0.010923640242048234
+  },
+  "EfficientNet-B0": {
+    "runs": [
+      {
+        "seed": 42,
+        "id_auc": 0.9286,
+        "ufd_macro_auc": 0.66688671875
+      },
+      {
+        "seed": 43,
+        "id_auc": 0.923325,
+        "ufd_macro_auc": 0.67445234375
+      },
+      {
+        "seed": 44,
+        "id_auc": 0.929525,
+        "ufd_macro_auc": 0.623832421875
+      }
+    ],
+    "id_auc_mean": 0.92715,
+    "id_auc_std_sample": 0.003344678609373443,
+    "ufd_macro_mean": 0.6550571614583333,
+    "ufd_macro_std_sample": 0.02730472380276706
+  }
+}

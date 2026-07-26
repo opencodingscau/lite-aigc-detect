@@ -70,8 +70,34 @@ LiteSSM-A is therefore selected as the preferred generalization--efficiency oper
 \includegraphics[width=0.92\textwidth]{figures/fig2_pareto_ufd_macro.png}
 \caption{Accuracy--efficiency plot using UFD Macro AUC versus batch-1 latency (ms/image, FP32, model-only p50; log $x$-axis).
 Filled markers: Panel~A; hollow diamonds: Panel~B references; marker size scales with Params.
+The main panel keeps the full $[0.60,1.00]$ Macro range so Panel~B absolute gaps remain visible; the inset magnifies the Panel~A band $[0.60,0.80]$.
 LiteSSM-A is marked as the preferred Panel~A operating point (highest Macro, not lowest latency).\label{fig:pareto}}
 \end{figure}
+
+\begin{table}[H]
+\caption{Operating metrics at a fixed decision threshold.
+For Panel~A, the threshold is fitted on the validation set by Youden's $J$ and applied unchanged to ID test and UFD (pooled).
+For Panel~B references we report a fixed score threshold of $0.5$ (not recipe-matched Youden).
+Bal.\ Acc.\ $=$ $(\mathrm{Sens}+\mathrm{Spec})/2$.\label{tab:operate}}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{@{}P{2.15cm}l c *{4}{R}@{}}
+\toprule
+\textbf{Model} & \textbf{Split} & \textbf{Thr} & \textbf{Bal.} & \textbf{F1} & \textbf{Sens.} & \textbf{Spec.} \\
+\midrule
+LiteSSM-A & ID & 0.43 & 0.863 & 0.870 & 0.920 & 0.805 \\
+LiteSSM-A & UFD pooled & 0.43 & 0.676 & 0.604 & 0.494 & 0.859 \\
+EfficientNet-B0 & ID & 0.54 & 0.805 & 0.818 & 0.875 & 0.735 \\
+EfficientNet-B0 & UFD pooled & 0.54 & 0.617 & 0.534 & 0.440 & 0.793 \\
+LiteFreqNet~v2 & ID & 0.94 & 0.823 & 0.829 & 0.860 & 0.785 \\
+LiteFreqNet~v2 & UFD pooled & 0.94 & 0.603 & 0.517 & 0.426 & 0.781 \\
+NPR (ref) & ID & 0.50 & 0.867 & 0.862 & 0.830 & 0.905 \\
+NPR (ref) & UFD pooled & 0.50 & 0.945 & 0.945 & 0.943 & 0.947 \\
+UnivFD (ref) & ID & 0.50 & 0.510 & 0.222 & 0.140 & 0.880 \\
+UnivFD (ref) & UFD pooled & 0.50 & 0.818 & 0.781 & 0.650 & 0.986 \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \subsection{Within-ID Performance by Content Domain}
 \label{sec:domain}
@@ -160,14 +186,32 @@ NPR~\cite{tan2024npr} & 0.990 & 0.995 & 0.995 & 0.996 & 0.837 & 0.999 & 0.998 & 
 The outlined DALL·E column remains near chance for every training-matched compact model.\label{fig:heatmap}}
 \end{figure}
 
+Figure~\ref{fig:dalle-diag} diagnoses the DALL·E failure at the score level.
+On Glide$_{100,10}$, Panel~A fake/real score mass separates; on DALL·E the two classes largely overlap for LiteSSM-A and EfficientNet-B0, whereas NPR retains clear separation.
+A full causal diagnosis would require matched acquisition metadata and spectral decomposition; the present evidence establishes a protocol-level boundary rather than a mechanistic explanation.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/fig_dalle_score_diag.png}
+\caption{Score distributions on UFD DALL·E versus Glide$_{100,10}$ for LiteSSM-A, EfficientNet-B0, and NPR (ref).
+Panel~A overlap on DALL·E explains near-chance AUCs; NPR remains separated under a different training paradigm.\label{fig:dalle-diag}}
+\end{figure}
+
 \subsection{Robustness under JPEG Q70 Recompression}
 \label{sec:jpeg}
 
 Table~\ref{tab:jpeg} compares clean ID AUC with JPEG $Q=70$.
 Absolute AUC changes were at most \textbf{0.003} for all models.
-LiteFreqNet~v2 did not exhibit a unique robustness advantage.
-The shared observation is stability of the evaluated compact detectors under the evaluated JPEG Q70 recompression setting, not frequency-module superiority.
-A multi-quality visualization ($Q\in\{95,85,70\}$) is given in Appendix~\ref{app:jpeg}.
+Figure~\ref{fig:jpeg-forest} plots paired-bootstrap $\Delta$AUC with 95\% CIs; all intervals include or hug zero, and LiteFreqNet~v2 shows no unique robustness advantage.
+The shared observation is stability under the evaluated JPEG Q70 setting, not frequency-module superiority.
+A multi-quality absolute-AUC sweep ($Q\in\{95,85,70\}$) remains in Appendix~\ref{app:jpeg}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/fig_jpeg_delta_forest.png}
+\caption{Forest plot of ID $\Delta$AUC $=\mathrm{AUC}_{Q70}-\mathrm{AUC}_{\mathrm{clean}}$ with paired bootstrap 95\% CIs ($B=1000$, seed~42).
+The dashed line marks zero effect.\label{fig:jpeg-forest}}
+\end{figure}
 
 \begin{table}[H]
 \caption{ID AUC under JPEG Q70 recompression.\label{tab:jpeg}}
@@ -189,8 +233,29 @@ ShuffleNetV2-x0.5 & 0.880 & 0.879 & $-0.001$ & $[-0.014,\ +0.014]$ \\
 
 \subsection{Ablation and Frequency-Module Transferability}
 
-Replacing early concatenation with gated residual fusion recovered usable thresholds after a probability-collapse failure in the initial LiteFreq design; LiteFreqNet~v2 is retained in Tables~\ref{tab:overall}--\ref{tab:jpeg}.
-Attaching the frequency branch to SSM backbones slightly reduced bake-off ID and OOD Pooled AUC for LiteSSM-A ($0.946\to0.937$; $0.712\to0.696$) and LiteSSM-B ($0.945\to0.938$; $0.722\to0.695$).
+Replacing early concatenation with gated residual fusion recovered usable thresholds after a probability-collapse failure in the initial LiteFreq design; LiteFreqNet~v2 is retained in the main tables.
+Table~\ref{tab:freq-abl} summarizes frequency-branch ablations under the bake-off protocol.
+Attaching the frequency branch to SSM backbones slightly reduced ID and OOD Pooled AUC; removing the frequency branch from LiteFreqNet likewise hurts ID/OOD Pooled.
+Frequency-branch variants for SSM backbones (and the LiteFreq no-frequency control) were evaluated with OOD Pooled AUC; \textbf{UFD Macro was not recomputed for these ablations}.
 Frequency injection was therefore not a transferable free upgrade across architectures in this protocol.
+
+\begin{table}[H]
+\caption{Frequency-module ablation under the locked bake-off protocol.
+UFD Macro is reported only for primary main-table checkpoints; ablation rows use ID and OOD Pooled only.\label{tab:freq-abl}}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}P{3.2cm}*{3}{R}@{}}
+\toprule
+\textbf{Model} & \textbf{ID} & \textbf{OOD Pooled} & \textbf{UFD Macro} \\
+\midrule
+LiteSSM-A & 0.946 & 0.712 & 0.718 \\
+LiteSSM-A + freq & 0.937 & 0.696 & -- \\
+LiteSSM-B & 0.945 & 0.722 & 0.700 \\
+LiteSSM-B + freq & 0.938 & 0.695 & -- \\
+LiteFreqNet~v2 & 0.906 & 0.698 & 0.645 \\
+LiteFreqNet (no-freq) & 0.857 & 0.648 & -- \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 An exploratory FLUX evaluation was additionally conducted; however, because the real and synthetic subsets were not content- and acquisition-matched, the results are reported only as supplementary evidence in Appendix~\ref{app:flux} and are \emph{not} used to support architecture-level conclusions.

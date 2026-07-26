@@ -1,0 +1,115 @@
+{
+  "note": "Panel A thresholds fitted on validation Youden J and applied unchanged to ID test and UFD. Panel B uses a fixed score threshold of 0.5.",
+  "models": {
+    "LiteSSM-A": {
+      "threshold": 0.43,
+      "threshold_source": "validation Youden J",
+      "id": {
+        "n": 400,
+        "threshold": 0.43,
+        "balanced_acc": 0.863,
+        "f1": 0.87,
+        "sensitivity": 0.92,
+        "specificity": 0.805,
+        "accuracy": 0.863
+      },
+      "ufd_pooled": {
+        "n": 6400,
+        "threshold": 0.43,
+        "balanced_acc": 0.676,
+        "f1": 0.604,
+        "sensitivity": 0.494,
+        "specificity": 0.859,
+        "accuracy": 0.676
+      }
+    },
+    "EfficientNet-B0": {
+      "threshold": 0.54,
+      "threshold_source": "validation Youden J",
+      "id": {
+        "n": 400,
+        "threshold": 0.54,
+        "balanced_acc": 0.805,
+        "f1": 0.818,
+        "sensitivity": 0.875,
+        "specificity": 0.735,
+        "accuracy": 0.805
+      },
+      "ufd_pooled": {
+        "n": 6400,
+        "threshold": 0.54,
+        "balanced_acc": 0.617,
+        "f1": 0.534,
+        "sensitivity": 0.44,
+        "specificity": 0.793,
+        "accuracy": 0.617
+      }
+    },
+    "LiteFreqNet v2": {
+      "threshold": 0.94,
+      "threshold_source": "validation Youden J",
+      "id": {
+        "n": 400,
+        "threshold": 0.94,
+        "balanced_acc": 0.823,
+        "f1": 0.829,
+        "sensitivity": 0.86,
+        "specificity": 0.785,
+        "accuracy": 0.823
+      },
+      "ufd_pooled": {
+        "n": 6400,
+        "threshold": 0.94,
+        "balanced_acc": 0.603,
+        "f1": 0.517,
+        "sensitivity": 0.426,
+        "specificity": 0.781,
+        "accuracy": 0.603
+      }
+    },
+    "NPR (ref)": {
+      "threshold": 0.5,
+      "threshold_source": "fixed score threshold 0.5 (Panel B reference)",
+      "id": {
+        "n": 400,
+        "threshold": 0.5,
+        "balanced_acc": 0.867,
+        "f1": 0.862,
+        "sensitivity": 0.83,
+        "specificity": 0.905,
+        "accuracy": 0.868
+      },
+      "ufd_pooled": {
+        "n": 6400,
+        "threshold": 0.5,
+        "balanced_acc": 0.945,
+        "f1": 0.945,
+        "sensitivity": 0.943,
+        "specificity": 0.947,
+        "accuracy": 0.945
+      }
+    },
+    "UnivFD (ref)": {
+      "threshold": 0.5,
+      "threshold_source": "fixed score threshold 0.5 (Panel B reference)",
+      "id": {
+        "n": 400,
+        "threshold": 0.5,
+        "balanced_acc": 0.51,
+        "f1": 0.222,
+        "sensitivity": 0.14,
+        "specificity": 0.88,
+        "accuracy": 0.51
+      },
+      "ufd_pooled": {
+        "n": 6400,
+        "threshold": 0.5,
+        "balanced_acc": 0.818,
+        "f1": 0.781,
+        "sensitivity": 0.65,
+        "specificity": 0.986,
+        "accuracy": 0.818
+      }
+    }
+  }
+}

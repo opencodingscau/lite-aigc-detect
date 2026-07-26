@@ -1,0 +1,47 @@
+{
+  "note": "SSM+freq and LiteFreq no-freq variants report ID and OOD Pooled under the bake-off protocol; UFD Macro was not recomputed for these ablations.",
+  "rows": [
+    {
+      "model": "LiteSSM-A",
+      "registry": "mobilemamba_lite",
+      "id_auc": 0.946,
+      "ood_pooled_auc": 0.712,
+      "ufd_macro": 0.718
+    },
+    {
+      "model": "LiteSSM-A + freq",
+      "registry": "mobilemamba_lite_freq",
+      "id_auc": 0.937,
+      "ood_pooled_auc": 0.696,
+      "ufd_macro": null
+    },
+    {
+      "model": "LiteSSM-B",
+      "registry": "mambapsa_cls",
+      "id_auc": 0.945,
+      "ood_pooled_auc": 0.722,
+      "ufd_macro": 0.7
+    },
+    {
+      "model": "LiteSSM-B + freq",
+      "registry": "mambapsa_cls_freq",
+      "id_auc": 0.938,
+      "ood_pooled_auc": 0.695,
+      "ufd_macro": null
+    },
+    {
+      "model": "LiteFreqNet v2",
+      "registry": "lite_freq_net_v2",
+      "id_auc": 0.906,
+      "ood_pooled_auc": 0.698,
+      "ufd_macro": 0.645
+    },
+    {
+      "model": "LiteFreqNet (no-freq)",
+      "registry": "lite_freq_net_nofreq",
+      "id_auc": 0.857,
+      "ood_pooled_auc": 0.648,
+      "ufd_macro": null
+    }
+  ]
+}

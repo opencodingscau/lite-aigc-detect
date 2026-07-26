@@ -19,6 +19,27 @@ UFD Macro is the primary cross-generator metric; FLUX is appendix-only.\label{fi
 use DiffusionForensics (DF) images from two content domains present in training: ADM bedroom and Stable Diffusion~v2 CelebA-HQ, each with real and fake folders.
 Frozen JSONL manifests (seed \textbf{42}) contain train/val/test/ood splits of sizes \textbf{3200/400/400/5600}.
 No test or OOD image is used for training, validation AUC selection, or threshold fitting.
+Table~\ref{tab:data-comp} summarizes split composition and intended use.
+
+\begin{table}[H]
+\caption{Dataset composition under frozen seed-42 manifests.
+ID train/val/test draws are balanced across \{bedroom, CelebA-HQ\}$\times$\{real, fake\}.
+UFD evaluation uses eight generator subsets with up to 400 real + 400 fake each.\label{tab:data-comp}}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{@{}P{1.55cm}RRRP{3.6cm}@{}}
+\toprule
+\textbf{Split} & \textbf{$n$} & \textbf{Domains} & \textbf{Labels} & \textbf{Role} \\
+\midrule
+Train & 3200 & bedroom + CelebA-HQ & real/fake (balanced) & Panel~A training only \\
+Val & 400 & bedroom + CelebA-HQ & real/fake (balanced) & AUC selection + Youden threshold \\
+ID test & 400 & bedroom + CelebA-HQ & real/fake (balanced) & ID / domain metrics \\
+OOD pooled & 5600 & DF OOD sources & real/fake & Supplementary pooled AUC \\
+UFD eval & 6400 & 8 generators & 400+400 / subset & Primary Macro / worst-gen. \\
+FLUX (app.) & 200 & unmatched probe & 100 real + 100 fake & Appendix only \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \paragraph{UniversalFakeDetect (UFD)}
 provides the primary cross-generator suite~\cite{ojha2023ufd}.
@@ -105,7 +126,9 @@ Latency/throughput are \textbf{model-only} on synthetic tensors and exclude disk
 Every main-table model uses 15 epochs, batch size 64, AdamW ($\mathrm{lr}=10^{-4}$, weight decay $10^{-4}$), CosineAnnealingLR, cross-entropy loss, input size 224, and seed 42 on one NVIDIA GeForce RTX~4090D (PyTorch~2.3).
 After each epoch we keep the checkpoint with the best validation AUC.
 A decision threshold is then fit on validation probabilities by maximizing Youden's $J=\mathrm{TPR}-\mathrm{FPR}$.
-Primary ranking metrics in this paper are AUC-based.
+That validation threshold is applied \emph{unchanged} to the ID test set and to UFD subsets for thresholded operating metrics; thresholds are \emph{not} re-tuned on test or OOD data.
+Primary ranking metrics in this paper remain AUC-based.
+Layer widths and SelectiveSSM state dimensions were chosen in preliminary capacity-constrained pilots to keep Panel~A SSM models below approximately 2.5\,M parameters; no claim of architecture-level optimality is made.
 
 \subsection{Metrics and Statistical Protocol}
 \label{sec:metrics}

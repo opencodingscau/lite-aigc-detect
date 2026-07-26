@@ -14,7 +14,7 @@ We believe the manuscript fits *Applied Sciences* because it prioritizes **repro
 
 All quantitative tables are derived from a frozen prediction package with bootstrap confidence intervals. We clearly distinguish **UFD Macro AUC** (primary cross-generator metric) from **OOD Pooled AUC** to avoid ambiguous generalization claims. Code and frozen artifacts are available at https://github.com/opencodingscau/lite-aigc-detect (release `v1.0.0-paper.2`) and archived at Zenodo (https://doi.org/10.5281/zenodo.21604045).
 
-This manuscript is original, not under consideration elsewhere, and all co-authors have approved the submission. We declare no conflicts of interest related to this work.
+This manuscript is original and not under consideration elsewhere. The author has approved the submission and declares no conflicts of interest related to this work.
 
 Thank you for considering our submission.
 

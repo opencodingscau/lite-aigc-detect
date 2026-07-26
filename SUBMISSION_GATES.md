@@ -34,13 +34,13 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 
 ## Gate C — Zero placeholders, compile, internal consistency
 
-- [ ] Real authors / affiliation / email / ORCID
-- [ ] Real CRediT contributions / Funding / Acknowledgments
+- [x] Real authors / affiliation / email / ORCID (single author: Kaihao Chen; co-authors TBD later)
+- [x] Real CRediT contributions / Funding (none) / Acknowledgments
 - [x] Removed fake `wang2021deepfake` (2103.XXXX) citation
-- [ ] Full bibliography mechanical check (title/authors/venue/pages/DOI)
+- [x] Bibliography mechanical check (see `docs/BIB_AUDIT.md`; unused `sd35card` removed)
 - [ ] Overleaf clean compile (no undef refs / missing figs)
 - [ ] PDF vs freeze numbers checklist (Macro 0.718/0.700; FLUX appendix-only; JPEG=Q70)
-- [ ] Cover letter last (draft updated; final after author metadata)
+- [ ] Cover letter last (draft updated; finalize after Overleaf PDF)
 
 ## Locked efficiency (do not reopen)
 

@@ -44,17 +44,19 @@ Smoke test:
 python scripts/test_remap_smoke.py
 ```
 
-Verify public file hashes (LF-normalized bytes; see `.gitattributes`):
+Verify public file hashes (LF bytes as stored in git; see `.gitattributes`):
 
 ```bash
-# Linux / macOS / Git Bash
+python scripts/verify_sha256sums.py
+
+# Linux / macOS / Git Bash (after a correct LF checkout)
 sha256sum -c hashes/SHA256SUMS
 
-# or regenerate the surface after intentional public-file edits
+# regenerate the surface after intentional public-file edits
 python scripts/make_sha256sums.py
 ```
 
-`hashes/SHA256SUMS` is computed on repository files as stored with **LF** line endings. A correct checkout with `.gitattributes` should match without runtime CRLF normalization.
+`hashes/SHA256SUMS` records SHA256 of **repository LF bytes**. `scripts/verify_sha256sums.py` checks against `git` blobs (or LF-normalized working copies), so Windows CRLF checkouts do not produce false failures. A clean checkout with `.gitattributes` should also satisfy `sha256sum -c` without extra normalization.
 
 ## Locked efficiency (manuscript source)
 

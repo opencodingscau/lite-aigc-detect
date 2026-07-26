@@ -1,0 +1,29 @@
+# Line endings: hashes in hashes/SHA256SUMS are computed on LF-normalized bytes.
+* text=auto eol=lf
+
+*.md text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.tex text eol=lf
+*.bib text eol=lf
+*.txt text eol=lf
+*.cff text eol=lf
+*.sh text eol=lf
+*.gitignore text eol=lf
+*.gitattributes text eol=lf
+*.example text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+*.eps binary
+*.pt binary
+*.pth binary
+*.ckpt binary
+*.npz binary
+*.zip binary
+*.bin binary

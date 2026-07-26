@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-07-26T05:17:17.735243+00:00",
-  "git_commit": null,
-  "freeze_package": "E:\\sciencecre\\aigc_datasets\\lite-aigc-detect\\freeze\\freeze_package.json",
+  "generated_at_utc": "2026-07-26T09:02:49.543486+00:00",
+  "git_commit": "725acdb1c882254a30197d5da373d83931edd234",
+  "freeze_package": "freeze\\freeze_package.json",
   "freeze_package_sha256": "d9cd1b4bc14fc5d4e447b57bb68f68d839091bd1b5ea344bf8f2d9d8aa13ca0a",
   "latency_summary_sha256": "5933a9be6c1439c220b613782e5bc8d9cd7d398706e5db447eb299fa93823997",
   "external_summary_sha256": "a40ec3a8cc60184c6bd9bbbfb3fcac6eaa18442470b93061214cf47f5c3dbe33",

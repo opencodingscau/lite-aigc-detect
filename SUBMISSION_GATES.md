@@ -5,18 +5,20 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 
 ## Gate A — Public repro package usable by a third party
 
-- [x] Public layout built (`../lite-aigc-detect/`); absolute cloud paths sanitized in JSON
+- [x] Public GitHub tree: https://github.com/opencodingscau/lite-aigc-detect
+- [x] Absolute cloud paths sanitized in public JSON
 - [x] `LICENSE` (MIT draft)
 - [x] `CITATION.cff` (authors/DOI still TODO — fill after real ORCID + Zenodo)
 - [x] `environment.yml` + `requirements.txt`
 - [x] `scripts/remap_manifest_paths.py`
-- [x] `scripts/build_tables.py` cold-start rebuild (**local PASS**, max_abs_err=0)
+- [x] `scripts/build_tables.py` cold-start rebuild (**PASS**, max_abs_err=0)
+- [x] Fresh clone + conda env cold-start PASS (`725acdb`)
+- [x] `.gitattributes` LF normalization for hash-stable text files
+- [x] `checkpoints/README.md` distribution / license policy (weights not in git)
 - [x] `scripts/make_sha256sums.py` → `hashes/SHA256SUMS`
-- [ ] GitHub repo created and pushed (use sanitized tree `lite-aigc-detect/`)
-- [ ] Tag `v1.0.0-paper`
-- [ ] Fresh clone + `python scripts/build_tables.py ...` PASS on another machine/env
-- [ ] Zenodo release DOI minted **then** back-filled into README / CITATION / paper
-- [ ] Checkpoints redistributed only if license-safe; prediction shards hashed
+- [ ] Tag `v1.0.0-paper` + GitHub Release
+- [ ] Zenodo version DOI minted **then** back-filled into README / CITATION / paper
+- [ ] Panel A checkpoints published only if dataset license allows derived weights
 - [ ] Data Availability contains real URLs (no placeholder DOI)
 
 ## Gate B — Method identity verifiable
@@ -51,8 +53,7 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 
 ## Suggested execution order
 
-1. ~~Finish Gate B naming + efficiency lock~~ (done for manuscript surface).
-2. Desensitize public tree → push GitHub + third-party cold start.
+1. ~~`.gitattributes` LF fix~~ → next: license-clear Panel A weights decision.
+2. Release candidate re-verify → tag `v1.0.0-paper`.
 3. Zenodo DOI → back-fill.
-4. Author metadata + bib QC.
-5. Overleaf + final cover letter.
+4. Gate C author metadata + bib + Overleaf.

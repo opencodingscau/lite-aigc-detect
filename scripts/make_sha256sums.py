@@ -21,8 +21,10 @@ GLOBS = [
     "external_refs/univfd_report.json",
     "external_refs/npr_report.json",
     "reproduced_tables/*.csv",
-    "reproduced_tables/verification_report.json",
+    # verification_report.json is intentionally excluded: contains timestamps / git HEAD
     "docs/model_architectures.md",
+    "checkpoints/README.md",
+    ".gitattributes",
 ]
 
 

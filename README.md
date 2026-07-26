@@ -11,7 +11,7 @@ Protocol-locked comparison of **compact CNN**, **frequency-aware**, and **study-
 | `mobilemamba_lite` | **LiteSSM-A** |
 | `mambapsa_cls` | **LiteSSM-B** |
 
-Checkpoint filenames are **not** renamed. Display names live in `freeze/frozen_numbers.json`. See `docs/model_architectures.md`.
+Checkpoint filenames are **not** renamed. Display names live in `freeze/frozen_numbers.json`. See `docs/model_architectures.md` and `checkpoints/README.md`.
 
 This repository is **not** a claim of universal / SOTA detection across heterogeneous training protocols.
 
@@ -38,11 +38,23 @@ python scripts/remap_manifest_paths.py \
   --check-exists
 ```
 
-Refresh hashes after any public artifact rename:
+Smoke test:
 
 ```bash
+python scripts/test_remap_smoke.py
+```
+
+Verify public file hashes (LF-normalized bytes; see `.gitattributes`):
+
+```bash
+# Linux / macOS / Git Bash
+sha256sum -c hashes/SHA256SUMS
+
+# or regenerate the surface after intentional public-file edits
 python scripts/make_sha256sums.py
 ```
+
+`hashes/SHA256SUMS` is computed on repository files as stored with **LF** line endings. A correct checkout with `.gitattributes` should match without runtime CRLF normalization.
 
 ## Locked efficiency (manuscript source)
 
@@ -62,7 +74,7 @@ Source: `freeze/frozen_numbers.json` (one RTX 4090D FP32 session). A preliminary
 | Locked freeze JSON + table rebuild | `freeze/`, `scripts/build_tables.py` |
 | Panel A/B summaries | `latency_batch1/`, `external_refs/` |
 | SHA256 surface | `hashes/SHA256SUMS` |
-| Sanitized public tree | sibling `../lite-aigc-detect/` via `scripts/build_public_release.py` |
+| Checkpoint layout + hashes | `checkpoints/README.md` (weights via release if license-cleared) |
 | Raw third-party images | **not redistributed** |
 | Zenodo DOI | **pending** — do not invent placeholders |
 

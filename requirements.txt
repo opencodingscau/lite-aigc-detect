@@ -17,5 +17,4 @@ thop>=0.1.1
 #   pip install ftfy regex packaging 'setuptools<81'
 # NPR: use upstream networks/ + NPR.pth (unwrap state['model'], strip module.)
 
-# Not required for Panel A:
-# diffusers, transformers  # only for historical FLUX appendix generation
+timm>=0.9  # V2 Pilot-A backbones (RepViT / EfficientViT / …)

@@ -50,7 +50,12 @@ def build_model(name: str, num_classes: int = 2) -> nn.Module:
             return DualBranchDetector(
                 bb, emb=192, freq_branch=FreqBranch(out_dim=192, mid_prior=True), num_classes=num_classes
             )
-    raise ValueError(f"Unknown model: {name}")
+    # V2 Pilot-A backbones (isolated names; paper freeze unchanged)
+    try:
+        from models_v2 import build_v2_model
+    except ImportError as e:
+        raise ValueError(f"Unknown model: {name}") from e
+    return build_v2_model(name, num_classes=num_classes)
 
 
 class FreqBranch(nn.Module):

@@ -5,7 +5,7 @@ Branch: `v2-experiments`
 
 | Pilot | Goal | Status | Owner notes |
 | --- | --- | --- | --- |
-| A Backbone bake-off | LiteSSM-A vs EfficientViM / EfficientVMamba / MambaOut / RepViT / SHViT|EfficientViT | **scaffolded** | configs ready; training not started |
+| A Backbone bake-off | LiteSSM-A vs EfficientViM / EfficientVMamba / MambaOut / RepViT / SHViT|EfficientViT | **wave-1 running on AutoDL** | Wave-1: `repvit_m0_9`, `mambaout_proxy` (ConvNeXt-T), `efficientnet_v2_s` under `/root/autodl-tmp/v2_exp` |
 | B Distillation | NPR / UnivFD / gated dual → compact student | **scaffolded** | need independent pool + dedup |
 | C Matched generators | Bias-controlled mini val (SDXL/FLUX + holdouts) | **scaffolded** | protocol draft only |
 

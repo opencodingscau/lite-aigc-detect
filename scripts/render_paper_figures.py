@@ -184,7 +184,7 @@ def load_json(path: Path):
 # Fig: protocol overview
 # ---------------------------------------------------------------------------
 def fig_protocol():
-    fig, ax = plt.subplots(figsize=(11.2, 3.6))
+    fig, ax = plt.subplots(figsize=(11.6, 3.9))
     ax.set_xlim(0, 112)
     ax.set_ylim(0, 36)
     ax.axis("off")
@@ -192,31 +192,31 @@ def fig_protocol():
         "Locked evaluation protocol (Panel A from-scratch; Panel B inference-only)",
         loc="left",
         pad=10,
-        fontsize=11,
+        fontsize=12,
         fontweight="semibold",
     )
 
     stages = [
-        (2, 12, 20, 16, "Data\nDF train/ID\nUFD OOD\n(manifests frozen)", C["shared"], C["shared_edge"]),
-        (28, 12, 20, 16, "Train\n15 ep · bs64\nAdamW 1e-4\nseed 42 · no PT", C["cnn_soft"], C["cnn"]),
-        (54, 20, 20, 12, "Panel A\nCNNs · LiteFreq\nLiteSSM-A/B", C["ssm_soft"], C["ssm"]),
-        (54, 4, 20, 12, "Panel B\nUnivFD · NPR\n(pretrained refs)", C["accent_soft"], C["accent"]),
-        (80, 12, 28, 16, "Metrics\nID · domain · UFD Macro\nJPEG Q70 · latency/thr", C["freq_soft"], C["freq"]),
+        (2, 11, 20, 18, "Data\nDF train/ID\nUFD OOD\n(manifests frozen)", C["shared"], C["shared_edge"]),
+        (28, 11, 20, 18, "Train\n15 ep · bs64\nAdamW 1e-4\nseed 42 · no PT", C["cnn_soft"], C["cnn"]),
+        (54, 20, 20, 13, "Panel A\nCNNs · LiteFreq\nLiteSSM-A/B", C["ssm_soft"], C["ssm"]),
+        (54, 3, 20, 13, "Panel B\nUnivFD · NPR\n(pretrained refs)", C["accent_soft"], C["accent"]),
+        (80, 11, 28, 18, "Metrics\nID · domain\nUFD Macro\nJPEG Q70\nlatency / thr.", C["freq_soft"], C["freq"]),
     ]
     for args in stages:
-        rounded(ax, (args[0], args[1]), args[2], args[3], args[4], args[5], args[6], fontsize=8.0)
+        rounded(ax, (args[0], args[1]), args[2], args[3], args[4], args[5], args[6], fontsize=8.6)
 
     arrow(ax, (22.2, 20), (27.6, 20))
-    arrow(ax, (48.2, 20), (53.6, 26))
-    arrow(ax, (48.2, 20), (53.6, 10))
-    arrow(ax, (74.2, 26), (79.6, 20))
-    arrow(ax, (74.2, 10), (79.6, 20))
+    arrow(ax, (48.2, 20), (53.6, 26.5))
+    arrow(ax, (48.2, 20), (53.6, 9.5))
+    arrow(ax, (74.2, 26.5), (79.6, 20))
+    arrow(ax, (74.2, 9.5), (79.6, 20))
 
     ax.text(
         2,
-        3.2,
+        1.6,
         "Primary OOD claim uses UFD Macro (equal-weight per generator). OOD Pooled is supplementary. FLUX = appendix only.",
-        fontsize=7.5,
+        fontsize=8.0,
         color=C["muted"],
     )
     save(fig, "fig_protocol_overview.png")
@@ -261,7 +261,7 @@ def fig_architecture():
     arrow(ax, (58, 32.5), (76, 27.5))
 
     # LiteSSM-A
-    ax.text(24, 29.2, "LiteSSM-A", ha="center", fontsize=10, fontweight="semibold", color=C["ssm"])
+    ax.text(24, 29.2, "LiteSSM-A", ha="center", fontsize=10.5, fontweight="semibold", color=C["ssm"])
     rounded(
         ax,
         (6, 14.5),
@@ -270,15 +270,15 @@ def fig_architecture():
         "×4 MRFFILite blocks\nLN → DWConv{3,5,7} + SelectiveSSM\nconcat → Linear + residual\n\nd_state=8 · expand=1 · sequential scan",
         C["ssm_soft"],
         C["ssm"],
-        8.0,
+        8.6,
         "semibold",
         lw=1.6,
     )
     arrow(ax, (24, 14.5), (24, 11.2))
-    rounded(ax, (8, 4.5), 32, 6.2, "LN + mean pool → Linear → 2 logits", C["bg"], C["ssm"], 8.2)
+    rounded(ax, (8, 4.5), 32, 6.2, "LN + mean pool → Linear → 2 logits", C["bg"], C["ssm"], 8.6)
 
     # LiteSSM-B
-    ax.text(76, 29.2, "LiteSSM-B", ha="center", fontsize=10, fontweight="semibold", color=C["accent"])
+    ax.text(76, 29.2, "LiteSSM-B", ha="center", fontsize=10.5, fontweight="semibold", color=C["accent"])
     rounded(
         ax,
         (58, 14.5),
@@ -287,7 +287,7 @@ def fig_architecture():
         "×4 BiViMBlock (Vim-inspired)\nLN → SSM_fwd  ∥  SSM_bwd\nconcat → Linear + residual\n\nd_state=16 · bidirectional SelectiveSSM",
         C["accent_soft"],
         C["accent"],
-        8.0,
+        8.6,
         "semibold",
         lw=1.6,
     )
@@ -310,14 +310,13 @@ def fig_architecture():
 # Fig: Pareto
 # ---------------------------------------------------------------------------
 def fig_pareto(frozen: dict, ext: dict | None, lat: dict | None):
-    fig, ax = plt.subplots(figsize=(8.2, 5.4))
+    fig, ax = plt.subplots(figsize=(9.0, 5.8))
     models = frozen["models"]
 
-    # soft regions
     ax.axvspan(3, 12, color="#F5F5F4", zorder=0)
     ax.axvspan(100, 300, color="#F0FDFA", zorder=0)
-    ax.text(5.5, 0.985, "low latency", fontsize=7.5, color=C["muted"], ha="center")
-    ax.text(170, 0.985, "SSM operating region", fontsize=7.5, color=C["ssm"], ha="center")
+    ax.text(5.5, 0.988, "low latency", fontsize=8.0, color=C["muted"], ha="center")
+    ax.text(170, 0.988, "SSM operating region", fontsize=8.0, color=C["ssm"], ha="center")
 
     for key in ORDER:
         name = LABELS[key]
@@ -328,80 +327,64 @@ def fig_pareto(frozen: dict, ext: dict | None, lat: dict | None):
         arch = ARCH[key]
         edge = C["ink"] if name == "LiteSSM-A" else "white"
         lw = 1.8 if name == "LiteSSM-A" else 0.9
-        ax.scatter(
-            [x],
-            [y],
-            s=s,
-            c=ARCH_COLOR[arch],
-            alpha=0.92,
-            edgecolors=edge,
-            linewidths=lw,
-            zorder=3,
-        )
+        ax.scatter([x], [y], s=s, c=ARCH_COLOR[arch], alpha=0.85, edgecolors=edge, linewidths=lw, zorder=3)
 
-    # curated label offsets
     offsets = {
-        "LiteSSM-A": (10, 8),
-        "LiteSSM-B": (10, -14),
-        "EfficientNet-B0": (8, 12),
-        "LiteFreqNet v2": (8, -14),
-        "MobileNetV3-S": (-55, -16),
-        "ShuffleNet-x0.5": (8, 10),
+        "LiteSSM-A": (14, 12),
+        "LiteSSM-B": (14, -18),
+        "EfficientNet-B0": (10, 14),
+        "LiteFreqNet v2": (10, -16),
+        "MobileNetV3-S": (-62, -18),
+        "ShuffleNet-x0.5": (10, 12),
     }
     for key in ORDER:
         name = LABELS[key]
         m = models[name]
         ox, oy = offsets[name]
         weight = "semibold" if name == "LiteSSM-A" else "regular"
+        label = name + ("  ★" if name == "LiteSSM-A" else "")
         ax.annotate(
-            name + ("  ★" if name == "LiteSSM-A" else ""),
+            label,
             (m["batch1_p50_ms"], m["ufd_macro_auc"]),
             textcoords="offset points",
             xytext=(ox, oy),
-            fontsize=8.3,
+            fontsize=8.6,
             fontweight=weight,
             color=C["ink"],
+            arrowprops=dict(arrowstyle="-", color=C["rule"], lw=0.7, shrinkA=0, shrinkB=4)
+            if name in ("LiteSSM-A", "LiteSSM-B", "MobileNetV3-S")
+            else None,
         )
 
     if ext:
-        for key, lab in [("univfd", "UnivFD (ref)"), ("npr", "NPR (ref)")]:
+        for key, lab, dxy in [("univfd", "UnivFD (ref)", (10, 8)), ("npr", "NPR (ref)", (10, -14))]:
             rep = ext[key]
             x = float(rep["latency_batch1"]["p50_ms"])
             y = float(rep["splits"]["ufd_eval"]["ufd_macro_auc"])
-            ax.scatter(
-                [x],
-                [y],
-                s=130,
-                facecolors="none",
-                edgecolors=C["ref"],
-                linewidths=1.7,
-                marker="D",
-                zorder=4,
-            )
-            ax.annotate(lab, (x, y), textcoords="offset points", xytext=(8, 5), fontsize=8, color=C["ref"])
+            ax.scatter([x], [y], s=70, facecolors="none", edgecolors=C["ref"], linewidths=1.5, marker="D", zorder=4, alpha=0.95)
+            ax.annotate(lab, (x, y), textcoords="offset points", xytext=dxy, fontsize=8.2, color=C["ref"])
 
     ax.set_xscale("log")
     ax.set_xlim(2.2, 320)
     ax.set_ylim(0.60, 1.02)
-    ax.set_xlabel("Batch-1 latency (ms / image, FP32, model-only p50; log scale)")
+    ax.set_xlabel("Batch-1 latency (ms/image, FP32, model-only p50; log scale)")
     ax.set_ylabel("UFD Macro AUC")
     ax.set_title("Accuracy–efficiency operating points", loc="left", fontweight="semibold")
     ax.grid(True, which="major", axis="both", alpha=0.22, color=C["rule"])
     ax.grid(True, which="minor", axis="x", alpha=0.12, color=C["rule"])
-
     handles = [
         Line2D([0], [0], marker="o", color="w", markerfacecolor=C["ssm"], markersize=9, label="SSM (Panel A)"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor=C["cnn"], markersize=9, label="CNN (Panel A)"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor=C["freq"], markersize=9, label="CNN+FFT (Panel A)"),
-        Line2D([0], [0], marker="D", color=C["ref"], markerfacecolor="none", markersize=8, label="External ref (Panel B)"),
+        Line2D([0], [0], marker="D", color=C["ref"], markerfacecolor="none", markersize=7, label="External ref (Panel B)"),
     ]
-    ax.legend(handles=handles, loc="lower right", frameon=True, fancybox=False, edgecolor=C["rule"], fontsize=8)
+    ax.legend(handles=handles, loc="lower right", frameon=True, fancybox=False, edgecolor=C["rule"], fontsize=8.2)
     ax.text(
         0.02,
         0.03,
         "Marker size ∝ Params (M)\n★ preferred Panel-A operating point",
         transform=ax.transAxes,
-        fontsize=7.4,
+        fontsize=7.6,
         color=C["muted"],
         va="bottom",
     )
@@ -422,14 +405,32 @@ def fig_domain(frozen: dict):
     x = np.arange(len(names))
     w = 0.38
 
-    fig, ax = plt.subplots(figsize=(9.2, 4.6))
-    b1 = ax.bar(x - w / 2, celeb, w, label="CelebA-HQ", color="#0284C7", edgecolor="white", linewidth=0.6)
-    b2 = ax.bar(x + w / 2, bed, w, label="Bedroom", color="#D97706", edgecolor="white", linewidth=0.6)
+    fig, ax = plt.subplots(figsize=(9.4, 4.8))
+    b1 = ax.bar(
+        x - w / 2,
+        celeb,
+        w,
+        label="CelebA-HQ",
+        color="#0284C7",
+        edgecolor="white",
+        linewidth=0.6,
+        hatch="///",
+    )
+    b2 = ax.bar(
+        x + w / 2,
+        bed,
+        w,
+        label="Bedroom",
+        color="#EA580C",
+        edgecolor="white",
+        linewidth=0.6,
+        hatch="...",
+    )
     ax.axhline(0.5, color=C["rule"], ls="--", lw=1, zorder=0)
     ax.set_ylim(0.55, 1.05)
     ax.set_xticks(x)
     ax.set_xticklabels(names, rotation=18, ha="right")
-    ax.set_ylabel("Within-ID AUC")
+    ax.set_ylabel("Within-ID AUC", fontsize=10.5)
     ax.set_title("Content-domain gap on the ID test split", loc="left", fontweight="semibold")
     ax.legend(frameon=True, fancybox=False, edgecolor=C["rule"], loc="lower left")
     ax.grid(True, axis="y", alpha=0.22, color=C["rule"])
@@ -438,18 +439,25 @@ def fig_domain(frozen: dict):
     for spine in ("left", "bottom"):
         ax.spines[spine].set_color(C["rule"])
 
-    # annotate bedroom values (the discriminative axis)
     for rect, v in zip(b2, bed):
-        ax.text(rect.get_x() + rect.get_width() / 2, v + 0.012, f"{v:.3f}", ha="center", va="bottom", fontsize=7.2, color=C["muted"])
+        ax.text(
+            rect.get_x() + rect.get_width() / 2,
+            v + 0.012,
+            f"{v:.3f}",
+            ha="center",
+            va="bottom",
+            fontsize=7.4,
+            color=C["muted"],
+        )
 
     ax.text(
         0.98,
         0.98,
-        "CelebA-HQ near saturation; bedroom separates models",
+        "Hatching aids grayscale print; bedroom separates models",
         transform=ax.transAxes,
         ha="right",
         va="top",
-        fontsize=7.6,
+        fontsize=7.8,
         color=C["muted"],
     )
     fig.tight_layout()
@@ -467,19 +475,19 @@ def fig_heatmap(pkg: dict):
         for j, g in enumerate(GEN_KEYS):
             mat[i, j] = per[g]["auc"]
 
-    fig, ax = plt.subplots(figsize=(10.4, 4.8))
+    fig, ax = plt.subplots(figsize=(10.6, 4.9))
     im = ax.imshow(mat, vmin=0.45, vmax=0.95, cmap=HEAT_CMAP, aspect="auto")
     cbar = fig.colorbar(im, ax=ax, fraction=0.035, pad=0.02)
-    cbar.set_label("AUC", color=C["muted"])
+    cbar.set_label("AUC", color=C["muted"], fontsize=10)
+    cbar.ax.tick_params(labelsize=9)
     cbar.outline.set_edgecolor(C["rule"])
 
     ax.set_yticks(range(len(ORDER)))
-    ax.set_yticklabels([LABELS[n] for n in ORDER])
+    ax.set_yticklabels([LABELS[n] for n in ORDER], fontsize=9)
     ax.set_xticks(range(len(GEN_KEYS)))
-    ax.set_xticklabels(GEN_LABELS, rotation=28, ha="right")
+    ax.set_xticklabels(GEN_LABELS, rotation=28, ha="right", fontsize=8.5)
 
-    # emphasize DALL·E column
-    ax.add_patch(Rectangle((-0.5, -0.5), 1, len(ORDER), fill=False, ec=C["bad"], lw=1.6, zorder=5))
+    ax.add_patch(Rectangle((-0.5, -0.5), 1, len(ORDER), fill=False, ec=C["bad"], lw=1.8, zorder=5))
 
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):
@@ -490,20 +498,12 @@ def fig_heatmap(pkg: dict):
                 f"{val:.2f}",
                 ha="center",
                 va="center",
-                fontsize=7.6,
+                fontsize=8.0,
                 color="white" if val < 0.62 or val > 0.82 else C["ink"],
                 fontweight="semibold" if j == 0 else "regular",
             )
 
     ax.set_title("UFD per-generator AUC (Panel A; FLUX excluded)", loc="left", fontweight="semibold")
-    ax.text(
-        0.0,
-        -0.22,
-        "Outlined column = DALL·E (near-chance for all Panel-A models).",
-        transform=ax.transAxes,
-        fontsize=7.5,
-        color=C["bad"],
-    )
     for spine in ax.spines.values():
         spine.set_visible(False)
     fig.tight_layout()
@@ -516,7 +516,15 @@ def fig_heatmap(pkg: dict):
 # ---------------------------------------------------------------------------
 def fig_jpeg():
     xs = ["Clean", "Q95", "Q85", "Q70"]
-    fig, ax = plt.subplots(figsize=(8.6, 4.8))
+    styles = {
+        "mobilemamba_lite": ("-", "o"),
+        "mambapsa_cls": ("--", "s"),
+        "efficientnet_b0": ("-", "^"),
+        "lite_freq_net_v2": ("-.", "D"),
+        "mobilenet_v3_small": (":", "v"),
+        "shufflenet_v2_x0_5": ("--", "P"),
+    }
+    fig, ax = plt.subplots(figsize=(9.0, 5.0))
     for key in ORDER:
         path = ROOT / "jpeg_results" / JPEG_FILES[key]
         j = load_json(path)
@@ -527,34 +535,44 @@ def fig_jpeg():
             float(j["jpeg"]["q70"]["test"]["auc"]),
         ]
         arch = ARCH[key]
-        lw = 2.2 if key == "mobilemamba_lite" else 1.4
+        ls, mk = styles[key]
+        lw = 2.3 if key == "mobilemamba_lite" else 1.5
         ax.plot(
             xs,
             ys,
-            marker="o",
-            ms=5.5,
+            marker=mk,
+            ms=6.5,
             lw=lw,
+            ls=ls,
             color=ARCH_COLOR[arch],
-            alpha=0.95 if key.startswith("mobile") or key.startswith("mamba") else 0.8,
+            alpha=0.95,
             label=LABELS[key],
         )
 
     ax.set_ylim(0.86, 0.96)
-    ax.set_ylabel("ID test AUC")
+    ax.set_ylabel("ID test AUC", fontsize=10.5)
     ax.set_title("JPEG recompression sweep (locked checkpoints)", loc="left", fontweight="semibold")
-    ax.grid(True, axis="y", alpha=0.22, color=C["rule"])
-    ax.legend(ncol=2, fontsize=7.8, frameon=True, fancybox=False, edgecolor=C["rule"], loc="lower left")
+    ax.grid(True, axis="both", alpha=0.28, color=C["rule"])
+    ax.legend(
+        ncol=1,
+        fontsize=8.4,
+        frameon=True,
+        fancybox=False,
+        edgecolor=C["rule"],
+        loc="center left",
+        bbox_to_anchor=(1.02, 0.5),
+    )
     for spine in ("top", "right"):
         ax.spines[spine].set_visible(False)
     for spine in ("left", "bottom"):
         ax.spines[spine].set_color(C["rule"])
     ax.text(
-        0.98,
+        0.02,
         0.05,
-        "Absolute ΔAUC ≤ 0.003 vs clean across qualities",
+        "Absolute ΔAUC ≤ 0.003 vs clean",
         transform=ax.transAxes,
-        ha="right",
-        fontsize=7.5,
+        ha="left",
+        fontsize=7.8,
         color=C["muted"],
     )
     fig.tight_layout()
@@ -566,7 +584,7 @@ def fig_jpeg():
 # Fig: seed sensitivity (appendix)
 # ---------------------------------------------------------------------------
 def fig_seed(summary: dict):
-    fig, axes = plt.subplots(1, 2, figsize=(9.6, 4.0), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(9.8, 4.1), sharey=False)
     metrics = [("id_auc", "ID AUC"), ("ufd_macro_auc", "UFD Macro AUC")]
     models = ["LiteSSM-A", "EfficientNet-B0"]
     colors = [C["ssm"], C["cnn"]]
@@ -575,23 +593,25 @@ def fig_seed(summary: dict):
     for ax, (field, title) in zip(axes, metrics):
         for i, (model, color) in enumerate(zip(models, colors)):
             runs = summary[model]["runs"]
-            xs = np.array(seeds) + (i - 0.5) * 0.18
+            xs = np.array(seeds, dtype=float) + (i - 0.5) * 0.22
             ys = [r[field] for r in runs]
-            ax.scatter(xs, ys, s=55, color=color, zorder=3, label=model if ax is axes[0] else None)
             mean = float(np.mean(ys))
             std = float(np.std(ys, ddof=0))
+            ax.axhline(mean, color=color, ls=":", lw=1.0, alpha=0.55, zorder=1)
             ax.errorbar(
                 [np.mean(xs)],
                 [mean],
                 yerr=[std],
-                fmt="s",
-                ms=6,
-                color=color,
-                capsize=4,
-                lw=1.4,
+                fmt="none",
+                ecolor=color,
+                elinewidth=1.0,
+                capsize=3.5,
+                capthick=1.0,
                 zorder=2,
-                alpha=0.9,
+                alpha=0.85,
             )
+            ax.scatter(xs, ys, s=48, color=color, zorder=4, edgecolors="white", linewidths=0.6, label=model if ax is axes[0] else None)
+            ax.scatter([np.mean(xs)], [mean], s=42, marker="s", color=color, zorder=5, edgecolors="white", linewidths=0.7)
         ax.set_xticks(seeds)
         ax.set_xlabel("Training seed")
         ax.set_title(title, loc="left", fontsize=10, fontweight="semibold")
@@ -602,7 +622,7 @@ def fig_seed(summary: dict):
             ax.spines[spine].set_color(C["rule"])
 
     axes[0].set_ylabel("AUC")
-    axes[0].legend(frameon=True, fancybox=False, edgecolor=C["rule"], fontsize=8)
+    axes[0].legend(frameon=True, fancybox=False, edgecolor=C["rule"], fontsize=8.2)
     fig.suptitle("Training-seed sensitivity (locked recipe; n=3)", fontsize=11, fontweight="semibold", y=1.02)
     fig.tight_layout()
     save(fig, "fig_seed_sensitivity.png")

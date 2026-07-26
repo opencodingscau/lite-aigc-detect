@@ -21,8 +21,12 @@
 \datepublished{ }
 \hreflink{https://doi.org/}
 
-% tabularx right-aligned X column used in result tables
+% tabularx helpers for wrapping text cells (l-columns do not shrink and cause overflow)
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\headheight}{24.2pt}
+\addtolength{\topmargin}{-12.2pt}
 
 %=================================================================
 \Title{Compact AI-Generated Image Detection under Compression and Cross-Generator Shift: A Reproducible Study of CNN, Frequency-Aware, and State-Space Models}

@@ -1,5 +1,5 @@
 Synthetic still images from modern generative models are increasingly difficult to separate from photographs by casual inspection, yet many content-moderation pipelines must run under tight parameter and compute budgets.
-The practical question is therefore not only which architecture maximizes in-distribution (ID) accuracy, but which \emph{compact} detector offers a usable accuracy--efficiency trade-off once images leave the training generators and pass through ordinary recompression.
+The practical question is therefore not only which architecture maximizes in-distribution (ID) accuracy, but which \emph{compact} detector for AI-generated content (AIGC) offers a usable accuracy--efficiency trade-off once images leave the training generators and pass through ordinary recompression.
 
 Prior work has explored CNN detectors~\cite{wang2020cnn,tan2019efficientnet}, frequency-domain cues~\cite{frank2020freq}, pretrained universal detectors~\cite{ojha2023ufd,liu2024fatformer}, reconstruction-based pipelines~\cite{wang2023dire}, large multi-generator benchmarks~\cite{zhu2023genimage}, and compact/efficient detectors such as LAID and LOTA~\cite{chivaran2025laid,wang2025lota}.
 Reported gains are often entangled with mismatched training protocols, ImageNet or CLIP initialization, or heterogeneous evaluation sets, which complicates operating-point selection.

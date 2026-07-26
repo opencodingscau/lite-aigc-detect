@@ -4,12 +4,12 @@
 CNN-based detectors remain a practical baseline for still-image real/fake classification.
 Early work showed that CNN-generated images leave transferable forensic cues that a ResNet-style classifier can exploit across GAN families~\cite{wang2020cnn}.
 Subsequent studies emphasized local texture, upsampling footprints, and neighboring-pixel dependencies as more stable signals than global semantics alone.
-Neighboring Pixel Relationships (NPR) treat the local interdependence induced by generator upsampling as a transferable artifact representation and report strong cross-generator behavior under their official protocol~\cite{tan2024npr}.
+Neighboring Pixel Relationships (NPR) treat local interdependence induced by generator upsampling as a transferable artifact cue and report strong cross-generator behavior under their official protocol~\cite{tan2024npr}.
 We treat NPR as an \emph{external pretrained reference} rather than a training-matched competitor.
 
 Frequency-domain cues---spectral peaks, mid/high-band energy, and residual spectra---have long been used to expose generative artifacts~\cite{frank2020freq,durall2020watch,corvi2023diffusion}.
-Whether a frequency module helps, however, is backbone- and protocol-dependent.
-We instantiate LiteFreqNet~v2 (gated FFT-magnitude fusion) under the same from-scratch recipe as the CNN and SSM panels to test transferability of frequency injection rather than to claim a universal spectral solution.
+Whether a frequency module helps is backbone- and protocol-dependent.
+We instantiate LiteFreqNet~v2 (gated FFT-magnitude fusion) under the same from-scratch recipe as the CNN/SSM panels to test transferability of frequency injection, not to claim a universal spectral solution.
 
 \subsection{Pretrained, Reconstruction-Based, and Modern Generalization Detectors}
 \label{sec:rw-general}
@@ -30,7 +30,7 @@ Large-scale benchmarks further shape evaluation expectations.
 GenImage provides a million-scale multi-generator suite with cross-generator and degraded-image protocols~\cite{zhu2023genimage}; many 2024--2025 detectors report GenImage ACC/AP under large training budgets.
 Our study instead freezes a low-data DiffusionForensics training split and uses UniversalFakeDetect per-generator AUCs as the primary cross-generator summary, with GenImage treated as an important external-validity reference rather than a shared leaderboard (Section~\ref{sec:discussion}).
 
-\subsection{Lightweight and Efficient AIGC Detection}
+\subsection{Lightweight and Efficient AI-Generated Content (AIGC) Detection}
 \label{sec:rw-lite}
 
 Compact ImageNet-style backbones (EfficientNet, MobileNet, ShuffleNet) are widely used when parameter count and throughput matter~\cite{tan2019efficientnet,howard2019mobilenetv3,ma2018shufflenet}.
@@ -47,19 +47,20 @@ We do \emph{not} claim the first lightweight AIGC detector, the first spatial--f
 \caption{Study positioning against closely related lightweight/efficient detectors.
 Numeric scores are not compared across rows because training data, pretraining, metrics, and pipelines differ.\label{tab:positioning}}
 \scriptsize
-\begin{tabularx}{\textwidth}{l l l l}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{@{}P{1.85cm}LLL@{}}
 \toprule
 \textbf{Dimension} & \textbf{LAID}~\cite{chivaran2025laid} & \textbf{LOTA}~\cite{wang2025lota} & \textbf{Ours} \\
 \midrule
-Primary goal & Lightweight LiCNN/LiViT benchmark & Bit-plane noise detector & Controlled compact comparison \\
+Primary goal & Lightweight CNN/ViT bench. & Bit-plane noise detector & Controlled compact comparison \\
 Training data & GenImage subset & GenImage & ADM bedroom + SDv2 CelebA-HQ \\
-Architectures & Off-the-shelf CNN/ViT & Noise classifiers & CNN, freq.\ CNN, study-specific SSM \\
-Pretraining (main) & Model dependent & Method-specific & None for Panel~A \\
-Primary OOD summary & ACC-based GenImage splits & Cross-gen.\ ACC/AP & UFD Macro AUC + worst generator \\
+Architectures & Off-the-shelf CNN/ViT & Noise classifiers & CNN, freq.\ CNN, study SSM \\
+Pretraining & Model dependent & Method-specific & None (Panel~A) \\
+Primary OOD & GenImage ACC splits & Cross-gen.\ ACC/AP & UFD Macro + worst gen. \\
 Domain split & Limited & No & CelebA-HQ vs.\ bedroom \\
-Failure reporting & Adversarial robustness & Degradation & Near-chance DALL·E (Panel~A) \\
-Efficiency focus & Params/FLOPs & ms-level extraction & Params/FLOPs/B1 p50/p95/Thr@32 \\
-External refs & Multiple SOTA & DIRE/related & UnivFD/NPR (separate panel) \\
+Failure report & Adversarial robustness & Degradation & Near-chance DALL·E (A) \\
+Efficiency & Params/FLOPs & ms-level extraction & Params/FLOPs/latency/thr. \\
+External refs & Multiple SOTA & DIRE/related & UnivFD/NPR (sep.\ panel) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -78,7 +79,9 @@ Its contribution is experimental-design novelty: under a locked no-pretraining, 
 \begin{table}[H]
 \caption{Protocol-level comparison of representative detectors.
 Entries describe published settings rather than a single shared leaderboard.\label{tab:protocol}}
-\begin{tabularx}{\textwidth}{l l l l l l}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}P{1.7cm}LLLLL@{}}
 \toprule
 \textbf{Method} & \textbf{Pretrained} & \textbf{Paradigm} & \textbf{Cross-gen.} & \textbf{Domain} & \textbf{Efficiency} \\
 \midrule

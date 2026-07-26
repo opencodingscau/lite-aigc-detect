@@ -2,7 +2,7 @@
 \label{app:flux}
 
 An exploratory FLUX evaluation was conducted independently of the locked training protocol.
-We generated 100 images with \texttt{black-forest-labs/FLUX.1-schnell}~\cite{flux2024} (Diffusers \texttt{FluxPipeline}, \texttt{bfloat16}, CPU offload, 4 steps, guidance 0.0, \texttt{max\_sequence\_length}=256, seeds $42+i$, ten cycled English prompts) and paired them with 100 DiffusionForensics real images (seed~42).
+We generated 100 images with FLUX.1-\texttt{schnell}~\cite{flux2024} (Diffusers \texttt{FluxPipeline}, \texttt{bfloat16}, CPU offload, 4 steps, guidance 0.0, \texttt{max\_sequence\_length}=256, seeds $42+i$, ten cycled English prompts) and paired them with 100 DiffusionForensics real images (seed~42).
 Because the real and synthetic subsets were \textbf{not} content- and acquisition-matched---native resolutions differ, PNG vs.\ JPEG containers differ, and residual pipeline cues cannot be ruled out---these results are reported only as supplementary evidence and are \textbf{not} used to support architecture-level conclusions in the main text.
 
 Table~\ref{tab:flux-app} lists AUCs with bootstrap 95\% CIs ($B=1000$, seed~42).
@@ -10,7 +10,9 @@ The LiteSSM-A vs.\ LiteSSM-B difference CI includes zero ($\Delta$AUC $+0.026$ $
 
 \begin{table}[H]
 \caption{Exploratory evaluation on the unmatched FLUX subset ($n=200$).\label{tab:flux-app}}
-\begin{tabularx}{\textwidth}{l l RR}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}P{2.4cm}l*{2}{R}@{}}
 \toprule
 \textbf{Model} & \textbf{Arch} & \textbf{AUC} & \textbf{95\% CI} \\
 \midrule

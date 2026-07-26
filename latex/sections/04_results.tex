@@ -22,7 +22,9 @@ Panel~B references attain substantially higher UFD Macro (UnivFD \textbf{0.948};
 \caption{Panel~A: controlled compact models trained under our frozen from-scratch protocol.
 Efficiency numbers are from one locked RTX~4090D session (PyTorch~2.3, CUDA~12.1, FP32): batch-1 latency with $\ge$50 warmup / 500 timed iterations and CUDA synchronize (model-only; p50 shown); Thr@32 is images/s at batch size~32 in the same session.
 CI intervals are 95\% bootstrap intervals for ID and UFD Macro.\label{tab:overall}}
-\begin{tabularx}{\textwidth}{l l RRRRR RR}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{@{}P{2.15cm}c*{7}{R}@{}}
 \toprule
 \textbf{Model} & \textbf{Arch} & \textbf{Params} & \textbf{FLOPs} & \textbf{B1 p50} & \textbf{Thr@32} & \textbf{ID} & \textbf{UFD} & \textbf{Worst} \\
  &  & (M) & (G) & (ms) &  & AUC & Macro & AUC \\
@@ -40,7 +42,9 @@ ShuffleNet-x0.5 & CNN & 0.344 & 0.044 & 6.21 & 4817 & 0.880 & 0.674 & 0.467 \\
 \begin{table}[H]
 \caption{Panel~B: external pretrained reference detectors (inference-only).
 Public weights and native preprocessing; not training-matched competitors.\label{tab:external}}
-\begin{tabularx}{\textwidth}{l l RRRR}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}P{1.7cm}L*{4}{R}@{}}
 \toprule
 \textbf{Detector} & \textbf{Pretrained} & \textbf{Params} & \textbf{B1 p50} & \textbf{ID} & \textbf{UFD Macro} \\
  &  & (M) & (ms) & AUC & AUC \\
@@ -86,7 +90,9 @@ CelebA-HQ is near saturation for all Panel~A models; bedroom AUC is the discrimi
 
 \begin{table}[H]
 \caption{Within-ID AUCs by content domain.\label{tab:domain}}
-\begin{tabularx}{\textwidth}{l RRRR}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}P{2.4cm}*{4}{R}@{}}
 \toprule
 \textbf{Model} & \textbf{ID} & \textbf{CelebA-HQ} & \textbf{Bedroom} & \textbf{Gap} \\
 \midrule
@@ -112,11 +118,14 @@ This contrast indicates a \emph{protocol/panel gap} rather than absolute undetec
 Figure~\ref{fig:heatmap} visualizes the Panel~A UFD generator--model matrix.
 
 \begin{table}[H]
-\caption{Per-generator AUCs on UFD (400 real + 400 fake per subset). Macro $=$ equal-weight mean; Min $=$ worst subset.\label{tab:ufd}}
+\caption{Per-generator AUCs on UFD (400 real + 400 fake per subset).
+Macro $=$ equal-weight mean; Min $=$ worst-subset AUC.
+Abbreviations: G10/G27/G50 $=$ Glide$_{100,10}$ / Glide$_{100,27}$ / Glide$_{50,27}$; L100/L200/Lcfg $=$ LDM$_{100}$ / LDM$_{200}$ / LDM$_{200,\mathrm{cfg}}$.\label{tab:ufd}}
 \scriptsize
-\begin{tabularx}{\textwidth}{l *{10}{R}}
+\setlength{\tabcolsep}{2.6pt}
+\begin{tabularx}{\textwidth}{@{}P{2.05cm}*{10}{R}@{}}
 \toprule
-\textbf{Model} & \textbf{DALL·E} & \textbf{G10} & \textbf{G27} & \textbf{G50} & \textbf{Guid.} & \textbf{L100} & \textbf{L200} & \textbf{Lcfg} & \textbf{Mac.} & \textbf{Min} \\
+\textbf{Model} & \textbf{DALL·E} & \textbf{G10} & \textbf{G27} & \textbf{G50} & \textbf{Guid.} & \textbf{L100} & \textbf{L200} & \textbf{Lcfg} & \textbf{Macro} & \textbf{Min} \\
 \midrule
 LiteSSM-A & 0.504 & 0.878 & 0.855 & 0.889 & 0.766 & 0.656 & 0.634 & 0.565 & 0.718 & 0.504 \\
 LiteSSM-B & 0.483 & 0.859 & 0.831 & 0.868 & 0.788 & 0.622 & 0.611 & 0.535 & 0.700 & 0.483 \\
@@ -126,17 +135,17 @@ MobileNetV3-S & 0.455 & 0.746 & 0.739 & 0.770 & 0.656 & 0.621 & 0.580 & 0.518 & 
 ShuffleNet-x0.5 & 0.467 & 0.805 & 0.802 & 0.835 & 0.755 & 0.617 & 0.570 & 0.537 & 0.674 & 0.467 \\
 \bottomrule
 \end{tabularx}
-\vspace{2pt}
-{\footnotesize G10/G27/G50: Glide$_{100,10}$ / Glide$_{100,27}$ / Glide$_{50,27}$; L100/L200/Lcfg: LDM$_{100}$ / LDM$_{200}$ / LDM$_{200,\mathrm{cfg}}$.}
 \end{table}
 
 \begin{table}[H]
 \caption{External reference (Panel~B) per-generator AUCs on the same frozen UFD subsets.
-Scores are inference-only with public checkpoints and native preprocessing; they contextualize the remaining gap to large-scale pretrained detectors and are not protocol-matched competitors.\label{tab:ufd-ext}}
+Scores are inference-only with public checkpoints and native preprocessing; they contextualize the remaining gap to large-scale pretrained detectors and are not protocol-matched competitors.
+Abbreviations follow Table~\ref{tab:ufd}.\label{tab:ufd-ext}}
 \scriptsize
-\begin{tabularx}{\textwidth}{l *{9}{R}}
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabularx}{\textwidth}{@{}P{1.7cm}*{9}{R}@{}}
 \toprule
-\textbf{Detector} & \textbf{DALL·E} & \textbf{G10} & \textbf{G27} & \textbf{G50} & \textbf{Guid.} & \textbf{L100} & \textbf{L200} & \textbf{Lcfg} & \textbf{Mac.} \\
+\textbf{Detector} & \textbf{DALL·E} & \textbf{G10} & \textbf{G27} & \textbf{G50} & \textbf{Guid.} & \textbf{L100} & \textbf{L200} & \textbf{Lcfg} & \textbf{Macro} \\
 \midrule
 UnivFD~\cite{ojha2023ufd} & 0.969 & 0.942 & 0.956 & 0.962 & 0.861 & 0.989 & 0.992 & 0.916 & 0.948 \\
 NPR~\cite{tan2024npr} & 0.990 & 0.995 & 0.995 & 0.996 & 0.837 & 0.999 & 0.998 & 0.999 & 0.976 \\
@@ -162,7 +171,9 @@ A multi-quality visualization ($Q\in\{95,85,70\}$) is given in Appendix~\ref{app
 
 \begin{table}[H]
 \caption{ID AUC under JPEG Q70 recompression.\label{tab:jpeg}}
-\begin{tabularx}{\textwidth}{l RRRR}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}P{2.4cm}*{4}{R}@{}}
 \toprule
 \textbf{Model} & \textbf{Clean} & \textbf{Q70} & \textbf{$\Delta$AUC} & \textbf{$\Delta$CI95} \\
 \midrule

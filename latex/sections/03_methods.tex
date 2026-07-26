@@ -26,7 +26,7 @@ For each subset we sample up to 400 real and 400 fake images (seed 42).
 Subsets in the frozen package include \texttt{dalle}, \texttt{glide\_100\_10}, \texttt{glide\_100\_27}, \texttt{glide\_50\_27}, \texttt{guided}, \texttt{ldm\_100}, \texttt{ldm\_200}, and \texttt{ldm\_200\_cfg}.
 
 \paragraph{Exploratory FLUX set (appendix only).}
-Independently of training, we generated 100 images with \texttt{black-forest-labs/FLUX.1-schnell}~\cite{flux2024} and paired them with 100 DF real images (seed 42).
+Independently of training, we generated 100 images with FLUX.1-\texttt{schnell}~\cite{flux2024} and paired them with 100 DF real images (seed 42).
 Because real/fake subsets were not content- and acquisition-matched, results appear only in Appendix~\ref{app:flux} and are never used for model selection or architecture claims.
 
 \subsection{Preprocessing}
@@ -39,7 +39,7 @@ JPEG experiments recompress decoded RGB images to JPEG quality $Q\in\{95,85,70\}
 
 \begin{itemize}
 \item EfficientNet-B0, MobileNetV3-Small, ShuffleNetV2-x0.5: \texttt{torchvision} classifiers with \texttt{weights=None}~\cite{tan2019efficientnet,howard2019mobilenetv3,ma2018shufflenet}.
-\item LiteFreqNet~v2: spatial stem + FFT-magnitude branch with gated residual fusion $\mathrm{LN}(s+\sigma(\alpha)f)$ and mid-band prior; early-concat and no-frequency variants used as ablations.
+\item LiteFreqNet~v2: spatial stem + FFT-magnitude branch with gated residual fusion $\mathrm{LN}\!\left(s+\sigma(\alpha)f\right)$ and mid-band prior; early-concat and no-frequency variants used as ablations.
 \item Two study-specific SSM classifiers, detailed in Section~\ref{sec:litessm}.
 \end{itemize}
 No ImageNet pretrained weights are used for any Panel~A model.
@@ -69,7 +69,9 @@ After LayerNorm, forward and time-reversed SelectiveSSM branches ($d_{\mathrm{st
 \begin{table}[H]
 \caption{Architecture configuration of the study-specific SSM models.
 Both use input $224\times224$, stem downsampling $\times16$, token length $L=196$, width $C=192$, and depth~$=4$ residual blocks.\label{tab:ssm-arch}}
-\begin{tabularx}{\textwidth}{l R l l}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{@{}P{1.35cm}cLL@{}}
 \toprule
 \textbf{Stage} & \textbf{Out size} & \textbf{LiteSSM-A} & \textbf{LiteSSM-B} \\
 \midrule
@@ -77,7 +79,7 @@ Stem-1 & $112\times112$ & Conv/s2, BN, GELU (64) & Conv/s2, BN, GELU (96) \\
 Stem-2 & $56\times56$ & Conv/s2, BN, GELU (128) & Conv/s2, BN, GELU (96) \\
 Stem-3 & $28\times28$ & Conv/s2, BN, GELU (192) & Conv/s2, BN, GELU (192) \\
 Stem-4 & $14\times14$ & Conv/s2, BN, GELU (192) & Conv/s2, BN, GELU (192) \\
-Blocks & $L{=}196$ & $4\times$ MRFFILite (SSM $d_s{=}8$) & $4\times$ Bi-SSM (SSM $d_s{=}16$) \\
+Blocks & $L{=}196$ & $4\times$ MRFFILite ($d_{\mathrm{state}}{=}8$) & $4\times$ Bi-SSM ($d_{\mathrm{state}}{=}16$) \\
 Head & $1$ & LN, mean pool, Linear$\to$2 & LN, mean pool, Linear$\to$2 \\
 \midrule
 Params / FLOPs & -- & 1.74\,M / 0.705\,G & 2.48\,M / 0.853\,G \\

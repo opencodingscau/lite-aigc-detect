@@ -93,6 +93,8 @@ huggingface/
 *.fdb_latexmk
 latex/**/*.pdf
 !latex/figures/**
+!latex/Definitions/logo-orcid.pdf
+!latex/Definitions/logo-orcid.eps
 
 # --- local agent / scratch helpers (not for public repo) ---
 _ssh_once.py

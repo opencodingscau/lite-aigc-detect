@@ -87,8 +87,9 @@ def git_commit(repo: Path) -> str | None:
 
 def write_csv(path: Path, rows: list[dict], fieldnames: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames)
+    # Force LF so hashes/SHA256SUMS stay stable across platforms (.gitattributes eol=lf).
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, lineterminator="\n")
         w.writeheader()
         for r in rows:
             w.writerow(r)

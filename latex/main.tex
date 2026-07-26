@@ -52,12 +52,12 @@ $^{1}$ \quad College of Software Engineering, South China Agricultural Universit
 \corres{Correspondence: 13543148496@163.com}
 
 % Structured abstract without headings (MDPI style); keep $\approx$200 words
-\abstract{Background: Deployable AI-generated still-image detectors must balance accuracy with efficiency under compression and generator shift, yet many comparisons mix training protocols or rely on pretrained backbones. Methods: We compare compact CNNs, a gated frequency-aware CNN (LiteFreqNet~v2), and two study-specific pure-PyTorch state-space classifiers (\textbf{LiteSSM-A} and \textbf{LiteSSM-B}) trained from scratch under a locked recipe on DiffusionForensics (ADM bedroom + SDv2 CelebA-HQ). Models are selected by validation AUC and evaluated with Params/FLOPs, locked batch-1 latency, batch-32 throughput, JPEG Q70, content-domain splits, and UniversalFakeDetect (UFD) per-generator scores. Public UnivFD and NPR checkpoints provide a separate pretrained reference panel. We treat UFD Macro AUC as the primary cross-generator metric. Results: Among protocol-matched compact models, LiteSSM-A attains the highest UFD Macro (0.718; ID 0.946; bedroom $\approx$0.81) at 1.74M parameters, with locked batch-1 p50 latency 144.4\,ms and batch-32 throughput 226 images/s (FP32, RTX~4090D); pretrained references reach higher absolute Macro (UnivFD 0.948; NPR 0.976) under different training paradigms. DALL·E remains near chance for all Panel~A models; JPEG Q70 changes AUC by at most 0.003; frequency modules are not universally helpful. Conclusions: LiteSSM-A is the preferred generalization--efficiency operating point within the studied lightweight protocol, while generator- and domain-specific boundaries preclude overgeneralized detection claims.}
+\abstract{Background: Compact AI-generated still-image detectors must balance accuracy with efficiency under compression and generator shift, yet many comparisons mix training protocols or rely on pretrained backbones. Methods: We compare compact CNNs, a gated frequency-aware CNN (LiteFreqNet~v2), and two study-specific pure-PyTorch state-space classifiers (\textbf{LiteSSM-A} and \textbf{LiteSSM-B}) trained from scratch under a locked recipe on DiffusionForensics (ADM bedroom + SDv2 CelebA-HQ). Models are selected by validation AUC and evaluated with Params/FLOPs, locked batch-1 latency, batch-32 throughput, JPEG Q70, content-domain splits, and UniversalFakeDetect (UFD) per-generator scores. Public UnivFD and NPR checkpoints provide a separate pretrained reference panel. We treat UFD Macro AUC as the primary cross-generator metric. Results: Among protocol-matched compact models, LiteSSM-A attains the highest UFD Macro (0.718; ID 0.946; bedroom $\approx$0.81) at 1.74M parameters, with locked batch-1 p50 latency 144.4\,ms and batch-32 throughput 226 images/s (FP32, RTX~4090D); pretrained references reach higher absolute Macro (UnivFD 0.948; NPR 0.976) under different training paradigms. DALL·E remains near chance for all Panel~A models while Panel~B references remain strong on the same subset; JPEG Q70 changes AUC by at most 0.003; frequency modules are not universally helpful. Conclusions: LiteSSM-A is the preferred generalization--efficiency operating point within the studied compact protocol rather than the lowest-latency model, while generator- and domain-specific boundaries preclude overgeneralized detection claims.}
 
-\keyword{AI-generated image detection; lightweight neural networks; state-space models; frequency features; out-of-distribution generalization; JPEG compression; reproducible benchmarking}
+\keyword{AI-generated image detection; compact neural networks; state-space models; frequency features; out-of-distribution generalization; JPEG compression; reproducible benchmarking}
 
 % Optional for Applied Sciences
-\featuredapplication{Compact still-image AIGC screening on GPU servers where parameter count, throughput, JPEG stability, and honest cross-generator failure reporting matter more than peak in-distribution accuracy alone.}
+\featuredapplication{Compact still-image AIGC screening on GPU servers where parameter count, measured throughput, JPEG stability, and honest cross-generator failure reporting matter more than peak in-distribution accuracy or minimum batch-1 latency alone.}
 
 \begin{document}
 
@@ -169,6 +169,45 @@ Corvi, R.; Cozzolino, D.; Zingarini, G.; Poggi, G.; Nagano, K.; Verdoliva, L. On
 
 \bibitem[Black Forest Labs(2024)]{flux2024}
 Black Forest Labs. FLUX. Available online: \url{https://github.com/black-forest-labs/flux} (accessed on 26 July 2026).
+
+\bibitem[Zhu et al.(2023)]{zhu2023genimage}
+Zhu, M.; Chen, H.; Yan, Q.; Huang, X.; Lin, G.; Li, W.; Tu, Z.; Hu, H.; Hu, J.; Wang, Y. GenImage: A million-scale benchmark for detecting AI-generated image. In Advances in Neural Information Processing Systems (NeurIPS), New Orleans, LA, USA, 10--16 December 2023; Vol.~36. https://doi.org/10.48550/arXiv.2306.08571.
+
+\bibitem[Liu et al.(2024)]{liu2024fatformer}
+Liu, H.; Tan, Z.; Tan, C.; Wei, Y.; Wang, J.; Zhao, Y. Forgery-aware adaptive transformer for generalizable synthetic image detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 16--22 June 2024; pp.~10770--10780. https://doi.org/10.1109/CVPR52733.2024.01024.
+
+\bibitem[Zhang et al.(2025)]{zhang2025vib}
+Zhang, H.; He, Q.; Bi, X.; Li, W.; Liu, B.; Xiao, B. Towards universal AI-generated image detection by variational information bottleneck network. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~23828--23837.
+
+\bibitem[Cheng et al.(2025)]{cheng2025cospy}
+Cheng, S.; Lyu, L.; Wang, Z.; Zhang, X.; Sehwag, V. CO-SPY: Combining semantic and pixel features to detect synthetic images by AI. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~13455--13465.
+
+\bibitem[Zhong et al.(2025)]{zhong2025beyond}
+Zhong, N.; Chen, H.; Xu, Y.; Qian, Z.; Zhang, X. Beyond generation: A diffusion-based low-level feature extractor for detecting AI-generated images. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~8258--8268.
+
+\bibitem[Chivaran and Ni(2025)]{chivaran2025laid}
+Chivaran, N.; Ni, J. LAID: Lightweight AI-generated image detection in spatial and spectral domains. {\em arXiv} {\bf 2025}, arXiv:2507.05162. https://doi.org/10.48550/arXiv.2507.05162.
+
+\bibitem[Wang et al.(2025)]{wang2025lota}
+Wang, H.; Cheng, R.; Zhang, Y.; Han, C.; Gui, J. LOTA: Bit-planes guided AI-generated image detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), Honolulu, HI, USA, 19--25 October 2025; pp.~17246--17255.
+
+\bibitem[Zhu et al.(2024)]{zhu2024vim}
+Zhu, L.; Liao, B.; Zhang, Q.; Wang, X.; Liu, W.; Wang, X. Vision Mamba: Efficient visual representation learning with bidirectional state space model. In Proceedings of the 41st International Conference on Machine Learning (ICML), Vienna, Austria, 21--27 July 2024; Proceedings of Machine Learning Research; Vol.~235, pp.~62429--62442. Available online: \url{https://proceedings.mlr.press/v235/zhu24f.html} (accessed on 26 July 2026).
+
+\bibitem[Cinar and Dogan(2025)]{cinar2025pvism}
+Cinar, O.; Dogan, Y. Novel deepfake image detection with PV-ISM: Patch-based Vision Transformer for identifying synthetic media. {\em Appl.\ Sci.} {\bf 2025}, {\em 15}, 6429. https://doi.org/10.3390/app15126429.
+
+\bibitem[Lokner Ladevic et al.(2024)]{lokner2024lightweight}
+Lokner Ladevic, A.; Kramberger, T.; Kovacevic, R.; Vlahek, D. Detection of AI-generated synthetic images with a lightweight CNN. {\em AI} {\bf 2024}, {\em 5}, 1575--1593. https://doi.org/10.3390/ai5030076.
+
+\bibitem[Man et al.(2026)]{man2026mdp}
+Man, Q.; Gee, S.J.; Cho, Y.I. Multi-domain perception Transformer for generalized forgery image detection. {\em Appl.\ Sci.} {\bf 2026}, {\em 16}, 533. https://doi.org/10.3390/app16010533.
+
+\bibitem[Durall et al.(2020)]{durall2020watch}
+Durall, R.; Keuper, M.; Keuper, J. Watch your up-convolution: CNN based generative deep neural networks are failing to reproduce spectral distributions. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 13--19 June 2020; pp.~7890--7899. https://doi.org/10.1109/CVPR42600.2020.00792.
+
+\bibitem[Bird and Lotfi(2024)]{bird2024cifake}
+Bird, J.J.; Lotfi, A. CIFAKE: Image classification and explainable identification of AI-generated synthetic images. {\em IEEE Access} {\bf 2024}, {\em 12}, 15642--15650. https://doi.org/10.1109/ACCESS.2024.3356122.
 
 \end{thebibliography}
 }

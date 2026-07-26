@@ -37,10 +37,14 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 - [x] Real authors / affiliation / email / ORCID (single author: Kaihao Chen; co-authors TBD later)
 - [x] Real CRediT contributions / Funding (none) / Acknowledgments
 - [x] Removed fake `wang2021deepfake` (2103.XXXX) citation
-- [x] Bibliography mechanical check (see `docs/BIB_AUDIT.md`; unused `sd35card` removed)
-- [x] Clean compile (local MiKTeX = Overleaf-equivalent; no undef refs / missing figs; 14-page PDF)
+- [x] Bibliography mechanical check + **literature expansion to 24 refs** (see `docs/BIB_AUDIT.md`; LAID/LOTA positioning table added)
+- [x] Softened deployment/real-time wording; LiteSSM-A framed as operating point (not lowest latency)
+- [x] Clean compile (local MiKTeX; 15-page PDF after literature rewrite)
 - [x] PDF vs freeze numbers checklist (see `docs/PDF_NUMBER_CHECKLIST.md`)
-- [x] Cover letter finalized (`COVER_LETTER.md`; single author)
+- [x] Cover letter finalized (`COVER_LETTER.md`; single author; LAID/LOTA positioning noted)
+- [x] Zenodo DOI + GitHub release already in Data Availability (`v1.0.0-paper.2`, `10.5281/zenodo.21604045`)
+
+**Pre-submit reminder:** re-upload Overleaf `latex/` after this rewrite and spot-check Related Work + Refs.
 
 ## Locked efficiency (do not reopen)
 

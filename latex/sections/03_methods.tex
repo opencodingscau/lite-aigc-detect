@@ -38,7 +38,7 @@ No ImageNet pretrained weights are used for any Panel~A model.
 \subsection{Study-Specific SSM Classifiers (LiteSSM-A / LiteSSM-B)}
 \label{sec:litessm}
 
-\textbf{LiteSSM-A} denotes the compact baseline SSM classifier, whereas \textbf{LiteSSM-B} extends it with a BiViM-inspired bidirectional SelectiveSSM design.
+\textbf{LiteSSM-A} denotes the compact baseline SSM classifier, whereas \textbf{LiteSSM-B} extends it with a bidirectional SelectiveSSM design inspired by Vision Mamba (Vim)~\cite{zhu2024vim}.
 Both models are study-specific pure-PyTorch implementations rather than official reproductions of an existing architecture.
 Frozen experiment artifacts retain the registry keys \texttt{mobilemamba\_lite} (LiteSSM-A) and \texttt{mambapsa\_cls} (LiteSSM-B) so that checkpoints and hashes remain unchanged; the manuscript uses only the LiteSSM names.
 Optional \texttt{*\_freq} DualBranch wrappers attach the gated frequency branch for ablation only and are not main-table models.
@@ -54,7 +54,7 @@ This choice keeps Params/FLOPs/latency comparisons portable but can inflate abso
 \paragraph{LiteSSM-A block (MRFFILite).}
 After LayerNorm, a multi-receptive local branch (depthwise Conv1d kernels $\{3,5,7\}$ summed) is concatenated with a SelectiveSSM global branch ($d_{\mathrm{state}}=8$, expand~$=1$), projected by a linear layer, and added residually.
 
-\paragraph{LiteSSM-B block (BiViM).}
+\paragraph{LiteSSM-B block (bidirectional SelectiveSSM).}
 After LayerNorm, forward and time-reversed SelectiveSSM branches ($d_{\mathrm{state}}=16$, expand~$=1$) are concatenated, linearly mixed, and added residually.
 
 \begin{table}[H]
@@ -68,7 +68,7 @@ Stem-1 & $112\times112$ & Conv/s2, BN, GELU (64) & Conv/s2, BN, GELU (96) \\
 Stem-2 & $56\times56$ & Conv/s2, BN, GELU (128) & Conv/s2, BN, GELU (96) \\
 Stem-3 & $28\times28$ & Conv/s2, BN, GELU (192) & Conv/s2, BN, GELU (192) \\
 Stem-4 & $14\times14$ & Conv/s2, BN, GELU (192) & Conv/s2, BN, GELU (192) \\
-Blocks & $L{=}196$ & $4\times$ MRFFILite (SSM $d_s{=}8$) & $4\times$ BiViM (SSM $d_s{=}16$) \\
+Blocks & $L{=}196$ & $4\times$ MRFFILite (SSM $d_s{=}8$) & $4\times$ Bi-SSM (SSM $d_s{=}16$) \\
 Head & $1$ & LN, mean pool, Linear$\to$2 & LN, mean pool, Linear$\to$2 \\
 \midrule
 Params / FLOPs & -- & 1.74\,M / 0.705\,G & 2.48\,M / 0.853\,G \\

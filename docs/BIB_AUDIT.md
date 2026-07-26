@@ -1,21 +1,33 @@
-# Bibliography audit (Gate C)
+# Bibliography audit (Gate C / literature expansion)
 
-Date: 2026-07-26  
-Source: `latex/main.tex` `thebibliography`
+Date: 2026-07-27  
+Source: `latex/main.tex` `thebibliography`  
+Target: **24** entries (was 11)
 
-| Key | Check | Action taken |
-|-----|-------|--------------|
-| `tan2019efficientnet` | Pages 6105–6114 OK (PMLR v97) | Added Quoc V. Le initials; PMLR URL |
-| `howard2019mobilenetv3` | Pages 1314–1324 OK | Added DOI 10.1109/ICCV.2019.00140 |
-| `ma2018shufflenet` | Was pp. 116–131 (incorrect LNCS range) | Fixed to LNCS 11218 pp. 122–138 + DOI |
-| `ojha2023ufd` | Pages 24480–24489 OK | Added DOI 10.1109/CVPR52729.2023.02345 |
-| `wang2020cnn` | Pages 8695–8704 OK | Added DOI 10.1109/CVPR42600.2020.00872 |
-| `frank2020freq` | Pages 3247–3258 OK (PMLR v119) | Added PMLR URL |
-| `gu2023mamba` | arXiv:2312.00752 OK (no conference version used) | Added arXiv DOI; kept as preprint |
-| `tan2024npr` | Pages 28130–28139 OK | Added DOI 10.1109/CVPR52733.2024.02657 |
-| `wang2023dire` | Pages 22445–22455 OK | Added DOI 10.1109/ICCV51070.2023.02051 |
-| `corvi2023diffusion` | Pages 1–5 OK | Added DOI 10.1109/ICASSP49357.2023.10095167 |
-| `flux2024` | Software URL OK | Kept as online resource |
-| `sd35card` | **Unused** (SD3.5 excluded from claims) | **Removed** from bibliography |
+## Added for positioning (2024–2026)
 
-No fake `XXXX` DOIs found. No duplicate arXiv+conference pairs for the same claim.
+| Key | Role | Venue |
+|-----|------|-------|
+| `zhu2023genimage` | Million-scale benchmark | NeurIPS 2023 / arXiv DOI |
+| `liu2024fatformer` | Pretrained forgery-aware adaption | CVPR 2024 pp. 10770–10780 |
+| `zhang2025vib` | VIB universal detection | CVPR 2025 pp. 23828–23837 |
+| `cheng2025cospy` | Semantic+pixel fusion | CVPR 2025 pp. 13455–13465 |
+| `zhong2025beyond` | Diffusion-as-denoiser features | CVPR 2025 pp. 8258–8268 |
+| `chivaran2025laid` | Closest lightweight spatial/spectral benchmark | arXiv:2507.05162 |
+| `wang2025lota` | Bit-plane efficient detector | ICCV 2025 pp. 17246–17255 |
+| `zhu2024vim` | Bidirectional SSM vision backbone (LiteSSM-B inspiration) | ICML 2024 / PMLR 235 |
+| `cinar2025pvism` | Related *Appl. Sci.* ViT detector | Appl. Sci. 15, 6429 |
+| `lokner2024lightweight` | Related MDPI lightweight CNN | AI 5, 1575–1593 |
+| `man2026mdp` | Related *Appl. Sci.* multi-domain Transformer | Appl. Sci. 16, 533 |
+| `durall2020watch` | Spectral fingerprint classic | CVPR 2020 pp. 7890–7899 |
+| `bird2024cifake` | CIFAKE dataset context | IEEE Access 12 |
+
+## Prior entries retained
+
+EfficientNet, MobileNetV3, ShuffleNetV2, UnivFD, CNNSpot, Frank freq., Mamba, NPR, DIRE, Corvi, FLUX.
+
+## Notes
+
+- No fake `XXXX` DOIs.
+- MDPI cites are **topic-relevant** (2 *Appl. Sci.* + 1 *AI*), not citation stacking.
+- LAID/LOTA are discussed with an explicit positioning table; scores are not merged across protocols.

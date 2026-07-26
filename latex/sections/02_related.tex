@@ -1,59 +1,93 @@
-\subsection{CNN and Artifact-Based Detection}
-\label{sec:rw-cnn}
+\subsection{Artifact- and Frequency-Based Detection}
+\label{sec:rw-artifact}
 
-CNN-based detectors remain the dominant practical baseline for still-image real/fake classification.
-Early work showed that CNN-generated images leave transferable forensic cues that a ResNet-style classifier can exploit across several GAN families~\cite{wang2020cnn}.
+CNN-based detectors remain a practical baseline for still-image real/fake classification.
+Early work showed that CNN-generated images leave transferable forensic cues that a ResNet-style classifier can exploit across GAN families~\cite{wang2020cnn}.
 Subsequent studies emphasized local texture, upsampling footprints, and neighboring-pixel dependencies as more stable signals than global semantics alone.
-In particular, Neighboring Pixel Relationships (NPR) treat the local interdependence induced by generator upsampling operators as a transferable artifact representation and report strong cross-generator behavior under their official training and evaluation protocol~\cite{tan2024npr}.
-We treat NPR as an \emph{external pretrained reference} rather than a training-matched competitor: its native preprocessing and released weights are used for inference-only contextualization on our frozen manifests.
+Neighboring Pixel Relationships (NPR) treat the local interdependence induced by generator upsampling as a transferable artifact representation and report strong cross-generator behavior under their official protocol~\cite{tan2024npr}.
+We treat NPR as an \emph{external pretrained reference} rather than a training-matched competitor.
 
-Compact ImageNet-style backbones (EfficientNet, MobileNet, ShuffleNet) are widely used when parameter count and throughput matter~\cite{tan2019efficientnet,howard2019mobilenetv3,ma2018shufflenet}.
-In this study they form the controlled lightweight CNN panel trained from scratch under a locked recipe.
+Frequency-domain cues---spectral peaks, mid/high-band energy, and residual spectra---have long been used to expose generative artifacts~\cite{frank2020freq,durall2020watch,corvi2023diffusion}.
+Whether a frequency module helps, however, is backbone- and protocol-dependent.
+We instantiate LiteFreqNet~v2 (gated FFT-magnitude fusion) under the same from-scratch recipe as the CNN and SSM panels to test transferability of frequency injection rather than to claim a universal spectral solution.
 
-\subsection{Pretrained and CLIP-Based Universal Detectors}
-\label{sec:rw-univfd}
+\subsection{Pretrained, Reconstruction-Based, and Modern Generalization Detectors}
+\label{sec:rw-general}
 
 A complementary line of work avoids learning a heavily tuned ``fake'' detector and instead probes large pretrained feature spaces.
-UniversalFakeDetect (UnivFD) uses frozen CLIP ViT-L/14 features with a linear probe (or nearest-neighbor variants) and demonstrates improved transfer to unseen generative families relative to detectors trained end-to-end on a single generator breed~\cite{ojha2023ufd}.
-The strength of this approach is precisely its large-scale pretraining; therefore UnivFD is \emph{not} comparable under an identical from-scratch lightweight protocol.
-We include the publicly released UnivFD checkpoint as a second external reference panel to situate our compact models, while keeping Panel~A (training-matched) and Panel~B (pretrained references) separate in the results tables.
-
-\subsection{Diffusion-Specific and Reconstruction-Based Detection}
-\label{sec:rw-dire}
+UniversalFakeDetect (UnivFD) uses frozen CLIP ViT-L/14 features with a linear probe and demonstrates improved transfer to unseen generative families relative to end-to-end detectors trained on a single generator breed~\cite{ojha2023ufd}.
+FatFormer adapts CLIP with forgery-aware image/frequency adapters and language-guided alignment~\cite{liu2024fatformer}.
+VIB-Net filters task-irrelevant multimodal features via a variational information bottleneck~\cite{zhang2025vib}, while CO-SPY adaptively fuses semantic and pixel-level artifact cues and releases a large multi-generator evaluation suite~\cite{cheng2025cospy}.
+Beyond Generation reframes detection as one-class modeling of low-level photographic features extracted with a diffusion model used as a denoiser rather than a generator~\cite{zhong2025beyond}.
 
 Diffusion-oriented detectors often exploit reconstruction error or diffusion-specific representations.
 DIRE distinguishes real and generated images via the discrepancy between an input and its diffusion reconstruction~\cite{wang2023dire}.
-Such pipelines can improve robustness on diffusion imagery, but they introduce a heavy generative-model reconstruction stage that differs from the lightweight direct-classification deployment target studied here.
+Such pipelines can improve robustness on diffusion imagery, but they introduce a heavy generative-model reconstruction stage that differs from the compact direct-classification setting studied here.
 We therefore discuss DIRE and related reconstruction approaches as literature context and do \emph{not} re-run them as efficiency-matched baselines.
-Complementary analyses of compression, resizing, and diffusion-specific forensics further caution that reported generalization depends on acquisition and post-processing assumptions~\cite{corvi2023diffusion}.
 
-\subsection{Frequency-Aware and Lightweight Detection}
-\label{sec:rw-freq}
+Large-scale benchmarks further shape evaluation expectations.
+GenImage provides a million-scale multi-generator suite with cross-generator and degraded-image protocols~\cite{zhu2023genimage}; many 2024--2025 detectors report GenImage ACC/AP under large training budgets.
+Our study instead freezes a low-data DiffusionForensics training split and uses UniversalFakeDetect per-generator AUCs as the primary cross-generator summary, with GenImage treated as an important external-validity reference rather than a shared leaderboard (Section~\ref{sec:discussion}).
 
-Frequency-domain cues---spectral peaks, mid/high-band energy, and residual spectra---have long been used to expose generative artifacts~\cite{frank2020freq}.
-Whether a frequency module helps, however, is backbone- and protocol-dependent.
-We instantiate LiteFreqNet~v2 (gated FFT-magnitude fusion) under the same from-scratch recipe as the CNN and SSM panels to test transferability of frequency injection rather than to claim a universal spectral solution.
-Lightweight SSMs inspired by selective state-space models~\cite{gu2023mamba} are evaluated as compact alternatives; our \textbf{LiteSSM-A} and \textbf{LiteSSM-B} implementations are \emph{study-specific pure-PyTorch} classifiers rather than official reproductions of any existing named architecture.
+\subsection{Lightweight and Efficient AIGC Detection}
+\label{sec:rw-lite}
 
-\subsection{Positioning of This Study}
-\label{sec:rw-position}
+Compact ImageNet-style backbones (EfficientNet, MobileNet, ShuffleNet) are widely used when parameter count and throughput matter~\cite{tan2019efficientnet,howard2019mobilenetv3,ma2018shufflenet}.
+In this study they form the controlled lightweight CNN panel trained from scratch under a locked recipe.
+MDPI venues have likewise published compact CNN/ViT detectors for synthetic-image recognition, typically on CIFAKE-style single-domain settings or spatial--frequency--wavelet fusion Transformers~\cite{bird2024cifake,lokner2024lightweight,cinar2025pvism,man2026mdp}.
 
-Prior work has demonstrated strong cross-generator detection using large pretrained feature extractors, reconstruction-based diffusion representations, and generator-artifact modeling.
+Two recent lines are especially close to our keywords.
+\textbf{LAID} benchmarks off-the-shelf lightweight CNNs/ViTs on GenImage subsets across spatial, spectral, and fusion domains, emphasizing Params/FLOPs and adversarial robustness~\cite{chivaran2025laid}.
+\textbf{LOTA} extracts millisecond-scale bit-plane noise patches for GenImage cross-generator ACC/AP and compares against reconstruction-heavy baselines~\cite{wang2025lota}.
+Neither work is a protocol-matched substitute for the present study: Table~\ref{tab:positioning} summarizes the contrast.
+We do \emph{not} claim the first lightweight AIGC detector, the first spatial--frequency study, or a real-time edge deployment result.
+
+\begin{table}[H]
+\caption{Study positioning against closely related lightweight/efficient detectors.
+Numeric scores are not compared across rows because training data, pretraining, metrics, and pipelines differ.\label{tab:positioning}}
+\scriptsize
+\begin{tabularx}{\textwidth}{l l l l}
+\toprule
+\textbf{Dimension} & \textbf{LAID}~\cite{chivaran2025laid} & \textbf{LOTA}~\cite{wang2025lota} & \textbf{Ours} \\
+\midrule
+Primary goal & Lightweight LiCNN/LiViT benchmark & Bit-plane noise detector & Controlled compact comparison \\
+Training data & GenImage subset & GenImage & ADM bedroom + SDv2 CelebA-HQ \\
+Architectures & Off-the-shelf CNN/ViT & Noise classifiers & CNN, freq.\ CNN, study-specific SSM \\
+Pretraining (main) & Model dependent & Method-specific & None for Panel~A \\
+Primary OOD summary & ACC-based GenImage splits & Cross-gen.\ ACC/AP & UFD Macro AUC + worst generator \\
+Domain split & Limited & No & CelebA-HQ vs.\ bedroom \\
+Failure reporting & Adversarial robustness & Degradation & Near-chance DALL·E (Panel~A) \\
+Efficiency focus & Params/FLOPs & ms-level extraction & Params/FLOPs/B1 p50/p95/Thr@32 \\
+External refs & Multiple SOTA & DIRE/related & UnivFD/NPR (separate panel) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{State-Space Vision Models and Study Positioning}
+\label{sec:rw-ssm}
+
+Selective state-space models provide linear-time sequence modeling~\cite{gu2023mamba}, and Vision Mamba (Vim) shows that bidirectional SSM blocks can serve as efficient vision backbones~\cite{zhu2024vim}.
+Our \textbf{LiteSSM-A} and \textbf{LiteSSM-B} classifiers are \emph{study-specific pure-PyTorch} detectors inspired by these ideas (LiteSSM-B uses a bidirectional SelectiveSSM design), not official reproductions of Vim or any vendor Mamba release.
+
+Table~\ref{tab:protocol} situates representative external paradigms against our controlled setting.
+Prior work has demonstrated strong cross-generator detection using large pretrained feature extractors, reconstruction-based diffusion representations, generator-artifact modeling, and GenImage-scale lightweight benchmarks.
 In contrast, this study does not seek a new state of the art across heterogeneous training protocols.
-Instead, it conducts a controlled, training-from-scratch comparison of compact CNN, frequency-aware, and state-space architectures, with explicit reporting of generator-macro performance, content-domain gaps, JPEG Q70 behavior, and measured deployment efficiency.
-Table~\ref{tab:protocol} summarizes the protocol-level contrast between representative external methods and our setting.
+Its contribution is experimental-design novelty: under a locked no-pretraining, low-data recipe, we jointly compare compact CNNs, a frequency-aware CNN, and study-specific SSMs, and we report generator-macro OOD, content-domain decomposition, worst-generator failure, JPEG Q70, and measured batch-1/batch-32 efficiency so that an operating point can be selected with explicit boundaries.
 
 \begin{table}[H]
 \caption{Protocol-level comparison of representative detectors.
 Entries describe published settings rather than a single shared leaderboard.\label{tab:protocol}}
 \begin{tabularx}{\textwidth}{l l l l l l}
 \toprule
-\textbf{Method} & \textbf{Pretrained} & \textbf{Paradigm} & \textbf{Cross-gen.} & \textbf{Domain} & \textbf{Deploy.} \\
+\textbf{Method} & \textbf{Pretrained} & \textbf{Paradigm} & \textbf{Cross-gen.} & \textbf{Domain} & \textbf{Efficiency} \\
 \midrule
 DIRE~\cite{wang2023dire} & Diffusion recon. & Reconstruction & Yes & Limited & Heavy pipeline \\
 UnivFD~\cite{ojha2023ufd} & CLIP ViT-L/14 & Linear/NN probe & Yes & Limited & Large backbone \\
 NPR~\cite{tan2024npr} & Official release & Artifact CNN & Yes & Limited & Official weights \\
-Ours & None & Controlled lite train & Yes & Yes & Params/latency \\
+FatFormer~\cite{liu2024fatformer} & CLIP + adapters & Pretrained adapt. & Yes & Limited & Large backbone \\
+LAID~\cite{chivaran2025laid} & Mixed & Lite CNN/ViT bench. & Yes & Limited & Params/FLOPs \\
+LOTA~\cite{wang2025lota} & Method-specific & Bit-plane noise & Yes & Limited & ms extraction \\
+Ours & None (Panel~A) & Controlled lite train & Yes & Yes & Params/latency/thr. \\
 \bottomrule
 \end{tabularx}
 \end{table}

@@ -3,40 +3,51 @@
 LiteSSM-B obtains a higher \textbf{OOD Pooled} AUC (\textbf{0.722}) than LiteSSM-A (\textbf{0.712}), yet a lower \textbf{UFD Macro} (\textbf{0.700} vs.\ \textbf{0.718}).
 Pooled AUC weights every OOD sample equally and can amplify easier or larger subsets inside \texttt{test\_ood.jsonl}.
 Macro AUC averages generator-level AUCs with equal weight and remains sensitive to consistently weak generators such as DALL·E.
-We therefore treat \textbf{UFD Macro as the primary cross-generator summary} for deployment-oriented reporting and keep pooled OOD as a secondary aggregate that must not substitute for Macro in the text or tables.
+We therefore treat \textbf{UFD Macro as the primary cross-generator summary} for operating-point reporting and keep pooled OOD as a secondary aggregate that must not substitute for Macro in the text or tables.
 
-\subsection{SSM as a Stronger Deployment Point---Not a Universal Detector}
+\subsection{SSM as a Stronger Operating Point---Not a Universal Detector}
 
-Across ID, UFD Macro, and bedroom-domain ID, LiteSSM-A occupies a favorable accuracy--size region under the evaluated latency budget.
+Across ID, UFD Macro, and bedroom-domain ID, LiteSSM-A occupies a favorable accuracy--size region under the evaluated protocol.
 LiteSSM-B is close on ID and competitive on several OOD views, but is heavier and slower; the LiteSSM-A--LiteSSM-B ID gap is CI-overlapping.
 These gains do \emph{not} imply a universal or generator-agnostic detector: worst-generator AUC remains near chance for both SSMs.
 The appropriate claim is narrower---under a matched lightweight protocol, SSM backbones improved average transfer relative to compact CNN baselines, while generator-specific collapse persisted.
-LiteSSM-A is preferred for its highest Panel~A UFD Macro together with a locked batch-32 throughput of 226 images/s, not because it minimizes absolute batch-1 latency.
+LiteSSM-A is preferred for its highest Panel~A UFD Macro together with a locked batch-32 throughput of 226 images/s, \emph{not} because it minimizes absolute batch-1 latency (p50 144.4\,ms versus $\approx$4--7\,ms for several CNNs).
+We therefore describe LiteSSM-A as the preferred \textbf{generalization--efficiency operating point} among protocol-matched compact models, rather than as a real-time, edge-ready, or lowest-latency detector.
 
 \subsection{Boundaries Exposed by Bedroom Content and DALL·E}
 
 Near-ceiling CelebA-HQ AUCs show that aggregate ID scores can look strong even when a substantial content domain remains difficult (Section~\ref{sec:domain}).
 Bedroom performance ($\approx$0.68--0.81) is where models separate and where SSM gains are most visible.
-DALL·E exposes an orthogonal \textbf{generator} boundary: chance-level AUCs across CNN and SSM alike indicate that the limitation is not an artifact of LiteFreqNet alone (Section~\ref{sec:ufd}).
+DALL·E exposes an orthogonal \textbf{generator} boundary: chance-level AUCs across all Panel~A CNN and SSM detectors (0.451--0.519) indicate that the limitation is not an artifact of LiteFreqNet alone (Section~\ref{sec:ufd}).
+Importantly, Panel~B pretrained references remain strong on the same DALL·E subset (UnivFD $\approx$0.969; NPR $\approx$0.990), so the failure is characteristic of the controlled from-scratch compact panel rather than an intrinsic impossibility of DALL·E detection under every training paradigm.
+This contrast supports a failure-aware takeaway: large-scale pretraining or official artifact pipelines can retain DALL·E signal that our low-data Panel~A models do not learn.
 
 \subsection{Frequency Enhancement Is Not Universally Helpful}
 
 LiteFreqNet~v2 did not win ID, UFD Macro, bedroom, or JPEG uniqueness.
 Attaching a similar frequency branch to SSM backbones slightly hurt bake-off ID/OOD Pooled metrics.
 Under the evaluated JPEG Q70 recompression setting, all compact models moved by at most 0.003 AUC (Section~\ref{sec:jpeg}); stability was shared rather than frequency-specific.
-We therefore interpret frequency features as protocol- and architecture-dependent, not as a general recipe for lightweight AIGC detection.
+We therefore interpret frequency features as protocol- and architecture-dependent, not as a general recipe for compact AIGC detection.
+
+\subsection{Relation to LAID, LOTA, and GenImage-Scale Benchmarks}
+
+LAID already benchmarks lightweight CNN/ViT detectors on GenImage spatial/spectral/fusion domains with Params/FLOPs reporting~\cite{chivaran2025laid}, and LOTA demonstrates millisecond bit-plane error extraction with strong GenImage ACC/AP~\cite{wang2025lota}.
+Our contribution is therefore not ``first lightweight AIGC detection,'' but a complementary controlled protocol: no Panel~A pretraining, DiffusionForensics low-data training, study-specific SSM classifiers, UFD Macro plus worst-generator reporting, CelebA-HQ/bedroom decomposition, locked batch-1 latency, and an external UnivFD/NPR panel that is never mixed into Panel~A rankings (Table~\ref{tab:positioning}).
+We did not retrain on GenImage because its large multi-generator training regime differs from the frozen low-data recipe used here; absence of GenImage numbers is an external-validity limitation, not evidence against GenImage as a community benchmark~\cite{zhu2023genimage}.
+Likewise, FatFormer, VIB-Net, CO-SPY, and Beyond Generation~\cite{liu2024fatformer,zhang2025vib,cheng2025cospy,zhong2025beyond} are discussed as modern pretrained/generalization references whose absolute scores cannot be merged into our tables without violating protocol matching.
 
 \subsection{Limitations}
 
 Training used a fixed no-pretraining recipe, a single training seed, and two DF training sources.
-Bootstrap intervals quantify test-sample uncertainty but do not capture training stochasticity.
+Bootstrap intervals quantify test-sample uncertainty but do \emph{not} capture variability across independently trained models.
 UFD Macro depends on the chosen subset list and per-class caps.
 JPEG analysis focuses on Q70 for the main claim.
 External reference detectors (UnivFD, NPR) use publicly released pretrained weights and native preprocessing; they contextualize performance and are not training-matched competitors.
 An unmatched FLUX subset is reported only in Appendix~\ref{app:flux}~\cite{flux2024}.
 Reported SSMs are study-specific pure-PyTorch classifiers for controlled comparison, not official architecture releases or vendor-kernel peaks.
 Deepfake video and legal-forensics claims are out of scope.
+Claims are restricted to the evaluated generators and domains; we do not assert comprehensive, universal, or real-world validation.
 
 \subsection{Practical Takeaway}
 
-For practitioners selecting one compact still-image detector from the training-matched suite, \textbf{LiteSSM-A} is the recommended operating point under the evaluated latency budget, paired with explicit monitoring for difficult generators (e.g., DALL·E-like sources) and content domains (e.g., indoor scenes), rather than an assumption of uniform reliability.
+For practitioners selecting one compact still-image detector from the training-matched suite, \textbf{LiteSSM-A} is the recommended operating point under the evaluated protocol when UFD Macro and bedroom-domain behavior are prioritized over minimum batch-1 latency, paired with explicit monitoring for difficult generators (e.g., DALL·E-like sources, where pretrained references may still succeed) and content domains (e.g., indoor scenes).

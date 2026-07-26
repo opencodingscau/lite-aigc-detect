@@ -57,9 +57,9 @@ Figure~\ref{fig:pareto} plots UFD Macro AUC against \textbf{batch-1 latency} (ms
 Batch-32 throughput remains reported in Table~\ref{tab:overall} for server batching and is not used as a single-image latency proxy.
 MobileNet/ShuffleNet and LiteFreqNet occupy the low-latency region (about 4--7\,ms) with lower or mid-range UFD Macro.
 EfficientNet-B0 is similarly fast at batch~1 ($\approx$6.6\,ms) but heavier (4.01\,M) with lower UFD Macro than either SSM.
-LiteSSM-A achieved the highest UFD Macro AUC among the controlled lightweight models while retaining a batch-32 throughput of \textbf{226} images/s (batch-1 p50 \textbf{144.4}\,ms).
+LiteSSM-A achieved the highest UFD Macro AUC among the controlled compact models while retaining a batch-32 throughput of \textbf{226} images/s (batch-1 p50 \textbf{144.4}\,ms).
 LiteSSM-B is slower (p50 \textbf{237.6}\,ms; throughput \textbf{120} images/s) with a slightly lower Macro.
-LiteSSM-A is therefore selected as the preferred generalization--efficiency operating point, rather than the model with the lowest absolute latency.
+LiteSSM-A is therefore selected as the preferred generalization--efficiency operating point among protocol-matched models, rather than as a real-time or lowest-latency detector.
 
 \begin{figure}[H]
 \centering
@@ -97,7 +97,8 @@ ShuffleNetV2-x0.5 & 0.880 & 0.992 & 0.677 & 0.315 \\
 Table~\ref{tab:ufd} reports per-subset AUCs on UFD~\cite{ojha2023ufd}.
 SSM detectors obtain higher Macro averages than the CNN/frequency suite.
 Generator identity dominates architecture: Glide subsets are comparatively easy, LDM subsets are weaker, and rankings change across columns.
-\textbf{DALL·E remained close to chance for every detector (0.451--0.519)}, including both SSMs; the failure is not specific to LiteFreqNet.
+\textbf{DALL·E remained close to chance for every Panel~A detector (0.451--0.519)}, including both SSMs; the failure is not specific to LiteFreqNet.
+By contrast, Panel~B pretrained references remain strong on the same DALL·E subset (UnivFD $\approx$0.969; NPR $\approx$0.990), indicating a protocol/panel gap rather than an absolute undetectability claim.
 Figure~\ref{fig:heatmap} visualizes the UFD generator--model matrix.
 
 \begin{table}[H]

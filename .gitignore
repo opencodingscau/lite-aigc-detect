@@ -139,3 +139,9 @@ autodl*
 # --- optional: keep freeze JSON, ignore huge pred dumps locally ---
 # freeze/predictions/
 *.jsonl.bak
+
+# --- v2 experiment local artifacts (never commit preds/ckpts/raw) ---
+v2/outputs/
+v2/**/teacher_soft/
+v2/distillation_pool/dedup/*.txt
+!v2/distillation_pool/dedup/.gitkeep

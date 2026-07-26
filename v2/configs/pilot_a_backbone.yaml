@@ -1,0 +1,59 @@
+# Pilot A — Compact backbone bake-off
+# Outputs → v2/outputs/pilot_a/  |  Metrics → v2/results/pilot_a/
+# Never write to freeze/ or paper manifests/
+
+pilot_id: pilot_a
+name: compact_backbone_bakeoff
+seed: 42
+input_size: 224
+epochs: 15
+batch_size: 64
+optimizer: AdamW
+lr: 1.0e-4
+weight_decay: 1.0e-4
+scheduler: CosineAnnealingLR
+
+# Reference v1 checkpoint (read-only); others trained under v2 manifests
+models:
+  - id: litessm_a
+    display: LiteSSM-A
+    source: reference_v1_ckpt
+    registry_key: mobilemamba_lite
+  - id: efficientvim
+    display: EfficientViM
+    source: train_v2
+  - id: efficientvmamba
+    display: EfficientVMamba
+    source: train_v2
+  - id: mambaout
+    display: MambaOut
+    source: train_v2
+  - id: repvit
+    display: RepViT
+    source: train_v2
+  - id: shvit_or_efficientvit
+    display: SHViT  # swap to EfficientViT if SHViT unavailable
+    source: train_v2
+    alt: EfficientViT
+
+manifests:
+  train: v2/manifests/pilot_a/train.jsonl
+  val: v2/manifests/pilot_a/val.jsonl
+  # Prefer new v2 eval manifests; if temporarily reusing protocol, clone IDs into v2/manifests with new SHA256
+  id_test: v2/manifests/pilot_a/id_test.jsonl
+  ufd_eval: v2/manifests/pilot_a/ufd_eval.jsonl
+
+metrics_required:
+  - ufd_macro_auc
+  - worst_generator_auc
+  - dalle_auc
+  - params_M
+  - flops_G
+  - batch1_p50_ms_pytorch_fp32
+
+metrics_optional:
+  - batch1_p50_ms_tensorrt_fp16
+  - cpu_batch1_p50_ms
+
+output_dir: v2/outputs/pilot_a
+results_dir: v2/results/pilot_a

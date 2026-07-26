@@ -1,0 +1,15 @@
+{
+  "pilot_id": "pilot_a",
+  "models": [
+    {
+      "id": "litessm_a",
+      "ufd_macro_auc": null,
+      "worst_generator_auc": null,
+      "dalle_auc": null,
+      "params_M": null,
+      "flops_G": null,
+      "batch1_p50_ms_pytorch_fp32": null
+    }
+  ],
+  "note": "Fill after first v2 eval; do not copy into paper freeze."
+}

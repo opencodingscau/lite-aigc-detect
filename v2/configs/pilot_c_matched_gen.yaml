@@ -1,0 +1,40 @@
+# Pilot C — Bias-controlled modern-generator mini validation set
+pilot_id: pilot_c
+name: matched_modern_generator_miniset
+
+protocol:
+  content_match: required          # real conditioned / paired semantics
+  same_target_size: required
+  same_codec: required             # PNG or JPEG Q matched
+  strip_metadata: required
+  same_resize_crop: required
+  same_colorspace: required
+  same_save_pipeline: required
+
+generator_groups:
+  train_visible:
+    - SDXL
+    - FLUX_family
+  validation_open:
+    - other_open_model  # pick one not in train_visible
+  heldout_test:
+    - SD3_5
+    - FLUX_other_version_or_licensed_closed
+  legacy_holdouts:
+    - ADM
+    - SDv2
+    - Glide
+    - DALLE_subset  # not paper test IDs if overlapping — rematerialize under v2
+
+orthogonal_splits:
+  generator_shift: semantic_overlap_generator_different
+  content_shift: generator_fixed_semantic_different
+
+external_benchmarks_optional:
+  - CO-SPYBench
+  - RRDataset
+
+manifest_root: v2/manifests/pilot_c
+notes_dir: v2/matched_generators
+output_dir: v2/outputs/pilot_c
+results_dir: v2/results/pilot_c

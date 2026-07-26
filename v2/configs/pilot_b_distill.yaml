@@ -1,0 +1,42 @@
+# Pilot B — Distillation pilot (independent pool; no paper test IDs)
+pilot_id: pilot_b
+name: gated_multi_teacher_distill
+seed: 42
+
+students:
+  - LiteSSM-A
+  - RepViT
+
+teachers:
+  - id: npr
+    role: local_upsampling_cues
+  - id: univfd
+    role: cross_generator_features
+
+recipes:
+  - npr_only
+  - univfd_only
+  - gated_dual
+
+loss:
+  ce_weight: 1.0
+  kd_weight_max: 1.0
+  gate: confidence_and_agreement
+  feature_contrastive: true
+  ranking_consistency: optional
+
+distillation_pool:
+  manifest: v2/manifests/pilot_b/distill_pool.jsonl
+  dedup_against_paper_manifests: true
+  notes: extra reals + independently generated fakes; teachers emit soft labels/features only
+
+success_bars:
+  ufd_macro_delta_min: 0.04
+  worst_generator_delta_min: 0.08
+  dalle_delta_min: 0.10
+  params_increase_max_frac: 0.10
+  latency_increase_max_frac: 0.10
+  teacher_at_inference: false
+
+output_dir: v2/outputs/pilot_b
+results_dir: v2/results/pilot_b

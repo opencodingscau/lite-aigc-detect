@@ -1,0 +1,82 @@
+{
+  "pilot": "pilot_a_wave1",
+  "note": "Same bake-off protocol manifests; new freeze_v2 candidate. Paper freeze untouched.",
+  "models": [
+    {
+      "model": "repvit_m0_9",
+      "params_M": 4.721,
+      "id_test_auc": 0.91545,
+      "ood_pooled_auc": 0.6674845806451613,
+      "ufd_macro_auc": 0.697,
+      "worst_generator_auc": 0.469,
+      "dalle_auc": 0.469,
+      "ufd_by_subset": {
+        "ufd_dalle": 0.469,
+        "ufd_glide_100_10": 0.868,
+        "ufd_glide_100_27": 0.851,
+        "ufd_glide_50_27": 0.888,
+        "ufd_guided": 0.762,
+        "ufd_ldm_100": 0.612,
+        "ufd_ldm_200": 0.612,
+        "ufd_ldm_200_cfg": 0.519
+      }
+    },
+    {
+      "model": "mambaout_proxy",
+      "params_M": 27.822,
+      "id_test_auc": 0.90455,
+      "ood_pooled_auc": 0.6173554838709677,
+      "ufd_macro_auc": 0.614,
+      "worst_generator_auc": 0.471,
+      "dalle_auc": 0.472,
+      "ufd_by_subset": {
+        "ufd_dalle": 0.472,
+        "ufd_glide_100_10": 0.681,
+        "ufd_glide_100_27": 0.72,
+        "ufd_glide_50_27": 0.757,
+        "ufd_guided": 0.681,
+        "ufd_ldm_100": 0.566,
+        "ufd_ldm_200": 0.567,
+        "ufd_ldm_200_cfg": 0.471
+      }
+    },
+    {
+      "model": "efficientnet_v2_s",
+      "params_M": 20.18,
+      "id_test_auc": 0.9212250000000001,
+      "ood_pooled_auc": 0.7040469677419354,
+      "ufd_macro_auc": 0.695,
+      "worst_generator_auc": 0.619,
+      "dalle_auc": 0.619,
+      "ufd_by_subset": {
+        "ufd_dalle": 0.619,
+        "ufd_glide_100_10": 0.719,
+        "ufd_glide_100_27": 0.686,
+        "ufd_glide_50_27": 0.697,
+        "ufd_guided": 0.732,
+        "ufd_ldm_100": 0.711,
+        "ufd_ldm_200": 0.68,
+        "ufd_ldm_200_cfg": 0.715
+      }
+    },
+    {
+      "model": "mobilemamba_lite",
+      "params_M": null,
+      "id_test_auc": null,
+      "ood_pooled_auc": null,
+      "ufd_macro_auc": 0.718,
+      "worst_generator_auc": 0.504,
+      "dalle_auc": 0.504,
+      "ufd_by_subset": {
+        "ufd_dalle": 0.504,
+        "ufd_glide_100_10": 0.878,
+        "ufd_glide_100_27": 0.855,
+        "ufd_glide_50_27": 0.889,
+        "ufd_guided": 0.766,
+        "ufd_ldm_100": 0.656,
+        "ufd_ldm_200": 0.634,
+        "ufd_ldm_200_cfg": 0.565
+      }
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "model": "mobilemamba_lite",
+  "ckpt": "/root/autodl-tmp/outputs/bakeoff/mobilemamba_lite/best.pt",
+  "val_threshold": 0.43,
+  "test_ood_by_source": {
+    "gangen_attgan_fake": {
+      "n": 500,
+      "pos_rate": 1.0,
+      "prob_mean": 0.07318952041311422,
+      "auc": null,
+      "acc_at_thr": 0.062,
+      "detect_rate_fake": 0.062
+    },
+    "gangen_attgan_real": {
+      "n": 500,
+      "pos_rate": 0.0,
+      "prob_mean": 0.042560674483538605,
+      "auc": null,
+      "acc_at_thr": 0.968,
+      "detect_rate_fake": 0.0
+    },
+    "ldm_bedroom_fake": {
+      "n": 500,
+      "pos_rate": 1.0,
+      "prob_mean": 0.7130450166240334,
+      "auc": null,
+      "acc_at_thr": 0.828,
+      "detect_rate_fake": 0.828
+    },
+    "ldm_bedroom_real": {
+      "n": 500,
+      "pos_rate": 0.0,
+      "prob_mean": 0.27437737352540714,
+      "auc": null,
+      "acc_at_thr": 0.75,
+      "detect_rate_fake": 0.0
+    },
+    "mj_bedroom_fake": {
+      "n": 100,
+      "pos_rate": 1.0,
+      "prob_mean": 0.1424323456082493,
+      "auc": null,
+      "acc_at_thr": 0.1,
+      "detect_rate_fake": 0.1
+    },
+    "projectedgan_bedroom_fake": {
+      "n": 500,
+      "pos_rate": 1.0,
+      "prob_mean": 0.5538957820096985,
+      "auc": null,
+      "acc_at_thr": 0.604,
+      "detect_rate_fake": 0.604
+    },
+    "projectedgan_bedroom_real": {
+      "n": 500,
+      "pos_rate": 0.0,
+      "prob_mean": 0.2792726850155741,
+      "auc": null,
+      "acc_at_thr": 0.736,
+      "detect_rate_fake": 0.0
+    },
+    "sdv2_bedroom_fake": {
+      "n": 500,
+      "pos_rate": 1.0,
+      "prob_mean": 0.775991859383881,
+      "auc": null,
+      "acc_at_thr": 0.884,
+      "detect_rate_fake": 0.884
+    },
+    "stylegan_bedroom_fake": {
+      "n": 500,
+      "pos_rate": 1.0,
+      "prob_mean": 0.519222308056429,
+      "auc": null,
+      "acc_at_thr": 0.582,
+      "detect_rate_fake": 0.582
+    },
+    "stylegan_bedroom_real": {
+      "n": 500,
+      "pos_rate": 0.0,
+      "prob_mean": 0.2602630438706838,
+      "auc": null,
+      "acc_at_thr": 0.776,
+      "detect_rate_fake": 0.0
+    },
+    "ufd_ldm100_fake": {
+      "n": 500,
+      "pos_rate": 1.0,
+      "prob_mean": 0.362959895898588,
+      "auc": null,
+      "acc_at_thr": 0.356,
+      "detect_rate_fake": 0.356
+    },
+    "ufd_ldm100_real": {
+      "n": 500,
+      "pos_rate": 0.0,
+      "prob_mean": 0.1685325999998604,
+      "auc": null,
+      "acc_at_thr": 0.868,
+      "detect_rate_fake": 0.0
+    }
+  },
+  "test_ood_paired": {
+    "df_ldm_bedroom": {
+      "n": 1000,
+      "auc": 0.86518,
+      "real_n": 500,
+      "fake_n": 500,
+      "acc_at_thr": 0.789
+    },
+    "df_stylegan_bedroom": {
+      "n": 1000,
+      "auc": 0.739536,
+      "real_n": 500,
+      "fake_n": 500,
+      "acc_at_thr": 0.679
+    },
+    "df_projectedgan_bedroom": {
+      "n": 1000,
+      "auc": 0.739544,
+      "real_n": 500,
+      "fake_n": 500,
+      "acc_at_thr": 0.67
+    },
+    "ufd_ldm100_in_ood": {
+      "n": 1000,
+      "auc": 0.6552800000000001,
+      "real_n": 500,
+      "fake_n": 500,
+      "acc_at_thr": 0.612
+    },
+    "gangen_attgan": {
+      "n": 1000,
+      "auc": 0.584558,
+      "real_n": 500,
+      "fake_n": 500,
+      "acc_at_thr": 0.515
+    }
+  },
+  "ufd_eval_n": 6400,
+  "ufd_subsets": [
+    "dalle",
+    "glide_100_10",
+    "glide_100_27",
+    "glide_50_27",
+    "guided",
+    "ldm_100",
+    "ldm_200",
+    "ldm_200_cfg"
+  ],
+  "ufd_by_subset": {
+    "ufd_dalle": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.17639132062544377,
+      "auc": 0.503675,
+      "acc_at_thr": 0.5125,
+      "detect_rate_fake": 0.155
+    },
+    "ufd_glide_100_10": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.4033333155802757,
+      "auc": 0.8778874999999999,
+      "acc_at_thr": 0.79625,
+      "detect_rate_fake": 0.695
+    },
+    "ufd_glide_100_27": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.4051219263956955,
+      "auc": 0.85488125,
+      "acc_at_thr": 0.7825,
+      "detect_rate_fake": 0.68
+    },
+    "ufd_glide_50_27": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.42811988620320335,
+      "auc": 0.8890312499999999,
+      "acc_at_thr": 0.8125,
+      "detect_rate_fake": 0.74
+    },
+    "ufd_guided": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.45914884409561635,
+      "auc": 0.7661874999999999,
+      "acc_at_thr": 0.7,
+      "detect_rate_fake": 0.6675
+    },
+    "ufd_ldm_100": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.25744730672573496,
+      "auc": 0.6562874999999999,
+      "acc_at_thr": 0.62625,
+      "detect_rate_fake": 0.3775
+    },
+    "ufd_ldm_200": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.26457999642723734,
+      "auc": 0.63433125,
+      "acc_at_thr": 0.61625,
+      "detect_rate_fake": 0.37
+    },
+    "ufd_ldm_200_cfg": {
+      "n": 800,
+      "pos_rate": 0.5,
+      "prob_mean": 0.22019380997298868,
+      "auc": 0.56523125,
+      "acc_at_thr": 0.565,
+      "detect_rate_fake": 0.2675
+    }
+  },
+  "ufd_mean_auc": 0.7184390625,
+  "id_by_source": {
+    "adm_bedroom_fake": {
+      "n": 100,
+      "pos_rate": 1.0,
+      "prob_mean": 0.7315651664976031,
+      "auc": null,
+      "acc_at_thr": 0.85,
+      "detect_rate_fake": 0.85
+    },
+    "adm_bedroom_real": {
+      "n": 100,
+      "pos_rate": 0.0,
+      "prob_mean": 0.36793129386845974,
+      "auc": null,
+      "acc_at_thr": 0.63,
+      "detect_rate_fake": 0.0
+    },
+    "sdv2_celebahq_fake": {
+      "n": 100,
+      "pos_rate": 1.0,
+      "prob_mean": 0.9853389085829258,
+      "auc": null,
+      "acc_at_thr": 0.99,
+      "detect_rate_fake": 0.99
+    },
+    "sdv2_celebahq_real": {
+      "n": 100,
+      "pos_rate": 0.0,
+      "prob_mean": 0.04106033611285966,
+      "auc": null,
+      "acc_at_thr": 0.98,
+      "detect_rate_fake": 0.0
+    }
+  },
+  "id_domain": {
+    "bedroom_adm": {
+      "n": 200,
+      "auc": 0.8119,
+      "real_n": 100,
+      "fake_n": 100,
+      "acc_at_thr": 0.74
+    },
+    "celebahq_sdv2": {
+      "n": 200,
+      "auc": 0.9988,
+      "real_n": 100,
+      "fake_n": 100,
+      "acc_at_thr": 0.985
+    }
+  }
+}

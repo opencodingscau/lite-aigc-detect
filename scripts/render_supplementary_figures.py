@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-ROOT = Path(r"E:\sciencecre\aigc_datasets\lite-aigc-detect")
+ROOT = Path(__file__).resolve().parents[1]
 ASSETS = Path(r"E:\sciencecre\aigc_datasets\formal\_paper_assets")
 OUT_DIRS = [ROOT / "latex" / "figures", ROOT / "freeze" / "figures"]
 DOCS = ROOT / "docs"
@@ -398,10 +398,11 @@ def fig_confusion(thr_map):
         ("ID test", confusion_counts(id_["probs"], id_["labels"], thr), len(id_["labels"])),
         ("UFD pooled", confusion_counts(ufd["probs"], ufd["labels"], thr), len(ufd["labels"])),
     ]
-    fig, axes = plt.subplots(1, 2, figsize=(9.8, 4.3))
+    fig, axes = plt.subplots(1, 2, figsize=(11.8, 4.5))
     for ax, (title, mat, n) in zip(axes, mats):
-        vmax = max(int(mat.max()), 1)
-        im = ax.imshow(mat, cmap="YlGn", vmin=0, vmax=vmax)
+        row_totals = mat.sum(axis=1, keepdims=True)
+        rates = np.divide(mat, row_totals, out=np.zeros_like(mat, dtype=float), where=row_totals != 0)
+        im = ax.imshow(rates, cmap="Blues", vmin=0, vmax=1)
         ax.set_xticks([0, 1], ["Pred real", "Pred fake"])
         ax.set_yticks([0, 1], ["True real", "True fake"])
         ax.set_title(f"{title}\nLiteSSM-A @ Youden thr={thr:.2f}  (n={n})", fontsize=10)
@@ -412,14 +413,13 @@ def fig_confusion(thr_map):
                 ax.text(
                     j,
                     i,
-                    f"{labels_txt[i][j]}\n{val}",
+                    f"{labels_txt[i][j]}\n{val} ({rates[i, j]:.1%})",
                     ha="center",
                     va="center",
-                    color="white" if val > 0.55 * vmax else C["ink"],
-                    fontsize=11,
+                    color="white" if rates[i, j] > 0.55 else C["ink"],
+                    fontsize=9.4,
                     fontweight="semibold",
                 )
-        fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04, label="Count")
         ax.text(
             0.5,
             -0.20,
@@ -429,8 +429,11 @@ def fig_confusion(thr_map):
             fontsize=8,
             color=C["muted"],
         )
-    fig.suptitle("Confusion counts at the locked operating threshold", fontsize=12, fontweight="semibold")
-    fig.tight_layout(rect=[0, 0.02, 1, 0.95])
+    fig.subplots_adjust(left=0.07, right=0.84, bottom=0.19, top=0.75, wspace=0.82)
+    cax = fig.add_axes([0.89, 0.19, 0.020, 0.62])
+    cbar = fig.colorbar(im, cax=cax)
+    cbar.set_label("Row-normalized rate", fontsize=9)
+    fig.suptitle("Confusion matrices at the locked operating threshold", fontsize=12, fontweight="semibold")
     save(fig, "fig_confusion_litesm_a.png")
     plt.close(fig)
 
@@ -519,31 +522,31 @@ def fig_kappa(thr_map, meta_out: dict):
         for j, kj in enumerate(PANEL_A):
             K[i, j] = cohen_kappa(preds[ki], preds[kj])
 
-    from matplotlib.colors import LinearSegmentedColormap
-
-    cmap = LinearSegmentedColormap.from_list(
-        "kappa_blue_yellow", [C["kappa_lo"], "#60A5FA", "#FDE68A", C["kappa_hi"]]
-    )
     fig, ax = plt.subplots(figsize=(6.6, 5.6))
-    im = ax.imshow(K, cmap=cmap, vmin=0.0, vmax=1.0)
+    masked = np.ma.masked_where(np.eye(n, dtype=bool), K)
+    cmap = plt.colormaps["Blues"].copy()
+    cmap.set_bad("#F5F5F5")
+    im = ax.imshow(masked, cmap=cmap, vmin=0.0, vmax=0.85)
     ax.set_xticks(range(n), [SHORT[k] for k in PANEL_A])
     ax.set_yticks(range(n), [SHORT[k] for k in PANEL_A])
     for i in range(n):
         for j in range(n):
+            if i == j:
+                ax.add_patch(plt.Rectangle((j - 0.5, i - 0.5), 1, 1, fc="#F5F5F5", ec="#D6D3D1", lw=0.7))
             ax.text(
                 j,
                 i,
                 f"{K[i, j]:.2f}",
                 ha="center",
                 va="center",
-                color=("white" if (K[i, j] <= 0.22 or K[i, j] >= 0.85) else C["ink"]),
+                color=("white" if i != j and K[i, j] >= 0.55 else C["ink"]),
                 fontsize=9,
             )
     ax.set_title(
         "UFD pooled prediction agreement (Cohen's $\\kappa$)",
         fontweight="semibold",
     )
-    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04, label="Cohen's κ")
+    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04, label="Cohen's κ (off-diagonal)")
     note = (
         "Binary decisions use each model's operating threshold "
         "(A=0.43, B=0.63, Eff=0.54, Freq=0.94; Mob/Shuf=0.5, Youden not retained)."

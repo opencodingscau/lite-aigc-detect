@@ -7,10 +7,10 @@ We therefore treat \textbf{UFD Macro as the primary cross-generator summary} for
 
 \subsection{SSM as a Stronger Operating Point---Not a Universal Detector}
 
-Across ID, UFD Macro, and bedroom-domain ID, LiteSSM-A occupies a favorable accuracy--size region under the evaluated protocol.
-LiteSSM-B is close on ID and competitive on several OOD views, but is heavier and slower; the LiteSSM-A--LiteSSM-B ID gap is CI-overlapping.
-These gains do \emph{not} imply a universal or generator-agnostic detector: worst-generator AUC remains near chance for both SSMs.
-The appropriate claim is narrower---under a matched compact-model protocol, SSM backbones attain higher UFD Macro AUC under the evaluated generator set relative to compact CNN baselines, while generator-specific collapse persisted.
+Within Panel~A, LiteSSM-A combines the highest UFD Macro with the strongest bedroom-domain result among the compact models at 1.74\,M parameters.
+LiteSSM-B is close on ID and competitive on several OOD views, but is heavier and slower; the LiteSSM-A--LiteSSM-B ID gap has an overlapping CI.
+The result is bounded by the DALL·E subsets: worst-generator AUC remains near chance for both SSMs.
+Thus, the supported comparison is limited to the matched compact-model panel, where the SSM backbones attain higher UFD Macro AUC than the evaluated CNN baselines but do not remove generator-specific failures.
 LiteSSM-A is preferred for its highest Panel~A UFD Macro together with a locked batch-32 throughput of 226 images/s, \emph{not} because it minimizes absolute batch-1 latency (p50 144.4\,ms versus $\approx$4--7\,ms for several CNNs).
 We therefore describe LiteSSM-A as the preferred \textbf{generalization--efficiency operating point} among protocol-matched compact models, rather than as a real-time, edge-ready, or lowest-latency detector.
 
@@ -19,8 +19,8 @@ We therefore describe LiteSSM-A as the preferred \textbf{generalization--efficie
 Near-ceiling CelebA-HQ AUCs show that aggregate ID scores can look strong even when a substantial content domain remains difficult (Section~\ref{sec:domain}).
 Bedroom performance ($\approx$0.68--0.81) is where models separate and where SSM gains are most visible (Figure~\ref{fig:qual-bedroom}).
 DALL·E exposes an orthogonal \textbf{generator} boundary: chance-level AUCs across all Panel~A CNN and SSM detectors (0.451--0.519) indicate that the limitation is not an artifact of LiteFreqNet alone (Section~\ref{sec:ufd}).
-We stack three complementary layers of evidence for this failure mode.
-First, score distributions (Figure~\ref{fig:dalle-diag}) and qualitative DALL·E/Glide grids (Figure~\ref{fig:qual-ufd}) show near-complete real/fake overlap for Panel~A models on DALL·E while NPR remains separated.
+Three analyses point to the same boundary.
+First, score distributions (Appendix~\ref{app:diagnostics}) and qualitative DALL·E/Glide grids (Figure~\ref{fig:qual-ufd}) show near-complete real/fake overlap for Panel~A models on DALL·E while NPR remains separated.
 Second, pairwise decision agreement (Appendix~\ref{app:diagnostics}) and elevated double-fault / error-Jaccard rates versus LiteSSM-A (Appendix~\ref{app:ensemble}) show that Panel~A errors are highly correlated across heterogeneous backbones.
 Third, equal-weight probability-mean ensembles of the same frozen predictions never exceed LiteSSM-A on UFD Macro (best ensemble $0.713$ vs.\ $0.718$; Appendix~\ref{app:ensemble}), so averaging does not cancel a shared protocol blind spot.
 Taken together, these layers support a protocol/panel gap rather than absolute undetectability of DALL·E under every training paradigm.

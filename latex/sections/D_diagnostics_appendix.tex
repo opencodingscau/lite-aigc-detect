@@ -6,6 +6,13 @@ Qualitative grids in the main text use \emph{predefined ranking rules} (not visu
 
 \begin{figure}[H]
 \centering
+\includegraphics[width=0.94\textwidth]{figures/fig_dalle_score_diag.png}
+\caption{Score distributions on UFD DALL·E versus Glide$_{100,10}$ for LiteSSM-A, EfficientNet-B0, and NPR (ref).
+Panel~A real and fake scores overlap on DALL·E but separate on Glide$_{100,10}$; NPR remains separated under a different training paradigm.\label{fig:dalle-diag}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
 \includegraphics[width=0.92\textwidth]{figures/fig_training_dynamics.png}
 \caption{Training dynamics under the locked Panel~A recipe (seed~42, 15~epochs).
 Solid lines: train loss (left axis); dashed lines: validation AUC (right axis).
@@ -17,9 +24,10 @@ Both models stabilize well before epoch~15; EfficientNet-B0 peaks earlier while 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.78\textwidth]{figures/fig_error_kappa_ufd.png}
-\caption{Pairwise Cohen's $\kappa$ among Panel~A binary decisions on UFD (pooled).
-High $\kappa$ (yellow) indicates overlapping decisions; low $\kappa$ (blue) indicates complementary errors.
+\caption{Pairwise Cohen's $\kappa$ among Panel~A binary decisions on UFD (pooled)~\cite{cohen1960}.
+The gray diagonal denotes self-agreement; off-diagonal blue shading encodes cross-model agreement.
 LiteSSM-A/B agree strongly ($\kappa\approx0.80$), while agreement with MobileNetV3-S is much weaker, suggesting that some failures are shared protocol-level blind spots (e.g., DALL·E) rather than a single-architecture artifact.
+Axis tags denote A$\star$=LiteSSM-A, B=LiteSSM-B, Eff=EfficientNet-B0, Freq=LiteFreqNet~v2, Mob=MobileNetV3-S, and Shuf=ShuffleNet-x0.5.
 MobileNetV3-S and ShuffleNet thresholds were not retained in the freeze and use a fixed score threshold of $0.5$ (disclosed on the figure).\label{fig:kappa}}
 \end{figure}
 

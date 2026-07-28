@@ -197,14 +197,24 @@ def fig_protocol():
     )
 
     stages = [
-        (2, 11, 20, 18, "Data\nDF train/ID\nUFD OOD\n(manifests frozen)", C["shared"], C["shared_edge"]),
-        (28, 11, 20, 18, "Train\n15 ep · bs64\nAdamW 1e-4\nseed 42 · no PT", C["cnn_soft"], C["cnn"]),
-        (54, 20, 20, 13, "Panel A\nCNNs · LiteFreq\nLiteSSM-A/B", C["ssm_soft"], C["ssm"]),
-        (54, 3, 20, 13, "Panel B\nUnivFD · NPR\n(pretrained refs)", C["accent_soft"], C["accent"]),
-        (80, 11, 28, 18, "Metrics\nID · domain\nUFD Macro\nJPEG Q70\nlatency / thr.", C["freq_soft"], C["freq"]),
+        (2, 11, 20, 18, "Frozen data\nDF train / ID\nUFD / OOD\nno test selection", "#F5F5F5", "#333333"),
+        (28, 11, 20, 18, "Shared training\n15 ep · bs64\nAdamW 1e-4\nseed 42 · no PT", "#F5F5F5", "#333333"),
+        (54, 20, 20, 13, "Panel A\nCNNs · LiteFreq\nLiteSSM-A/B", "#FFFFFF", "#333333"),
+        (54, 3, 20, 13, "Panel B\nUnivFD · NPR\n(pretrained refs)", "#FFFFFF", "#333333"),
+        (80, 11, 28, 18, "Report\nID · domain\nUFD Macro\nJPEG Q70\nlatency / thr.", "#F5F5F5", "#333333"),
     ]
     for args in stages:
-        rounded(ax, (args[0], args[1]), args[2], args[3], args[4], args[5], args[6], fontsize=8.6)
+        ax.add_patch(Rectangle((args[0], args[1]), args[2], args[3], fc=args[5], ec=args[6], lw=0.9))
+        ax.text(
+            args[0] + args[2] / 2,
+            args[1] + args[3] / 2,
+            args[4],
+            ha="center",
+            va="center",
+            fontsize=9.2,
+            color=C["ink"],
+            linespacing=1.28,
+        )
 
     arrow(ax, (22.2, 20), (27.6, 20))
     arrow(ax, (48.2, 20), (53.6, 26.5))
@@ -227,81 +237,96 @@ def fig_protocol():
 # Fig: architecture (shared stem + fork)
 # ---------------------------------------------------------------------------
 def fig_architecture():
-    fig = plt.figure(figsize=(11.4, 5.8))
-    ax = fig.add_axes([0.02, 0.06, 0.96, 0.88])
+    fig = plt.figure(figsize=(11.8, 6.4))
+    ax = fig.add_axes([0.025, 0.045, 0.95, 0.90])
     ax.set_xlim(0, 100)
-    ax.set_ylim(0, 58)
+    ax.set_ylim(0, 64)
     ax.axis("off")
+    a_edge, a_fill = "#4472C4", "#EAF0FA"
+    b_edge, b_fill = "#70AD47", "#EDF5E8"
+    neutral_edge, neutral_fill = "#333333", "#F5F5F5"
+    ax.text(2, 61.5, "Study-specific pure-PyTorch SSM classifiers", fontsize=13, fontweight="semibold")
     ax.text(
-        50,
-        55.5,
-        "Study-specific pure-PyTorch SSM classifiers",
-        ha="center",
-        va="center",
-        fontsize=12,
-        fontweight="semibold",
-    )
-
-    # Shared column
-    rounded(ax, (32, 44), 36, 6.5, "Input  224×224×3", C["shared"], C["shared_edge"], 9, "semibold")
-    arrow(ax, (50, 44), (50, 40.2))
-    rounded(
-        ax,
-        (28, 32.5),
-        44,
-        7.5,
-        "Matched stem topology  ·  4× Conv3×3/s2 + BN + GELU  →  14×14×192\nFlatten + positional embedding  ·  L=196, C=192",
-        C["shared"],
-        C["shared_edge"],
-        8.2,
-    )
-
-    # Fork
-    arrow(ax, (42, 32.5), (24, 27.5))
-    arrow(ax, (58, 32.5), (76, 27.5))
-
-    # LiteSSM-A
-    ax.text(24, 29.2, "LiteSSM-A", ha="center", fontsize=10.5, fontweight="semibold", color=C["ssm"])
-    rounded(
-        ax,
-        (6, 14.5),
-        36,
-        12.5,
-        "×4 MRFFILite blocks\nLN → DWConv{3,5,7} + SelectiveSSM\nconcat → Linear + residual\n\nd_state=8 · expand=1 · sequential scan",
-        C["ssm_soft"],
-        C["ssm"],
-        8.6,
-        "semibold",
-        lw=1.6,
-    )
-    arrow(ax, (24, 14.5), (24, 11.2))
-    rounded(ax, (8, 4.5), 32, 6.2, "LN + mean pool → Linear → 2 logits", C["bg"], C["ssm"], 8.6)
-
-    # LiteSSM-B
-    ax.text(76, 29.2, "LiteSSM-B", ha="center", fontsize=10.5, fontweight="semibold", color=C["accent"])
-    rounded(
-        ax,
-        (58, 14.5),
-        36,
-        12.5,
-        "×4 BiViMBlock (Vim-inspired)\nLN → SSM_fwd  ∥  SSM_bwd\nconcat → Linear + residual\n\nd_state=16 · bidirectional SelectiveSSM",
-        C["accent_soft"],
-        C["accent"],
-        8.6,
-        "semibold",
-        lw=1.6,
-    )
-    arrow(ax, (76, 14.5), (76, 11.2))
-    rounded(ax, (60, 4.5), 32, 6.2, "LN + mean pool → Linear → 2 logits", C["bg"], C["accent"], 8.2)
-
-    ax.text(
-        50,
-        1.2,
-        "Block design differs; both keep a ×16 stem to L=196 tokens and a two-logit head (pure-PyTorch scan).",
-        ha="center",
-        fontsize=7.6,
+        2,
+        58.5,
+        "Shared convolutional encoder and token interface; the residual sequence block is the controlled architectural difference.",
+        fontsize=8.4,
         color=C["muted"],
     )
+
+    def box(x, y, w, h, title, detail, fc, ec, title_color=C["ink"]):
+        patch = Rectangle((x, y), w, h, linewidth=0.9, edgecolor=ec, facecolor=fc)
+        ax.add_patch(patch)
+        ax.text(x + 1.2, y + h - 1.55, title, fontsize=8.7, fontweight="semibold", color=title_color, va="top")
+        if detail:
+            ax.text(x + 1.2, y + h - 3.75, detail, fontsize=7.25, color=C["muted"], va="top", linespacing=1.26)
+        return patch
+
+    # Shared encoder: image, progressively reduced feature maps, then token interface.
+    box(3, 46, 14, 8, "Input image", "224 × 224 × 3", neutral_fill, neutral_edge)
+    for i in range(3):
+        for j in range(3):
+            ax.add_patch(Rectangle((4.2 + j * 2.4, 47.0 + i * 1.7), 1.55, 1.15, fc="#CBD5E1", ec="white", lw=0.35))
+    arrow(ax, (17.5, 50), (22.2, 50))
+    box(23, 44.4, 30, 11.2, "Shared convolutional stem", "4 × [Conv 3×3 / s2 · BN · GELU]\n224²×3  →  14²×192", neutral_fill, neutral_edge)
+    for i, (w, h) in enumerate([(3.8, 3.8), (3.0, 3.0), (2.3, 2.3), (1.7, 1.7)]):
+        x = 27.0 + i * 5.4
+        y = 46.6 + (3.8 - h) / 2
+        ax.add_patch(Rectangle((x, y), w, h, fc="#CBD5E1", ec="#94A3B8", lw=0.55))
+    arrow(ax, (53.5, 50), (58.2, 50))
+    box(59, 44.4, 18, 11.2, "Token interface", "Flatten + position\nL = 196, C = 192", neutral_fill, neutral_edge)
+    for i in range(7):
+        ax.add_patch(Rectangle((62.0 + i * 1.45, 47.0), 1.0, 3.0, fc="#D6D3D1", ec="white", lw=0.35))
+    ax.text(79.2, 50, "same input\nfor both heads", fontsize=7.2, color=C["muted"], va="center")
+    ax.text(40, 42.0, r"$x\in\mathbb{R}^{B\times3\times224\times224}\ \rightarrow\ h\in\mathbb{R}^{B\times196\times192}$",
+            fontsize=7.4, color=C["muted"], ha="center")
+    arrow(ax, (67.0, 44.0), (25.0, 39.4), C["shared_edge"])
+    arrow(ax, (69.0, 44.0), (75.0, 39.4), C["shared_edge"])
+
+    # Branch panels.
+    panels = [
+        (3, 9, 44, 30, "LiteSSM-A", r"MRFFILite ×4  ($d_{\mathrm{state}}=8$)", a_edge, a_fill),
+        (53, 9, 44, 30, "LiteSSM-B", r"BiViM ×4  ($d_{\mathrm{state}}=16$)", b_edge, b_fill),
+    ]
+    for x, y, w, h, name, subtitle, edge, soft in panels:
+        ax.add_patch(Rectangle((x, y), w, h, linewidth=1.0, edgecolor=edge, facecolor="#FFFFFF"))
+        ax.add_patch(Rectangle((x, y + h - 5.4), w, 5.4, fc=soft, ec="none"))
+        ax.text(x + 1.4, y + h - 1.75, name, fontsize=10.8, fontweight="semibold", color=edge, va="top")
+        ax.text(x + w - 1.4, y + h - 1.95, subtitle, fontsize=7.5, color=C["muted"], ha="right", va="top")
+
+    # LiteSSM-A block flow.
+    box(6, 25, 7.2, 6.2, "LN", "", C["bg"], a_edge)
+    box(16, 26.2, 10.5, 4.7, "Local path", "DWConv k={3,5,7}", a_fill, a_edge, a_edge)
+    box(16, 18.2, 10.5, 4.7, "State path", "SelectiveSSM\nstate = 8", a_fill, a_edge, a_edge)
+    box(30, 22.1, 8.7, 5.8, "Fuse", "concat → Linear", C["bg"], a_edge)
+    ax.text(41.2, 24.8, "⊕", fontsize=17, color=a_edge, ha="center", va="center")
+    ax.text(25, 11.2, "residual block repeated 4 times · expand = 1 · sequential scan", fontsize=7.4, color=C["muted"], ha="center")
+    arrow(ax, (13.5, 28.1), (15.5, 28.5), "#666666")
+    arrow(ax, (13.5, 27.1), (15.5, 20.6), "#666666")
+    arrow(ax, (26.8, 28.5), (29.4, 25.4), "#666666")
+    arrow(ax, (26.8, 20.6), (29.4, 24.6), "#666666")
+    arrow(ax, (38.9, 25), (40.0, 25), "#666666")
+    ax.add_patch(FancyArrowPatch((8.0, 25.0), (40.0, 22.8), arrowstyle="-", lw=0.7, color="#666666"))
+
+    # LiteSSM-B block flow.
+    box(56, 25, 7.2, 6.2, "LN", "", C["bg"], b_edge)
+    box(66, 26.2, 10.5, 4.7, "Forward scan", "SelectiveSSM\nstate = 16", b_fill, b_edge, b_edge)
+    box(66, 18.2, 10.5, 4.7, "Backward scan", "reverse → SSM\n→ reverse", b_fill, b_edge, b_edge)
+    box(80, 22.1, 8.7, 5.8, "Fuse", "concat → Linear", C["bg"], b_edge)
+    ax.text(91.2, 24.8, "⊕", fontsize=17, color=b_edge, ha="center", va="center")
+    ax.text(75, 11.2, "residual block repeated 4 times · bidirectional selective scan", fontsize=7.4, color=C["muted"], ha="center")
+    arrow(ax, (63.5, 28.1), (65.5, 28.5), "#666666")
+    arrow(ax, (63.5, 27.1), (65.5, 20.6), "#666666")
+    arrow(ax, (76.8, 28.5), (79.4, 25.4), "#666666")
+    arrow(ax, (76.8, 20.6), (79.4, 24.6), "#666666")
+    arrow(ax, (88.9, 25), (90.0, 25), "#666666")
+    ax.add_patch(FancyArrowPatch((58.0, 25.0), (90.0, 22.8), arrowstyle="-", lw=0.7, color="#666666"))
+
+    # Branch outputs and shared head convention.
+    box(8, 2.5, 34, 6.0, "Classifier head", r"LayerNorm → $\frac{1}{L}\sum_i h_i$ → Linear(192 → 2)", C["bg"], a_edge)
+    box(58, 2.5, 34, 6.0, "Classifier head", r"LayerNorm → $\frac{1}{L}\sum_i h_i$ → Linear(192 → 2)", C["bg"], b_edge)
+    arrow(ax, (25, 9), (25, 8.7), "#666666")
+    arrow(ax, (75, 9), (75, 8.7), "#666666")
     save(fig, "fig_ssm_architecture.png")
     plt.close(fig)
 
@@ -352,11 +377,11 @@ def fig_domain(frozen: dict):
         hatch="...",
     )
     ax.axhline(0.5, color=C["rule"], ls="--", lw=1, zorder=0)
-    ax.set_ylim(0.55, 1.05)
+    ax.set_ylim(0.55, 1.02)
     ax.set_xticks(x)
     ax.set_xticklabels(names, rotation=18, ha="right")
     ax.set_ylabel("Within-ID AUC", fontsize=10.5)
-    ax.set_title("Content-domain gap on the ID test split", loc="left", fontweight="semibold")
+    ax.set_title("Content-domain gap on the ID test split (y-axis: 0.55–1.02)", loc="left", fontweight="semibold")
     ax.legend(frameon=True, fancybox=False, edgecolor=C["rule"], loc="lower left")
     ax.grid(True, axis="y", alpha=0.22, color=C["rule"])
     for spine in ("top", "right"):
@@ -375,16 +400,6 @@ def fig_domain(frozen: dict):
             color=C["muted"],
         )
 
-    ax.text(
-        0.98,
-        0.98,
-        "Hatching aids grayscale print; bedroom separates models",
-        transform=ax.transAxes,
-        ha="right",
-        va="top",
-        fontsize=7.8,
-        color=C["muted"],
-    )
     fig.tight_layout()
     save(fig, "fig_domain_gap.png")
     plt.close(fig)
@@ -424,7 +439,7 @@ def fig_heatmap(pkg: dict):
                 ha="center",
                 va="center",
                 fontsize=8.0,
-                color="white" if val < 0.62 or val > 0.82 else C["ink"],
+                color="white" if val >= 0.74 else C["ink"],
                 fontweight="semibold" if j == 0 else "regular",
             )
 

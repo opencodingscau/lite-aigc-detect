@@ -49,21 +49,26 @@ def load_npz(path: Path):
 
 
 def auc_safe(y: np.ndarray, p: np.ndarray) -> float:
+    """Tie-aware binary ROC AUC without requiring scikit-learn."""
     y = np.asarray(y).astype(int)
     p = np.asarray(p).astype(float)
     if len(np.unique(y)) < 2:
         return float("nan")
-    order = np.argsort(-p)
-    y_s = y[order]
     n_pos = float((y == 1).sum())
     n_neg = float((y == 0).sum())
     if n_pos == 0 or n_neg == 0:
         return float("nan")
-    tps = np.cumsum(y_s == 1)
-    fps = np.cumsum(y_s == 0)
-    tpr = np.concatenate([[0.0], tps / n_pos, [1.0]])
-    fpr = np.concatenate([[0.0], fps / n_neg, [1.0]])
-    return float(np.trapz(tpr, fpr))
+    order = np.argsort(p, kind="mergesort")
+    sorted_p = p[order]
+    ranks = np.empty(len(p), dtype=float)
+    start = 0
+    while start < len(p):
+        end = start + 1
+        while end < len(p) and sorted_p[end] == sorted_p[start]:
+            end += 1
+        ranks[order[start:end]] = (start + 1 + end) / 2.0
+        start = end
+    return float((ranks[y == 1].sum() - n_pos * (n_pos + 1) / 2.0) / (n_pos * n_neg))
 
 
 def thresholds() -> dict[str, float]:
@@ -190,10 +195,13 @@ def main():
     fig, ax = plt.subplots(figsize=(8.2, 3.6))
     ax.bar(range(len(names)), macros, color=colors, edgecolor="white", linewidth=0.4)
     ax.axhline(singles["LiteSSM-A"]["ufd_macro"], color="#0F766E", ls="--", lw=1.2, label="LiteSSM-A")
+    ax.axvline(5.5, color="#D6D3D1", lw=0.9, zorder=0)
+    ax.text(2.5, 0.742, "Single models", ha="center", va="bottom", fontsize=8.2, color="#57534E")
+    ax.text(7.5, 0.742, "Fixed equal-weight ensembles", ha="center", va="bottom", fontsize=8.2, color="#57534E")
     ax.set_xticks(range(len(names)))
     ax.set_xticklabels(names, rotation=28, ha="right")
     ax.set_ylabel("UFD Macro AUC")
-    ax.set_ylim(0.60, 0.74)
+    ax.set_ylim(0.60, 0.75)
     ax.set_title("Panel A singles vs probability-mean ensembles (frozen preds)")
     ax.legend(frameon=False, loc="upper right")
     ax.spines["top"].set_visible(False)

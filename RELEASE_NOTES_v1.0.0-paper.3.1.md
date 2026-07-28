@@ -1,4 +1,4 @@
-﻿# Release v1.0.0-paper.3.1
+# Release v1.0.0-paper.3.1
 
 YAML-safe `CITATION.cff` fix for Zenodo archival (paper.3 content).
 

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
 
-ROOT = Path(r"E:\sciencecre\aigc_datasets\lite-aigc-detect")
+ROOT = Path(__file__).resolve().parents[1]
 ASSETS = Path(r"E:\sciencecre\aigc_datasets\formal\_paper_assets")
 OUT_DIRS = [ROOT / "latex" / "figures", ROOT / "freeze" / "figures"]
 DOCS = ROOT / "docs"
@@ -354,7 +354,6 @@ def fig_jpeg_forest():
     ax.grid(True, axis="x", alpha=0.25, color=C["rule"])
     for spine in ("top", "right"):
         ax.spines[spine].set_visible(False)
-    ax.text(0.98, 0.05, "All CIs include or hug zero; no frequency-specific robustness win", transform=ax.transAxes, ha="right", fontsize=7.5, color=C["muted"])
     fig.tight_layout()
     save(fig, "fig_jpeg_delta_forest.png")
     plt.close(fig)
@@ -363,13 +362,14 @@ def fig_jpeg_forest():
 def fig_dalle_diagnostic():
     # Panel A models + NPR
     specs = [
-        ("mobilemamba_lite", "npz", C["ssm"]),
-        ("efficientnet_b0", "npz", C["cnn"]),
-        ("npr", "jsonl", C["ref"]),
+        ("mobilemamba_lite", "npz"),
+        ("efficientnet_b0", "npz"),
+        ("npr", "jsonl"),
     ]
+    real_color, fake_color = "#64748B", C["ssm"]
     sources = [("ufd_dalle", "DALL·E"), ("ufd_glide_100_10", "Glide 100/10")]
     fig, axes = plt.subplots(len(specs), len(sources), figsize=(9.8, 7.2), sharex=False, sharey=False)
-    for r, (key, kind, col) in enumerate(specs):
+    for r, (key, kind) in enumerate(specs):
         if kind == "npz":
             probs, labels, src = load_npz(ASSETS / "preds" / f"{key}__ufd.npz")
         else:
@@ -379,8 +379,8 @@ def fig_dalle_diagnostic():
             m = src == scode
             pr, lab = probs[m], labels[m]
             # histograms of scores for real/fake
-            ax.hist(pr[lab == 0], bins=20, range=(0, 1), alpha=0.55, color="#64748B", label="real", density=True)
-            ax.hist(pr[lab == 1], bins=20, range=(0, 1), alpha=0.55, color=col, label="fake", density=True)
+            ax.hist(pr[lab == 0], bins=20, range=(0, 1), alpha=0.55, color=real_color, label="real", density=True)
+            ax.hist(pr[lab == 1], bins=20, range=(0, 1), alpha=0.55, color=fake_color, label="fake", density=True)
             ax.set_xlim(0, 1)
             if r == 0:
                 ax.set_title(stitle, fontweight="semibold")

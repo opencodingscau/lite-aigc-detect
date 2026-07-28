@@ -117,7 +117,7 @@ $^{1}$ \quad College of Software Engineering, South China Agricultural Universit
 
 \informedconsent{Not applicable.}
 
-\dataavailability{Original images come from public datasets (DiffusionForensics; UniversalFakeDetect) and must be obtained from their providers under the original licenses; we do not redistribute raw third-party images. Frozen manifests (sample IDs and paths), SHA256 digests, prediction/efficiency summaries, table-regeneration scripts, and the Appendix~\ref{app:ensemble} ensemble script (\texttt{scripts/run\_ensemble\_panel\_a.py}) are available at \url{https://github.com/opencodingscau/lite-aigc-detect} (release \texttt{v1.0.0-paper.3.1}) and archived at Zenodo with version DOI \url{https://doi.org/10.5281/zenodo.21643045} (concept DOI \url{https://doi.org/10.5281/zenodo.21604044}). Panel~A self-trained checkpoints follow \texttt{checkpoints/README.md} and are redistributed only when training-data licenses permit; Panel~B detectors (UnivFD, NPR) must be obtained from their official releases. The unmatched FLUX exploratory subset is documented in Appendix~\ref{app:flux}; redistribution follows the same license constraints as the source real pool and FLUX model terms.}
+\dataavailability{Original images come from public datasets (DiffusionForensics; UniversalFakeDetect) and must be obtained from their providers under the original licenses; we do not redistribute raw third-party images. Frozen manifests (sample IDs and paths), SHA256 digests, prediction/efficiency summaries, table-regeneration scripts, and the Appendix~\ref{app:ensemble} ensemble script (\texttt{scripts/run\_ensemble\_panel\_a.py}) are available at \url{https://github.com/opencodingscau/lite-aigc-detect} (release \texttt{v1.0.0}) and archived at Zenodo (concept DOI \url{https://doi.org/10.5281/zenodo.21604044}). Panel~A self-trained checkpoints follow \texttt{checkpoints/README.md} and are redistributed only when training-data licenses permit; Panel~B detectors (UnivFD, NPR) must be obtained from their official releases. The unmatched FLUX exploratory subset is documented in Appendix~\ref{app:flux}; redistribution follows the same license constraints as the source real pool and FLUX model terms.}
 
 \acknowledgments{The author thanks the maintainers of the publicly released datasets and reference detectors used in this study.}
 
@@ -148,8 +148,32 @@ UFD & UniversalFakeDetect\\
 \isAPAandChicago{}{%
 \begin{thebibliography}{999}
 
+\bibitem[Wang et al.(2020)]{wang2020cnn}
+Wang, S.Y.; Wang, O.; Zhang, R.; Owens, A.; Efros, A.A. CNN-generated images are surprisingly easy to spot\ldots for now. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 13--19 June 2020; pp.~8695--8704. https://doi.org/10.1109/CVPR42600.2020.00872.
+
 \bibitem[Tan and Le(2019)]{tan2019efficientnet}
 Tan, M.; Le, Q.V. EfficientNet: Rethinking model scaling for convolutional neural networks. In Proceedings of the 36th International Conference on Machine Learning (ICML), Long Beach, CA, USA, 9--15 June 2019; Proceedings of Machine Learning Research; Vol.~97, pp.~6105--6114. Available online: \url{https://proceedings.mlr.press/v97/tan19a.html} (accessed on 26 July 2026).
+
+\bibitem[Frank et al.(2020)]{frank2020freq}
+Frank, J.; Eisenhofer, T.; Sch{\"o}nherr, L.; Fischer, A.; Kolossa, D.; Holz, T. Leveraging frequency analysis for deep fake image recognition. In Proceedings of the 37th International Conference on Machine Learning (ICML), Virtual Event, 13--18 July 2020; Proceedings of Machine Learning Research; Vol.~119, pp.~3247--3258. Available online: \url{https://proceedings.mlr.press/v119/frank20a.html} (accessed on 26 July 2026).
+
+\bibitem[Ojha et al.(2023)]{ojha2023ufd}
+Ojha, U.; Li, Y.; Lee, Y.J. Towards universal fake image detectors that generalize across generative models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Vancouver, BC, Canada, 18--22 June 2023; pp.~24480--24489. https://doi.org/10.1109/CVPR52729.2023.02345.
+
+\bibitem[Liu et al.(2024)]{liu2024fatformer}
+Liu, H.; Tan, Z.; Tan, C.; Wei, Y.; Wang, J.; Zhao, Y. Forgery-aware adaptive transformer for generalizable synthetic image detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 16--22 June 2024; pp.~10770--10780. https://doi.org/10.1109/CVPR52733.2024.01024.
+
+\bibitem[Wang et al.(2023)]{wang2023dire}
+Wang, Z.; Bao, J.; Zhou, W.; Wang, W.; Hu, H.; Chen, H.; Li, H. DIRE for diffusion-generated image detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), Paris, France, 2--6 October 2023; pp.~22445--22455. https://doi.org/10.1109/ICCV51070.2023.02051.
+
+\bibitem[Zhu et al.(2023)]{zhu2023genimage}
+Zhu, M.; Chen, H.; Yan, Q.; Huang, X.; Lin, G.; Li, W.; Tu, Z.; Hu, H.; Hu, J.; Wang, Y. GenImage: A million-scale benchmark for detecting AI-generated image. In Advances in Neural Information Processing Systems (NeurIPS), New Orleans, LA, USA, 10--16 December 2023; Vol.~36. https://doi.org/10.48550/arXiv.2306.08571.
+
+\bibitem[Chivaran and Ni(2025)]{chivaran2025laid}
+Chivaran, N.; Ni, J. LAID: Lightweight AI-generated image detection in spatial and spectral domains. {\em arXiv} {\bf 2025}, arXiv:2507.05162. https://doi.org/10.48550/arXiv.2507.05162.
+
+\bibitem[Wang et al.(2025)]{wang2025lota}
+Wang, H.; Cheng, R.; Zhang, Y.; Han, C.; Gui, J. LOTA: Bit-planes guided AI-generated image detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), Honolulu, HI, USA, 19--25 October 2025; pp.~17246--17255. https://doi.org/10.1109/ICCV51701.2025.01602.
 
 \bibitem[Howard et al.(2019)]{howard2019mobilenetv3}
 Howard, A.; Sandler, M.; Chu, G.; Chen, L.C.; Chen, B.; Tan, M.; Wang, W.; Zhu, Y.; Pang, R.; Vasudevan, V.; et al. Searching for MobileNetV3. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), Seoul, Republic of Korea, 27 October--2 November 2019; pp.~1314--1324. https://doi.org/10.1109/ICCV.2019.00140.
@@ -157,75 +181,74 @@ Howard, A.; Sandler, M.; Chu, G.; Chen, L.C.; Chen, B.; Tan, M.; Wang, W.; Zhu, 
 \bibitem[Ma et al.(2018)]{ma2018shufflenet}
 Ma, N.; Zhang, X.; Zheng, H.T.; Sun, J. ShuffleNet V2: Practical guidelines for efficient CNN architecture design. In Proceedings of the European Conference on Computer Vision (ECCV), Munich, Germany, 8--14 September 2018; Lecture Notes in Computer Science; Springer: Cham, Switzerland, 2018; Vol.~11218, pp.~122--138. https://doi.org/10.1007/978-3-030-01264-9\_8.
 
-\bibitem[Ojha et al.(2023)]{ojha2023ufd}
-Ojha, U.; Li, Y.; Lee, Y.J. Towards universal fake image detectors that generalize across generative models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Vancouver, BC, Canada, 18--22 June 2023; pp.~24480--24489. https://doi.org/10.1109/CVPR52729.2023.02345.
-
-\bibitem[Wang et al.(2020)]{wang2020cnn}
-Wang, S.Y.; Wang, O.; Zhang, R.; Owens, A.; Efros, A.A. CNN-generated images are surprisingly easy to spot\ldots for now. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 13--19 June 2020; pp.~8695--8704. https://doi.org/10.1109/CVPR42600.2020.00872.
-
-\bibitem[Frank et al.(2020)]{frank2020freq}
-Frank, J.; Eisenhofer, T.; Sch{\"o}nherr, L.; Fischer, A.; Kolossa, D.; Holz, T. Leveraging frequency analysis for deep fake image recognition. In Proceedings of the 37th International Conference on Machine Learning (ICML), Virtual Event, 13--18 July 2020; Proceedings of Machine Learning Research; Vol.~119, pp.~3247--3258. Available online: \url{https://proceedings.mlr.press/v119/frank20a.html} (accessed on 26 July 2026).
-
-\bibitem[Gu and Dao(2023)]{gu2023mamba}
-Gu, A.; Dao, T. Mamba: Linear-time sequence modeling with selective state spaces. {\em arXiv} {\bf 2023}, arXiv:2312.00752. https://doi.org/10.48550/arXiv.2312.00752.
-
 \bibitem[Tan et al.(2024)]{tan2024npr}
-Tan, C.; Zhao, Y.; Wei, S.; Gu, G.; Liu, P.; Wei, Y. Rethinking the up-sampling operations in CNN-based generative network for generalizable deepfake detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 16--22 June 2024; pp.~28130--28139. https://doi.org/10.1109/CVPR52733.2024.02657.
-
-\bibitem[Wang et al.(2023)]{wang2023dire}
-Wang, Z.; Bao, J.; Zhou, W.; Wang, W.; Hu, H.; Chen, H.; Li, H. DIRE for diffusion-generated image detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), Paris, France, 2--6 October 2023; pp.~22445--22455. https://doi.org/10.1109/ICCV51070.2023.02051.
-
-\bibitem[Corvi et al.(2023)]{corvi2023diffusion}
-Corvi, R.; Cozzolino, D.; Zingarini, G.; Poggi, G.; Nagano, K.; Verdoliva, L. On the detection of synthetic images generated by diffusion models. In Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Rhodes Island, Greece, 4--10 June 2023; pp.~1--5. https://doi.org/10.1109/ICASSP49357.2023.10095167.
+Tan, C.; Liu, H.; Zhao, Y.; Wei, S.; Gu, G.; Liu, P.; Wei, Y. Rethinking the up-sampling operations in CNN-based generative network for generalizable deepfake detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 16--22 June 2024; pp.~28130--28139. https://doi.org/10.1109/CVPR52733.2024.02657.
 
 \bibitem[Black Forest Labs(2024)]{flux2024}
 Black Forest Labs. FLUX. Available online: \url{https://github.com/black-forest-labs/flux} (accessed on 26 July 2026).
 
-\bibitem[Zhu et al.(2023)]{zhu2023genimage}
-Zhu, M.; Chen, H.; Yan, Q.; Huang, X.; Lin, G.; Li, W.; Tu, Z.; Hu, H.; Hu, J.; Wang, Y. GenImage: A million-scale benchmark for detecting AI-generated image. In Advances in Neural Information Processing Systems (NeurIPS), New Orleans, LA, USA, 10--16 December 2023; Vol.~36. https://doi.org/10.48550/arXiv.2306.08571.
-
-\bibitem[Liu et al.(2024)]{liu2024fatformer}
-Liu, H.; Tan, Z.; Tan, C.; Wei, Y.; Wang, J.; Zhao, Y. Forgery-aware adaptive transformer for generalizable synthetic image detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 16--22 June 2024; pp.~10770--10780. https://doi.org/10.1109/CVPR52733.2024.01024.
-
-\bibitem[Zhang et al.(2025)]{zhang2025vib}
-Zhang, H.; He, Q.; Bi, X.; Li, W.; Liu, B.; Xiao, B. Towards universal AI-generated image detection by variational information bottleneck network. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~23828--23837.
-
-\bibitem[Cheng et al.(2025)]{cheng2025cospy}
-Cheng, S.; Lyu, L.; Wang, Z.; Zhang, X.; Sehwag, V. CO-SPY: Combining semantic and pixel features to detect synthetic images by AI. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~13455--13465.
-
-\bibitem[Zhong et al.(2025)]{zhong2025beyond}
-Zhong, N.; Chen, H.; Xu, Y.; Qian, Z.; Zhang, X. Beyond generation: A diffusion-based low-level feature extractor for detecting AI-generated images. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~8258--8268.
-
-\bibitem[Chivaran and Ni(2025)]{chivaran2025laid}
-Chivaran, N.; Ni, J. LAID: Lightweight AI-generated image detection in spatial and spectral domains. {\em arXiv} {\bf 2025}, arXiv:2507.05162. https://doi.org/10.48550/arXiv.2507.05162.
-
-\bibitem[Wang et al.(2025)]{wang2025lota}
-Wang, H.; Cheng, R.; Zhang, Y.; Han, C.; Gui, J. LOTA: Bit-planes guided AI-generated image detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), Honolulu, HI, USA, 19--25 October 2025; pp.~17246--17255.
-
-\bibitem[Zhu et al.(2024)]{zhu2024vim}
-Zhu, L.; Liao, B.; Zhang, Q.; Wang, X.; Liu, W.; Wang, X. Vision Mamba: Efficient visual representation learning with bidirectional state space model. In Proceedings of the 41st International Conference on Machine Learning (ICML), Vienna, Austria, 21--27 July 2024; Proceedings of Machine Learning Research; Vol.~235, pp.~62429--62442. Available online: \url{https://proceedings.mlr.press/v235/zhu24f.html} (accessed on 26 July 2026).
-
-\bibitem[Cinar and Dogan(2025)]{cinar2025pvism}
-Cinar, O.; Dogan, Y. Novel deepfake image detection with PV-ISM: Patch-based Vision Transformer for identifying synthetic media. {\em Appl.\ Sci.} {\bf 2025}, {\em 15}, 6429. https://doi.org/10.3390/app15126429.
-
-\bibitem[Lokner Ladevic et al.(2024)]{lokner2024lightweight}
-Lokner Ladevic, A.; Kramberger, T.; Kovacevic, R.; Vlahek, D. Detection of AI-generated synthetic images with a lightweight CNN. {\em AI} {\bf 2024}, {\em 5}, 1575--1593. https://doi.org/10.3390/ai5030076.
-
-\bibitem[Man et al.(2026)]{man2026mdp}
-Man, Q.; Gee, S.J.; Cho, Y.I. Multi-domain perception Transformer for generalized forgery image detection. {\em Appl.\ Sci.} {\bf 2026}, {\em 16}, 533. https://doi.org/10.3390/app16010533.
-
 \bibitem[Durall et al.(2020)]{durall2020watch}
 Durall, R.; Keuper, M.; Keuper, J. Watch your up-convolution: CNN based generative deep neural networks are failing to reproduce spectral distributions. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 13--19 June 2020; pp.~7890--7899. https://doi.org/10.1109/CVPR42600.2020.00792.
+
+\bibitem[Corvi et al.(2023)]{corvi2023diffusion}
+Corvi, R.; Cozzolino, D.; Zingarini, G.; Poggi, G.; Nagano, K.; Verdoliva, L. On the detection of synthetic images generated by diffusion models. In Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Rhodes Island, Greece, 4--10 June 2023; pp.~1--5. https://doi.org/10.1109/ICASSP49357.2023.10095167.
+
+\bibitem[Zhang et al.(2025)]{zhang2025vib}
+Zhang, H.; He, Q.; Bi, X.; Li, W.; Liu, B.; Xiao, B. Towards universal AI-generated image detection by variational information bottleneck network. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~23828--23837. https://doi.org/10.1109/CVPR52734.2025.02219.
+
+\bibitem[Cheng et al.(2025)]{cheng2025cospy}
+Cheng, S.; Lyu, L.; Wang, Z.; Zhang, X.; Sehwag, V. CO-SPY: Combining semantic and pixel features to detect synthetic images by AI. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~13455--13465. https://doi.org/10.1109/CVPR52734.2025.01256.
+
+\bibitem[Zhong et al.(2025)]{zhong2025beyond}
+Zhong, N.; Chen, H.; Xu, Y.; Qian, Z.; Zhang, X. Beyond generation: A diffusion-based low-level feature extractor for detecting AI-generated images. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~8258--8268. https://doi.org/10.1109/CVPR52734.2025.00773.
+
+\bibitem[Guillaro et al.(2025)]{guillaro2025bfree}
+Guillaro, F.; Zingarini, G.; Usman, B.; Sud, A.; Cozzolino, D.; Verdoliva, L. A bias-free training paradigm for more general AI-generated image detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~18685--18694. https://doi.org/10.1109/CVPR52734.2025.01741.
+
+\bibitem[Ricker et al.(2024)]{ricker2024aeroblade}
+Ricker, J.; Lukovnikov, D.; Fischer, A. AEROBLADE: Training-free detection of latent diffusion images using autoencoder reconstruction error. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Seattle, WA, USA, 17--21 June 2024; pp.~9130--9140. https://doi.org/10.1109/CVPR52733.2024.00872.
 
 \bibitem[Bird and Lotfi(2024)]{bird2024cifake}
 Bird, J.J.; Lotfi, A. CIFAKE: Image classification and explainable identification of AI-generated synthetic images. {\em IEEE Access} {\bf 2024}, {\em 12}, 15642--15650. https://doi.org/10.1109/ACCESS.2024.3356122.
 
-\bibitem[Guillaro et al.(2025)]{guillaro2025bfree}
-Guillaro, F.; Zingarini, G.; Usman, B.; Sud, A.; Cozzolino, D.; Verdoliva, L. A bias-free training paradigm for more general AI-generated image detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Nashville, TN, USA, 11--15 June 2025; pp.~18685--18694.
+\bibitem[Lokner Ladevic et al.(2024)]{lokner2024lightweight}
+Lokner La{\dj}evi{\'c}, A.; Kramberger, T.; Kramberger, R.; Vlahek, D. Detection of AI-generated synthetic images with a lightweight CNN. {\em AI} {\bf 2024}, {\em 5}, 1575--1593. https://doi.org/10.3390/ai5030076.
+
+\bibitem[Cinar and Dogan(2025)]{cinar2025pvism}
+Cinar, O.; Dogan, Y. Novel deepfake image detection with PV-ISM: Patch-based Vision Transformer for identifying synthetic media. {\em Appl.\ Sci.} {\bf 2025}, {\em 15}, 6429. https://doi.org/10.3390/app15126429.
+
+\bibitem[Man et al.(2026)]{man2026mdp}
+Man, Q.; Gee, S.J.; Cho, Y.I. Multi-domain perception Transformer for generalized forgery image detection. {\em Appl.\ Sci.} {\bf 2026}, {\em 16}, 533. https://doi.org/10.3390/app16010533.
+
+\bibitem[Gu and Dao(2023)]{gu2023mamba}
+Gu, A.; Dao, T. Mamba: Linear-time sequence modeling with selective state spaces. {\em arXiv} {\bf 2023}, arXiv:2312.00752. https://doi.org/10.48550/arXiv.2312.00752.
+
+\bibitem[Zhu et al.(2024)]{zhu2024vim}
+Zhu, L.; Liao, B.; Zhang, Q.; Wang, X.; Liu, W.; Wang, X. Vision Mamba: Efficient visual representation learning with bidirectional state space model. In Proceedings of the 41st International Conference on Machine Learning (ICML), Vienna, Austria, 21--27 July 2024; Proceedings of Machine Learning Research; Vol.~235, pp.~62429--62442. Available online: \url{https://proceedings.mlr.press/v235/zhu24f.html} (accessed on 26 July 2026).
 
 \bibitem[Liu et al.(2024b)]{liu2024vmamba}
-Liu, Y.; Tian, Y.; Zhao, Y.; Yu, H.; Xie, L.; Wang, Y.; Ye, Q.; Jiao, J.; Liu, Y. VMamba: Visual state space model. In Advances in Neural Information Processing Systems (NeurIPS), Vancouver, BC, Canada, 10--15 December 2024; Vol.~37.
+Liu, Y.; Tian, Y.; Zhao, Y.; Yu, H.; Xie, L.; Wang, Y.; Ye, Q.; Jiao, J.; Liu, Y. VMamba: Visual state space model. In Advances in Neural Information Processing Systems (NeurIPS), Vancouver, BC, Canada, 10--15 December 2024; Vol.~37. https://doi.org/10.48550/arXiv.2401.10166.
 
+\bibitem[Karras et al.(2018)]{karras2018progan}
+Karras, T.; Aila, T.; Laine, S.; Lehtinen, J. Progressive growing of GANs for improved quality, stability, and variation. In Proceedings of the International Conference on Learning Representations (ICLR), Vancouver, BC, Canada, 30 April--3 May 2018. https://doi.org/10.48550/arXiv.1710.10196.
+
+\bibitem[Dhariwal and Nichol(2021)]{dhariwal2021adm}
+Dhariwal, P.; Nichol, A. Diffusion models beat GANs on image synthesis. In Advances in Neural Information Processing Systems (NeurIPS), 2021; Vol.~34, pp.~8780--8794. https://doi.org/10.48550/arXiv.2105.05233.
+
+\bibitem[Rombach et al.(2022)]{rombach2022ldm}
+Rombach, R.; Blattmann, A.; Lorenz, D.; Esser, P.; Ommer, B. High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), New Orleans, LA, USA, 18--24 June 2022; pp.~10684--10695. https://doi.org/10.1109/CVPR52688.2022.01042.
+
+\bibitem[Radford et al.(2021)]{radford2021clip}
+Radford, A.; Kim, J.W.; Hallacy, C.; Ramesh, A.; Goh, G.; Agarwal, S.; Sastry, G.; Askell, A.; Mishkin, P.; Clark, J.; et al. Learning transferable visual models from natural language supervision. In Proceedings of the 38th International Conference on Machine Learning (ICML), Virtual Event, 18--24 July 2021; Proceedings of Machine Learning Research; Vol.~139, pp.~8748--8763. https://doi.org/10.48550/arXiv.2103.00020.
+
+\bibitem[Youden(1950)]{youden1950}
+Youden, W.J. Index for rating diagnostic tests. {\em Cancer} {\bf 1950}, {\em 3}, 32--35. Available online: \url{https://doi.org/10.1002/1097-0142(1950)3:1<32::AID-CNCR2820030106>3.0.CO;2-3}.
+
+\bibitem[Cohen(1960)]{cohen1960}
+Cohen, J. A coefficient of agreement for nominal scales. {\em Educational and Psychological Measurement} {\bf 1960}, {\em 20}, 37--46. https://doi.org/10.1177/001316446002000104.
+
+\bibitem[Kuncheva and Whitaker(2003)]{kuncheva2003}
+Kuncheva, L.I.; Whitaker, C.J. Measures of diversity in classifier ensembles and their relationship with the ensemble accuracy. {\em Machine Learning} {\bf 2003}, {\em 51}, 181--207. https://doi.org/10.1023/A:1022859003006.
 \end{thebibliography}
 }
 

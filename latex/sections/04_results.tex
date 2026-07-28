@@ -1,4 +1,4 @@
-Unless otherwise noted, point estimates include percentile bootstrap 95\% CIs ($B=1000$, seed~42) from the frozen prediction package.
+Unless otherwise noted, point estimates are accompanied by percentile bootstrap 95\% CIs ($B=1000$, seed~42) from the frozen prediction package.
 The \textbf{primary} cross-generator metric is \textbf{UFD Macro AUC}; \textbf{OOD Pooled AUC} is supplementary only.
 
 \subsection{Overall In-Distribution and Out-of-Distribution Performance}
@@ -16,14 +16,16 @@ Under \textbf{UFD Macro AUC}, LiteSSM-A ranked first in Panel~A at \textbf{0.718
 Among CNN baselines, ShuffleNetV2-x0.5 reached \textbf{0.674}, EfficientNet-B0 \textbf{0.667}, LiteFreqNet~v2 \textbf{0.645}, and MobileNetV3-Small \textbf{0.636}.
 Worst-generator AUC remained near chance for every Panel~A model (\textbf{0.451--0.519}), always corresponding to DALL·E (Section~\ref{sec:ufd}).
 
-Panel~B references attain substantially higher UFD Macro (UnivFD \textbf{0.948}; NPR \textbf{0.976}) using large-scale CLIP pretraining or official artifact-training releases; these numbers contextualize absolute room for improvement and are \emph{not} ranked against Panel~A under a shared training protocol.
+Panel~B reaches higher UFD Macro values (UnivFD \textbf{0.948}; NPR \textbf{0.976}) under pretrained or externally released training paradigms.
+These results are reported separately because their training settings differ from Panel~A.
 
 \begin{table}[H]
 \caption{Panel~A: controlled compact models trained under our frozen from-scratch protocol.
 Efficiency numbers are from one locked RTX~4090D session (PyTorch~2.3, CUDA~12.1, FP32): batch-1 latency with $\ge$50 warmup / 500 timed iterations and CUDA synchronize (model-only; p50 shown); Thr@32 is images/s at batch size~32 in the same session.
-CI intervals are 95\% bootstrap intervals for ID and UFD Macro.\label{tab:overall}}
-\scriptsize
-\setlength{\tabcolsep}{3.2pt}
+Point estimates are shown; percentile bootstrap 95\% CIs for ID and UFD Macro are reported in the accompanying text.
+UFD Macro is the equal-weight mean across the eight UFD subsets; Worst is the minimum subset AUC.\label{tab:overall}}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
 \begin{tabularx}{\textwidth}{@{}P{2.15cm}c*{7}{R}@{}}
 \toprule
 \textbf{Model} & \textbf{Arch} & \textbf{Params} & \textbf{FLOPs} & \textbf{B1 p50} & \textbf{Thr@32} & \textbf{ID} & \textbf{UFD} & \textbf{Worst} \\
@@ -41,8 +43,9 @@ ShuffleNet-x0.5 & CNN & 0.344 & 0.044 & 6.21 & 4817 & 0.880 & 0.674 & 0.467 \\
 
 \begin{table}[H]
 \caption{Panel~B: external pretrained reference detectors (inference-only).
-Public weights and native preprocessing; not training-matched competitors.\label{tab:external}}
-\scriptsize
+Public weights and native preprocessing; not training-matched competitors.
+Batch-1 latency is descriptive only and is not used for a speed ranking against Panel~A.\label{tab:external}}
+\footnotesize
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\textwidth}{@{}P{1.7cm}L*{4}{R}@{}}
 \toprule
@@ -84,6 +87,7 @@ Marker size scales with Params; LiteSSM-A is the preferred Panel~A operating poi
 \caption{Operating metrics at a fixed decision threshold.
 For Panel~A, the threshold is fitted on the validation set by Youden's $J$ and applied unchanged to ID test and UFD (pooled).
 For Panel~B references we report a fixed score threshold of $0.5$ (not recipe-matched Youden).
+The three Panel~A rows represent the highest-UFD-Macro model (LiteSSM-A), the strongest CNN baseline (EfficientNet-B0), and the frequency-aware model (LiteFreqNet~v2); all retained thresholds are archived with the freeze.
 Balanced Acc.\ $=$ $(\mathrm{Sensitivity}+\mathrm{Specificity})/2$.\label{tab:operate}}
 \scriptsize
 \setlength{\tabcolsep}{3.2pt}
@@ -105,15 +109,15 @@ UnivFD (ref) & UFD pooled & 0.50 & 0.818 & 0.781 & 0.650 & 0.986 \\
 \end{tabularx}
 \end{table}
 
-Figure~\ref{fig:confusion} reports absolute confusion counts for LiteSSM-A at the locked Youden threshold ($0.43$).
+Figure~\ref{fig:confusion} reports confusion counts and within-class rates for LiteSSM-A at the locked Youden threshold ($0.43$).
 On ID test the operating point yields TN$=$161, FP$=$39, FN$=$16, TP$=$184 ($n{=}400$); on UFD pooled the same threshold yields TN$=$2748, FP$=$452, FN$=$1619, TP$=$1581 ($n{=}6400$), making the elevated false-negative mass under generator shift explicit.
 Appendix~\ref{app:diagnostics} further shows ID threshold sweeps around these operating points and seed-42 training dynamics.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/fig_confusion_litesm_a.png}
-\caption{Confusion counts for LiteSSM-A at the validation Youden threshold ($0.43$) applied unchanged to ID test and UFD (pooled).
-Cells report absolute counts (TN/FP/FN/TP) so that sample scale is visible; color scales are panel-wise.\label{fig:confusion}}
+\caption{Confusion matrices for LiteSSM-A at the validation Youden threshold ($0.43$) applied unchanged to ID test and UFD (pooled).
+Cells report absolute counts (TN/FP/FN/TP) and row-normalized rates; both panels use the same $[0,1]$ color scale.\label{fig:confusion}}
 \end{figure}
 
 \subsection{Within-ID Performance by Content Domain}
@@ -129,7 +133,8 @@ Figure~\ref{fig:qual-bedroom} provides qualitative bedroom examples selected by 
 \centering
 \includegraphics[width=0.95\textwidth]{figures/fig_domain_gap.png}
 \caption{Within-ID AUCs by content domain.
-CelebA-HQ is near saturation for all Panel~A models; bedroom AUC is the discriminative axis.\label{fig:domain}}
+CelebA-HQ is near saturation for all Panel~A models; bedroom AUC is the discriminative axis.
+The displayed $y$-axis is restricted to $[0.55,1.02]$ to resolve the bedroom differences.\label{fig:domain}}
 \end{figure}
 
 \begin{figure}[H]
@@ -214,19 +219,12 @@ NPR~\cite{tan2024npr} & 0.990 & 0.995 & 0.995 & 0.996 & 0.837 & 0.999 & 0.998 & 
 The outlined DALL·E column remains near chance for every training-matched compact model.\label{fig:heatmap}}
 \end{figure}
 
-Figure~\ref{fig:dalle-diag} diagnoses the DALL·E failure at the score level.
+Appendix~\ref{app:diagnostics} reports score distributions for the DALL·E failure.
 On Glide$_{100,10}$, Panel~A fake/real score mass separates; on DALL·E the two classes largely overlap for LiteSSM-A and EfficientNet-B0, whereas NPR retains clear separation.
 Figure~\ref{fig:qual-ufd} shows the same contrast with real images: DALL·E fakes nearest to $p{=}0.5$ for LiteSSM-A (NPR still near $1.0$) versus high-confidence Glide$_{100,10}$ detections.
 Pairwise Panel~A decision agreement (Cohen's $\kappa$) is reported in Appendix~\ref{app:diagnostics}.
 Probability-mean ensembles of the same frozen predictions are reported in Appendix~\ref{app:ensemble}; none exceeds LiteSSM-A on UFD Macro.
 A full causal diagnosis would require matched acquisition metadata and spectral decomposition; the present evidence establishes a protocol-level boundary rather than a mechanistic explanation.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/fig_dalle_score_diag.png}
-\caption{Score distributions on UFD DALL·E versus Glide$_{100,10}$ for LiteSSM-A, EfficientNet-B0, and NPR (ref).
-Panel~A overlap on DALL·E explains near-chance AUCs; NPR remains separated under a different training paradigm.\label{fig:dalle-diag}}
-\end{figure}
 
 \begin{figure}[H]
 \centering

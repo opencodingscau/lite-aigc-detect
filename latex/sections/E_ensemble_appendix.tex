@@ -36,22 +36,25 @@ $E_{\mathrm{A+B}}$ mean & 0.948 & 0.713 & 0.495 & 0.495 \\
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig_ensemble_ufd_macro.png}
 \caption{UFD Macro AUC for Panel~A singles and probability-mean ensembles computed from frozen prediction files.
-No ensemble exceeds LiteSSM-A (dashed teal).\label{fig:ensemble}}
+The left group contains single models and the right group fixed equal-weight ensembles; no ensemble exceeds LiteSSM-A (dashed teal).\label{fig:ensemble}}
 \end{figure}
 
 \noindent\textbf{Reading.}
 No probability-mean ensemble exceeds LiteSSM-A on UFD Macro (best ensemble Macro $0.713$ vs.\ $0.718$).
 $E_{\mathrm{A+Eff}}$ raises DALL·E/Worst to $0.524$ but still loses Macro, confirming that averaging complementary singles does not automatically repair generator-macro collapse.
+Double-fault and related diversity measures quantify the extent to which classifiers share failures~\cite{kuncheva2003}.
 Double-fault rates versus LiteSSM-A on UFD remain substantial (e.g., error Jaccard $\approx$0.55--0.70 with other Panel~A models in \texttt{docs/ensemble\_panel\_a.json}), consistent with Appendix~\ref{app:diagnostics} $\kappa$ heatmaps: many failures are shared protocol-level blind spots rather than orthogonal errors that ensembles can cancel.
 
 \subsection{Exploratory Matched-Generator Adaptation (Post-Freeze Probe)}
 \label{app:m1v2}
 
-After locking the Panel~A protocol, we ran an exploratory matched-generator adaptation probe (M1/M1-v2) outside the paper freeze: CE training on modern FLUX/SDXL images with an ID-anchor KL term, selected by \texttt{fixed\_last} without UFD hyperparameter search.
+After locking the Panel~A protocol, we ran an exploratory matched-generator adaptation probe outside the paper freeze.
+M1 denotes the Phase-0 CE-plus-ID-anchor run; M1-v2 extends it with FLUX/SDXL training images and uses \texttt{fixed\_last} selection without UFD hyperparameter search.
 Table~\ref{tab:m1v2-app} summarizes descriptive AUCs.
 
 \begin{table}[H]
-\caption{Exploratory matched-generator adaptation (not a Panel~A main-table method; selection forbidden on UFD and on held-out SD3.5).\label{tab:m1v2-app}}
+\caption{Exploratory matched-generator adaptation (not a Panel~A main-table method; selection forbidden on UFD and on held-out SD3.5).
+An em dash denotes that the held-out SD3.5 probe was not evaluated for that run.\label{tab:m1v2-app}}
 \scriptsize
 \setlength{\tabcolsep}{3.5pt}
 \begin{tabularx}{\textwidth}{@{}L*{5}{R}@{}}

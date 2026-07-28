@@ -1,4 +1,4 @@
-﻿# Submission gates (objective definition)
+# Submission gates (objective definition)
 
 Aligned with the pre-submission plan: scientific evidence is largely frozen;
 remaining work is **auditability**. Do not submit until all boxes below pass.

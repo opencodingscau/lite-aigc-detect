@@ -16,9 +16,11 @@ UFD Macro is the primary cross-generator metric; FLUX is appendix-only.\label{fi
 \subsection{Datasets and Splits}
 
 \paragraph{Training and ID evaluation}
-use DiffusionForensics (DF) images from two content domains present in training: ADM bedroom and Stable Diffusion~v2 CelebA-HQ, each with real and fake folders.
+We use DiffusionForensics (DF) images from two content domains present in training: ADM bedroom and Stable Diffusion~v2 CelebA-HQ, each with real and fake folders~\cite{wang2023dire}.
+CelebA-HQ was introduced as a high-quality face dataset by Karras et al.~\cite{karras2018progan}; the ADM and latent-diffusion / Stable Diffusion generator families are described by Dhariwal and Nichol~\cite{dhariwal2021adm} and Rombach et al.~\cite{rombach2022ldm}, respectively.
 Frozen JSONL manifests (seed \textbf{42}) contain train/val/test/ood splits of sizes \textbf{3200/400/400/5600}.
 No test or OOD image is used for training, validation AUC selection, or threshold fitting.
+The released \texttt{test\_ood.jsonl} preserves the source label and membership of every row in the supplementary pooled set; that set is not used for model selection or as a substitute for UFD Macro.
 Table~\ref{tab:data-comp} summarizes split composition and intended use.
 
 \begin{table}[H]
@@ -125,7 +127,7 @@ Latency/throughput are \textbf{model-only} on synthetic tensors and exclude disk
 
 Every main-table model uses 15 epochs, batch size 64, AdamW ($\mathrm{lr}=10^{-4}$, weight decay $10^{-4}$), CosineAnnealingLR, cross-entropy loss, input size 224, and seed 42 on one NVIDIA GeForce RTX~4090D (PyTorch~2.3).
 After each epoch we keep the checkpoint with the best validation AUC.
-A decision threshold is then fit on validation probabilities by maximizing Youden's $J=\mathrm{TPR}-\mathrm{FPR}$.
+A decision threshold is then fit on validation probabilities by maximizing Youden's $J=\mathrm{TPR}-\mathrm{FPR}$~\cite{youden1950}.
 That validation threshold is applied \emph{unchanged} to the ID test set and to UFD subsets for thresholded operating metrics; thresholds are \emph{not} re-tuned on test or OOD data.
 Primary ranking metrics in this paper remain AUC-based.
 Layer widths and SelectiveSSM state dimensions were chosen in preliminary capacity-constrained pilots to keep Panel~A SSM models below approximately 2.5\,M parameters; no claim of architecture-level optimality is made.
@@ -162,13 +164,14 @@ Protocol details and the unmatched-subset caveat are given in Appendix~\ref{app:
 
 To contextualize Panel~A without breaking the from-scratch fairness claim, we evaluate two publicly released detectors on the same frozen manifests using their native preprocessing and pretrained weights:
 \begin{itemize}
-\item UnivFD (CLIP ViT-L/14 linear probe)~\cite{ojha2023ufd};
+\item UnivFD (CLIP ViT-L/14 linear probe)~\cite{ojha2023ufd}; its visual backbone follows CLIP~\cite{radford2021clip};
 \item NPR (neighboring-pixel-relationship CNN)~\cite{tan2024npr}.
 \end{itemize}
 DIRE~\cite{wang2023dire} is discussed in Related Work only and is not re-run.
 Results form Panel~B and are captioned as references, not training-matched competitors.
+Their reported model-only latency is descriptive only: native preprocessing and training paradigms differ, so Panel~B values are not used for a speed ranking against Panel~A.
 
 \subsection{Implementation Artifacts}
 
 Training/evaluation code, freeze/bootstrap scripts, prediction shards, table exports, and SHA256 digests of manifests/checkpoints/predictions are retained so statistics can be recomputed without retraining.
-Code, frozen summaries, and hashes are released at \url{https://github.com/opencodingscau/lite-aigc-detect} (tag \texttt{v1.0.0-paper.3.1}) and archived on Zenodo (version DOI \url{https://doi.org/10.5281/zenodo.21643045}). Data Availability lists original dataset providers, license limits on redistributing raw images, manifest hashes, and checkpoint policy.
+Code, frozen summaries, and hashes are released at \url{https://github.com/opencodingscau/lite-aigc-detect} (tag \texttt{v1.0.0}) and archived on Zenodo (concept DOI \url{https://doi.org/10.5281/zenodo.21604044}). Data Availability lists original dataset providers, license limits on redistributing raw images, manifest hashes, and checkpoint policy.

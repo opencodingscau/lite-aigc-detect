@@ -1,5 +1,5 @@
-﻿cff-version: 1.2.0
-title: "Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift"
+cff-version: 1.2.0
+title: "Compact AI-Generated Image Detection under Compression and Cross-Generator Shift"
 message: >-
   If you use this software or the frozen table-rebuild package, please cite it
   using these metadata.
@@ -18,18 +18,15 @@ abstract: >-
   as the primary OOD metric and measured batch-1 latency.
 keywords:
   - AI-generated image detection
-  - lightweight neural networks
+  - compact neural networks
   - state-space models
   - reproducible benchmarking
 license: MIT
 repository-code: "https://github.com/opencodingscau/lite-aigc-detect"
-doi: "10.5281/zenodo.21643045"
+doi: "10.5281/zenodo.21604044"
 identifiers:
-  - type: doi
-    value: "10.5281/zenodo.21643045"
-    description: "Zenodo version DOI for GitHub release v1.0.0-paper.3.1"
   - type: doi
     value: "10.5281/zenodo.21604044"
     description: "Zenodo concept DOI (all versions; resolves to latest)"
-version: "v1.0.0-paper.3.1"
-date-released: "2026-07-28"
+version: "v1.0.0"
+date-released: "2026-07-29"

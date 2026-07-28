@@ -2,7 +2,7 @@
   "note": "Computed from frozen formal/_paper_assets preds; equal-weight probability mean; no UFD/test-set weight tuning; does not alter freeze/frozen_numbers.json",
   "singles": {
     "LiteSSM-A": {
-      "id_auc": 0.9462499999999998,
+      "id_auc": 0.94625,
       "ufd_macro": 0.7184390624999999,
       "worst": 0.503675,
       "dalle": 0.503675,
@@ -11,7 +11,7 @@
         "ufd_glide_100_10": 0.8778875,
         "ufd_glide_100_27": 0.85488125,
         "ufd_glide_50_27": 0.88903125,
-        "ufd_guided": 0.7661874999999998,
+        "ufd_guided": 0.7661875,
         "ufd_ldm_100": 0.6562875,
         "ufd_ldm_200": 0.63433125,
         "ufd_ldm_200_cfg": 0.56523125
@@ -20,16 +20,16 @@
     "LiteSSM-B": {
       "id_auc": 0.945125,
       "ufd_macro": 0.6997125,
-      "worst": 0.48349999999999993,
-      "dalle": 0.48349999999999993,
+      "worst": 0.4835,
+      "dalle": 0.4835,
       "by_source": {
-        "ufd_dalle": 0.48349999999999993,
+        "ufd_dalle": 0.4835,
         "ufd_glide_100_10": 0.85945625,
-        "ufd_glide_100_27": 0.8314187500000001,
+        "ufd_glide_100_27": 0.83141875,
         "ufd_glide_50_27": 0.868225,
-        "ufd_guided": 0.7875062500000001,
+        "ufd_guided": 0.78750625,
         "ufd_ldm_100": 0.62225625,
-        "ufd_ldm_200": 0.6107374999999999,
+        "ufd_ldm_200": 0.6107375,
         "ufd_ldm_200_cfg": 0.5346
       }
     },
@@ -40,38 +40,38 @@
       "dalle": 0.518825,
       "by_source": {
         "ufd_dalle": 0.518825,
-        "ufd_glide_100_10": 0.7726062499999999,
+        "ufd_glide_100_10": 0.77260625,
         "ufd_glide_100_27": 0.7819125,
         "ufd_glide_50_27": 0.794775,
         "ufd_guided": 0.72008125,
-        "ufd_ldm_100": 0.6131562500000001,
+        "ufd_ldm_100": 0.61315625,
         "ufd_ldm_200": 0.5769375,
         "ufd_ldm_200_cfg": 0.5568
       }
     },
     "LiteFreqNet v2": {
-      "id_auc": 0.9064000000000001,
+      "id_auc": 0.9064,
       "ufd_macro": 0.6454875,
-      "worst": 0.45130000000000003,
-      "dalle": 0.45130000000000003,
+      "worst": 0.4513,
+      "dalle": 0.4513,
       "by_source": {
-        "ufd_dalle": 0.45130000000000003,
-        "ufd_glide_100_10": 0.7862625000000001,
+        "ufd_dalle": 0.4513,
+        "ufd_glide_100_10": 0.7862625,
         "ufd_glide_100_27": 0.76304375,
-        "ufd_glide_50_27": 0.8084500000000001,
-        "ufd_guided": 0.6781187499999999,
+        "ufd_glide_50_27": 0.80845,
+        "ufd_guided": 0.67811875,
         "ufd_ldm_100": 0.59414375,
         "ufd_ldm_200": 0.55130625,
-        "ufd_ldm_200_cfg": 0.5312749999999999
+        "ufd_ldm_200_cfg": 0.531275
       }
     },
     "MobileNetV3-S": {
       "id_auc": 0.890225,
       "ufd_macro": 0.6356296875,
-      "worst": 0.45465000000000005,
-      "dalle": 0.45465000000000005,
+      "worst": 0.45465,
+      "dalle": 0.45465,
       "by_source": {
-        "ufd_dalle": 0.45465000000000005,
+        "ufd_dalle": 0.45465,
         "ufd_glide_100_10": 0.746125,
         "ufd_glide_100_27": 0.73925,
         "ufd_glide_50_27": 0.7704125,
@@ -82,18 +82,18 @@
       }
     },
     "ShuffleNet-x0.5": {
-      "id_auc": 0.8799250000000001,
-      "ufd_macro": 0.6735249999999999,
-      "worst": 0.46660624999999994,
-      "dalle": 0.46660624999999994,
+      "id_auc": 0.879925,
+      "ufd_macro": 0.673524609375,
+      "worst": 0.46660625,
+      "dalle": 0.46660625,
       "by_source": {
-        "ufd_dalle": 0.46660624999999994,
+        "ufd_dalle": 0.46660625,
         "ufd_glide_100_10": 0.8050625,
         "ufd_glide_100_27": 0.80239375,
-        "ufd_glide_50_27": 0.8351500000000001,
+        "ufd_glide_50_27": 0.83515,
         "ufd_guided": 0.75504375,
         "ufd_ldm_100": 0.6170875,
-        "ufd_ldm_200": 0.57018125,
+        "ufd_ldm_200": 0.570178125,
         "ufd_ldm_200_cfg": 0.536675
       }
     }
@@ -120,8 +120,8 @@
       ],
       "id_auc": 0.94495,
       "ufd_macro": 0.70858515625,
-      "worst": 0.5242687500000001,
-      "dalle": 0.5242687500000001
+      "worst": 0.52426875,
+      "dalle": 0.52426875
     },
     "E_top3_mean": {
       "members": [
@@ -140,7 +140,7 @@
         "LiteSSM-B"
       ],
       "id_auc": 0.948125,
-      "ufd_macro": 0.7128546875000001,
+      "ufd_macro": 0.7128546875,
       "worst": 0.49491875,
       "dalle": 0.49491875
     }

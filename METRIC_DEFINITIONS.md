@@ -31,4 +31,4 @@ LiteFreqNet v2 = 频域机制/消融角色，**不是** JPEG 主方法。
 SOTA / 通杀 / SSM 通用泛化 / LiteFreq JPEG 主贡献 / 正文提 SD3.5 失败 / Deepfake 视频
 
 ## 标题
-Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift: A Reproducible Study of CNN, Frequency-Aware, and State-Space Models
+Compact AI-Generated Image Detection under Compression and Cross-Generator Shift: A Reproducible Study of CNN, Frequency-Aware, and State-Space Models

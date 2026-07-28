@@ -5,22 +5,19 @@ Prior work has explored CNN detectors~\cite{wang2020cnn,tan2019efficientnet}, fr
 Reported gains are often entangled with mismatched training protocols, ImageNet or CLIP initialization, or heterogeneous evaluation sets, which complicates operating-point selection.
 Frequency features are sometimes presented as broadly helpful for diffusion artifacts; likewise, strong ID scores can conceal fragile transfer to particular generators or content domains~\cite{ojha2023ufd}.
 
-This paper contributes a \emph{protocol-locked empirical study} of compact detectors under a disclosed recipe, rather than a claim of state-of-the-art accuracy or a new compact framework that supersedes LAID/LOTA.
-Under a single no-pretraining recipe, we compare:
+We conduct a controlled, from-scratch comparison of compact detectors under one shared recipe.
+The Panel~A comparison includes:
 \begin{enumerate}
 \item compact CNN baselines (EfficientNet-B0, MobileNetV3-Small, ShuffleNetV2-x0.5)~\cite{tan2019efficientnet,howard2019mobilenetv3,ma2018shufflenet};
 \item a gated frequency-aware CNN (LiteFreqNet~v2) and related ablations;
 \item two study-specific pure-PyTorch SSM classifiers (\textbf{LiteSSM-A} and \textbf{LiteSSM-B}), with and without an attached frequency branch.
 \end{enumerate}
 
-Evaluation covers ID test performance, content-domain splits (CelebA-HQ vs.\ bedroom), UniversalFakeDetect (UFD) per-generator and Macro averages~\cite{ojha2023ufd}, JPEG quality-70 recompression, and measured efficiency (parameters, FLOPs, batch-1 latency, batch-32 throughput).
-External pretrained reference detectors (UnivFD, NPR) are reported in a separate panel for contextualization only~\cite{ojha2023ufd,tan2024npr}.
-An unmatched FLUX probe is deferred to the appendix and is not used for architecture claims~\cite{flux2024}.
-We explicitly separate \textbf{UFD Macro AUC} from \textbf{OOD Pooled AUC} to avoid metric ambiguity, and we phrase transfer claims as \emph{partial, generator-dependent evidence under the evaluated subsets}.
+Evaluation spans ID test performance, content-domain splits (CelebA-HQ vs.\ bedroom), UniversalFakeDetect (UFD) per-generator and Macro averages~\cite{ojha2023ufd}, JPEG quality-70 recompression, and measured efficiency (parameters, FLOPs, batch-1 latency, batch-32 throughput).
+We report pretrained UnivFD and NPR separately for context~\cite{ojha2023ufd,tan2024npr}, use \textbf{UFD Macro AUC} as the primary cross-generator summary, and report the unmatched FLUX probe in Appendix~\ref{app:flux}~\cite{flux2024}.
 
-\paragraph{Main finding.}
-Under the evaluated protocol, \textbf{LiteSSM-A} is the recommended compact operating point in the training-matched panel: it attains the highest UFD Macro among Panel~A models while retaining moderate batch-32 throughput, but it is \emph{not} the lowest batch-1 latency model, and \emph{no} evaluated Panel~A detector---including SSMs---removes generator-specific failures (notably DALL·E) or content-domain difficulty (bedroom).
-Frequency enhancement is not universally beneficial under our protocol.
+The study combines a shared low-data recipe with generator-, domain-, JPEG-, and efficiency-specific evidence. It also examines failure modes through score distributions, decision agreement, and fixed-weight ensembles.
+Within Panel~A, \textbf{LiteSSM-A} attains the highest UFD Macro while retaining moderate batch-32 throughput. Its transfer remains generator dependent: DALL·E stays difficult, bedroom images remain less separable than CelebA-HQ, and the frequency branch does not provide a consistent gain.
 
 The remainder of the paper is organized as follows.
 Section~\ref{sec:related} situates related detectors, including LAID and LOTA.

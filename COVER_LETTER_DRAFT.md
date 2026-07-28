@@ -1,4 +1,4 @@
-﻿# SUPERSEDED — use `COVER_LETTER.md`
+# SUPERSEDED — use `COVER_LETTER.md`
 
 This draft is kept only for history. Authoritative cover letter: **`COVER_LETTER.md`**.
 

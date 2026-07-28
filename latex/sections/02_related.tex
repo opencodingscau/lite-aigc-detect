@@ -23,8 +23,9 @@ B-Free emphasizes bias-controlled training pairs and content-aligned fakes to re
 We cite these works as complementary protocol lessons rather than as training-matched baselines.
 Diffusion-oriented detectors often exploit reconstruction error or diffusion-specific representations.
 DIRE distinguishes real and generated images via the discrepancy between an input and its diffusion reconstruction~\cite{wang2023dire}.
+AEROBLADE instead uses latent-diffusion autoencoder reconstruction error without detector training~\cite{ricker2024aeroblade}.
 Such pipelines can improve robustness on diffusion imagery, but they introduce a heavy generative-model reconstruction stage that differs from the compact direct-classification setting studied here.
-We therefore discuss DIRE and related reconstruction approaches as literature context and do \emph{not} re-run them as efficiency-matched baselines.
+We therefore discuss DIRE, AEROBLADE, and related reconstruction approaches as literature context and do \emph{not} re-run them as efficiency-matched baselines.
 
 Large-scale benchmarks further shape evaluation expectations.
 GenImage provides a million-scale multi-generator suite with cross-generator and degraded-image protocols~\cite{zhu2023genimage}; many 2024--2025 detectors report GenImage ACC/AP under large training budgets.
@@ -37,11 +38,10 @@ Compact ImageNet-style backbones (EfficientNet, MobileNet, ShuffleNet) are widel
 In this study they form the controlled compact CNN panel trained from scratch under a locked recipe.
 MDPI venues have likewise published compact CNN/ViT detectors for synthetic-image recognition, typically on CIFAKE-style single-domain settings or spatial--frequency--wavelet fusion Transformers~\cite{bird2024cifake,lokner2024lightweight,cinar2025pvism,man2026mdp}.
 
-Two recent lines are especially close to our keywords.
+Two recent lines are particularly relevant to the compact-detection setting.
 \textbf{LAID} benchmarks off-the-shelf lightweight CNNs/ViTs on GenImage subsets across spatial, spectral, and fusion domains, emphasizing Params/FLOPs and adversarial robustness~\cite{chivaran2025laid}.
 \textbf{LOTA} extracts millisecond-scale bit-plane noise patches for GenImage cross-generator ACC/AP and compares against reconstruction-heavy baselines~\cite{wang2025lota}.
-Neither work is a protocol-matched substitute for the present study: Table~\ref{tab:positioning} summarizes the contrast.
-We do \emph{not} claim the first lightweight AIGC detector, the first spatial--frequency study, or a real-time edge deployment result.
+LAID and LOTA address complementary settings with different data, pretraining, and evaluation metrics; Table~\ref{tab:positioning} summarizes these distinctions.
 
 \begin{table}[H]
 \caption{Study positioning against closely related lightweight/efficient detectors.
@@ -73,8 +73,7 @@ Our \textbf{LiteSSM-A} and \textbf{LiteSSM-B} classifiers are \emph{study-specif
 
 Table~\ref{tab:protocol} situates representative external paradigms against our controlled setting.
 Prior work has demonstrated strong cross-generator detection using large pretrained feature extractors, reconstruction-based diffusion representations, generator-artifact modeling, and GenImage-scale lightweight benchmarks.
-In contrast, this study does not seek a new state of the art across heterogeneous training protocols.
-Its contribution is experimental-design novelty: under a locked no-pretraining, low-data recipe, we jointly compare compact CNNs, a frequency-aware CNN, and study-specific SSMs, and we report generator-macro OOD, content-domain decomposition, worst-generator failure, JPEG Q70, and measured batch-1/batch-32 efficiency so that an operating point can be selected with explicit boundaries.
+Our study isolates architecture effects within a shared low-data, no-pretraining training setting and reports generator-macro OOD, content-domain decomposition, worst-generator failure, JPEG~Q70 behavior, and measured batch-1/batch-32 efficiency.
 
 \begin{table}[H]
 \caption{Protocol-level comparison of representative detectors.

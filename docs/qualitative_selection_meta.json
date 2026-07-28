@@ -1,0 +1,200 @@
+{
+  "selection_policy": "predefined ranking rules; not visual cherry-picking",
+  "bedroom": {
+    "rule": {
+      "top": "bedroom \u2229 (A correct @0.43) \u2229 (Eff wrong @0.54); rank by |p_A\u2212p_Eff|; stratified real/fake top-3",
+      "bottom": "bedroom \u2229 (A wrong) \u2229 (Eff wrong); rank by mean |p\u2212thr|; stratified real/fake top-3",
+      "seed": null,
+      "not_by_visual_appeal": true
+    },
+    "cells": [
+      {
+        "row": 0,
+        "col": 0,
+        "path": "E:\\sciencecre\\aigc_datasets\\DiffusionForensics\\adm\\bedroom\\1_fake\\638.png",
+        "true": "fake",
+        "p_litesm_a": 0.7127889394760132,
+        "p_eff_b0": 0.3354773223400116,
+        "source": "adm_bedroom_fake"
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "path": "E:\\sciencecre\\aigc_datasets\\DiffusionForensics\\adm\\bedroom\\0_real\\0722e10c9dd132c7b502a61b76e68f67509efd05.jpg",
+        "true": "real",
+        "p_litesm_a": 0.1583050638437271,
+        "p_eff_b0": 0.7778370976448059,
+        "source": "adm_bedroom_real"
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "path": "E:\\sciencecre\\aigc_datasets\\DiffusionForensics\\adm\\bedroom\\1_fake\\343.png",
+        "true": "fake",
+        "p_litesm_a": 0.8220270276069641,
+        "p_eff_b0": 0.49442553520202637,
+        "source": "adm_bedroom_fake"
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "path": "E:\\sciencecre\\aigc_datasets\\DiffusionForensics\\adm\\bedroom\\1_fake\\349.png",
+        "true": "fake",
+        "p_litesm_a": 0.14551778137683868,
+        "p_eff_b0": 0.08937963098287582,
+        "source": "adm_bedroom_fake"
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "path": "E:\\sciencecre\\aigc_datasets\\DiffusionForensics\\adm\\bedroom\\0_real\\07216af28c2909d608c476341352b48cb6beac85.jpg",
+        "true": "real",
+        "p_litesm_a": 0.9893268346786499,
+        "p_eff_b0": 0.9039642810821533,
+        "source": "adm_bedroom_real"
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "path": "E:\\sciencecre\\aigc_datasets\\DiffusionForensics\\adm\\bedroom\\1_fake\\829.png",
+        "true": "fake",
+        "p_litesm_a": 0.2274012416601181,
+        "p_eff_b0": 0.11871396750211716,
+        "source": "adm_bedroom_fake"
+      }
+    ]
+  },
+  "ufd_dalle_glide": {
+    "rule": {
+      "top": "UFD DALL\u00b7E \u2229 label=fake; rank by |p_LiteSSM-A\u22120.5| ascending; top-3",
+      "bottom": "UFD Glide_100_10 \u2229 label=fake \u2229 p_A\u22650.43; rank by p_A descending; top-3",
+      "not_by_visual_appeal": true
+    },
+    "cells": [
+      {
+        "row": 0,
+        "col": 0,
+        "path": "E:\\sciencecre\\aigc_datasets\\UniversalFakeDetect\\dalle\\1_fake\\plszaygqda.png",
+        "p_litesm_a": 0.5040944218635559,
+        "p_npr": 1.0,
+        "source": "ufd_dalle"
+      },
+      {
+        "row": 0,
+        "col": 1,
+        "path": "E:\\sciencecre\\aigc_datasets\\UniversalFakeDetect\\dalle\\1_fake\\jgyprvacek.png",
+        "p_litesm_a": 0.5089606642723083,
+        "p_npr": 1.0,
+        "source": "ufd_dalle"
+      },
+      {
+        "row": 0,
+        "col": 2,
+        "path": "E:\\sciencecre\\aigc_datasets\\UniversalFakeDetect\\dalle\\1_fake\\stzvgskice.png",
+        "p_litesm_a": 0.5102739930152893,
+        "p_npr": 1.0,
+        "source": "ufd_dalle"
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "path": "E:\\sciencecre\\aigc_datasets\\UniversalFakeDetect\\glide_100_10\\1_fake\\iedkqtkbtj.png",
+        "p_litesm_a": 0.9998486042022705,
+        "p_npr": 1.0,
+        "source": "ufd_glide_100_10"
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "path": "E:\\sciencecre\\aigc_datasets\\UniversalFakeDetect\\glide_100_10\\1_fake\\ajldduomvc.png",
+        "p_litesm_a": 0.9997462630271912,
+        "p_npr": 1.0,
+        "source": "ufd_glide_100_10"
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "path": "E:\\sciencecre\\aigc_datasets\\UniversalFakeDetect\\glide_100_10\\1_fake\\ueoeojrsyj.png",
+        "p_litesm_a": 0.9995719790458679,
+        "p_npr": 1.0,
+        "source": "ufd_glide_100_10"
+      }
+    ]
+  },
+  "kappa_ufd": {
+    "order": [
+      "mobilemamba_lite",
+      "mambapsa_cls",
+      "efficientnet_b0",
+      "lite_freq_net_v2",
+      "mobilenet_v3_small",
+      "shufflenet_v2_x0_5"
+    ],
+    "short": [
+      "A\u2605",
+      "B",
+      "Eff",
+      "Freq",
+      "Mob",
+      "Shuf"
+    ],
+    "matrix": [
+      [
+        1.0,
+        0.7969,
+        0.5874,
+        0.5272,
+        0.2695,
+        0.5589
+      ],
+      [
+        0.7969,
+        1.0,
+        0.561,
+        0.4999,
+        0.2512,
+        0.5136
+      ],
+      [
+        0.5874,
+        0.561,
+        1.0,
+        0.4758,
+        0.1909,
+        0.5203
+      ],
+      [
+        0.5272,
+        0.4999,
+        0.4758,
+        1.0,
+        0.3062,
+        0.4587
+      ],
+      [
+        0.2695,
+        0.2512,
+        0.1909,
+        0.3062,
+        1.0,
+        0.187
+      ],
+      [
+        0.5589,
+        0.5136,
+        0.5203,
+        0.4587,
+        0.187,
+        1.0
+      ]
+    ],
+    "thresholds": {
+      "mobilemamba_lite": 0.43,
+      "mambapsa_cls": 0.63,
+      "efficientnet_b0": 0.54,
+      "lite_freq_net_v2": 0.94,
+      "mobilenet_v3_small": 0.5,
+      "shufflenet_v2_x0_5": 0.5
+    }
+  }
+}

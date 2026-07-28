@@ -8,7 +8,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 ROOT = Path(r"E:\sciencecre\aigc_datasets\lite-aigc-detect")
 ASSETS = Path(r"E:\sciencecre\aigc_datasets\formal\_paper_assets")
@@ -168,77 +167,157 @@ def fig_pareto_inset():
         "shufflenet_v2_x0_5": "CNN",
     }
     cols = {"SSM": C["ssm"], "CNN": C["cnn"], "CNN+FFT": C["freq"]}
+    # Hand-tuned offsets (points): dense CNN cluster needs radial spread so each tag maps uniquely
+    short_xy = {
+        # Mob left-down; Freq upper-right of cluster; Eff bottom-right
+        "mobilenet_v3_small": ("Mob", -8, -36),
+        "shufflenet_v2_x0_5": ("Shuf", -18, 28),
+        "lite_freq_net_v2": ("Freq", -8, -28),
+        "efficientnet_b0": ("Eff", 44, -36),
+        "mobilemamba_lite": ("A★", 22, 18),
+        "mambapsa_cls": ("B", -22, -20),
+    }
+    fs = 11
 
-    fig, ax = plt.subplots(figsize=(9.2, 5.9))
+    fig, (ax, axz) = plt.subplots(
+        1, 2, figsize=(11.2, 5.5), gridspec_kw={"width_ratios": [1.35, 1.0], "wspace": 0.28}
+    )
+
     pts = []
     for key in order:
         name = LABELS[key]
         m = frozen["models"][name]
         x, y = float(m["batch1_p50_ms"]), float(m["ufd_macro_auc"])
         s = max(90.0, float(m["params_M"]) * 95)
-        ax.scatter([x], [y], s=s, c=cols[arch[key]], alpha=0.88, edgecolors=("black" if name == "LiteSSM-A" else "white"), linewidths=(1.7 if name == "LiteSSM-A" else 0.8), zorder=3)
-        pts.append((name, x, y, cols[arch[key]]))
+        a = arch[key]
+        ax.scatter(
+            [x],
+            [y],
+            s=s,
+            c=cols[a],
+            alpha=0.9,
+            edgecolors=("black" if name == "LiteSSM-A" else "white"),
+            linewidths=(1.8 if name == "LiteSSM-A" else 0.8),
+            zorder=3,
+        )
+        axz.scatter(
+            [np.log10(x)],
+            [y],
+            s=70,
+            c=cols[a],
+            alpha=0.9,
+            edgecolors=("black" if name == "LiteSSM-A" else "white"),
+            linewidths=(1.8 if name == "LiteSSM-A" else 0.8),
+            zorder=3,
+        )
+        pts.append((key, name, x, y))
 
-    for key, lab, dxy in [("univfd", "UnivFD (ref)", (8, 8)), ("npr", "NPR (ref)", (8, -12))]:
+    for key, lab, dxy in [("npr", "NPR", (10, 10)), ("univfd", "UnivFD", (10, -16))]:
         rep = ext[key]
         x = float(rep["latency_batch1"]["p50_ms"])
         y = float(rep["splits"]["ufd_eval"]["ufd_macro_auc"])
         ax.scatter([x], [y], s=70, facecolors="none", edgecolors=C["ref"], linewidths=1.5, marker="D", zorder=4)
-        ax.annotate(lab, (x, y), textcoords="offset points", xytext=dxy, fontsize=8.2, color=C["ref"])
-
-    offsets = {
-        "LiteSSM-A": (16, 10),
-        "LiteSSM-B": (16, -16),
-        "EfficientNet-B0": (8, 12),
-        "LiteFreqNet v2": (8, -14),
-        "MobileNetV3-S": (-58, -16),
-        "ShuffleNet-x0.5": (8, 10),
-    }
-    for name, x, y, _ in pts:
-        ox, oy = offsets[name]
         ax.annotate(
-            name + (" ★" if name == "LiteSSM-A" else ""),
+            lab,
             (x, y),
             textcoords="offset points",
+            xytext=dxy,
+            fontsize=fs,
+            color=C["ref"],
+            arrowprops=dict(arrowstyle="-", color=C["rule"], lw=0.7, shrinkA=0, shrinkB=3),
+        )
+    # A above its point; B bottom-left of its point
+    ax.annotate(
+        "LiteSSM-A",
+        (144.4, 0.718),
+        textcoords="offset points",
+        xytext=(0, 26),
+        fontsize=fs,
+        fontweight="semibold",
+        color=C["ink"],
+        ha="center",
+        va="bottom",
+        arrowprops=dict(arrowstyle="-", color=C["rule"], lw=0.7, shrinkA=0, shrinkB=3),
+        clip_on=False,
+    )
+    ax.annotate(
+        "LiteSSM-B",
+        (237.6, 0.700),
+        textcoords="offset points",
+        xytext=(-58, -30),
+        fontsize=fs,
+        color=C["ink"],
+        ha="right",
+        va="top",
+        arrowprops=dict(arrowstyle="-", color=C["rule"], lw=0.7, shrinkA=0, shrinkB=3),
+        clip_on=False,
+    )
+
+    # Right: fixed radial offsets — no adjustText (it scrambled leader lines on this cluster)
+    for key, name, x, y in pts:
+        lab, ox, oy = short_xy[key]
+        axz.annotate(
+            lab,
+            (np.log10(x), y),
+            textcoords="offset points",
             xytext=(ox, oy),
-            fontsize=8.4,
-            fontweight=("semibold" if name == "LiteSSM-A" else "regular"),
+            fontsize=fs,
+            fontweight=("semibold" if key == "mobilemamba_lite" else "regular"),
             color=C["ink"],
-            arrowprops=dict(arrowstyle="-", color=C["rule"], lw=0.7) if name.startswith("LiteSSM") or name == "MobileNetV3-S" else None,
+            ha="center",
+            va="center",
+            arrowprops=dict(arrowstyle="-", color=C["rule"], lw=0.8, shrinkA=0, shrinkB=4),
+            zorder=5,
+            clip_on=False,
         )
 
     ax.set_xscale("log")
-    ax.set_xlim(2.2, 320)
-    ax.set_ylim(0.60, 1.02)
-    ax.set_xlabel("Batch-1 latency (ms/image, FP32, model-only p50; log scale)")
-    ax.set_ylabel("UFD Macro AUC")
-    ax.set_title("Accuracy–efficiency operating points", loc="left", fontweight="semibold")
-    ax.grid(True, which="major", alpha=0.22, color=C["rule"])
+    ax.set_xlim(2.2, 380)
+    ax.set_ylim(0.58, 1.04)
+    ax.set_xlabel("Batch-1 latency (ms/image; log scale)", fontsize=fs)
+    ax.set_ylabel("UFD Macro AUC", fontsize=fs)
+    ax.set_title("Full range (Panel A + B)", loc="left", fontweight="semibold", fontsize=fs)
+
+    axz.set_xlim(np.log10(2.2), np.log10(320))
+    axz.set_ylim(0.575, 0.810)
+    tick_vals = [3, 10, 30, 100, 300]
+    axz.set_xticks([np.log10(v) for v in tick_vals])
+    axz.set_xticklabels([str(v) for v in tick_vals])
+    axz.set_xlabel("Batch-1 latency (ms/image; log scale)", fontsize=fs)
+    axz.set_title("Panel A zoom [0.60, 0.80]", loc="left", fontweight="semibold", fontsize=fs)
+
+    for a in (ax, axz):
+        a.tick_params(labelsize=fs)
+        a.grid(True, which="major", alpha=0.22, color=C["rule"])
+        for spine in a.spines.values():
+            spine.set_color(C["rule"])
+
     handles = [
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["ssm"], markersize=9, label="SSM (Panel A)"),
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["cnn"], markersize=9, label="CNN (Panel A)"),
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["freq"], markersize=9, label="CNN+FFT (Panel A)"),
-        Line2D([0], [0], marker="D", color=C["ref"], markerfacecolor="none", markersize=7, label="External ref (Panel B)"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["ssm"], markersize=9, label="SSM"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["cnn"], markersize=9, label="CNN"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["freq"], markersize=9, label="CNN+FFT"),
+        Line2D([0], [0], marker="D", color=C["ref"], markerfacecolor="none", markersize=7, label="Panel B ref"),
     ]
-    ax.legend(handles=handles, loc="lower right", frameon=True, fancybox=False, edgecolor=C["rule"], fontsize=8)
-    ax.text(0.02, 0.03, "Marker size ∝ Params (M)\n★ preferred Panel-A operating point", transform=ax.transAxes, fontsize=7.5, color=C["muted"], va="bottom")
-
-    # inset: Panel A only, 0.60-0.80
-    axins = inset_axes(ax, width="42%", height="38%", loc="center left", borderpad=1.8)
-    for name, x, y, col in pts:
-        axins.scatter([x], [y], s=55, c=col, edgecolors=("black" if name == "LiteSSM-A" else "white"), linewidths=0.8)
-        if name in ("LiteSSM-A", "LiteSSM-B", "ShuffleNet-x0.5", "EfficientNet-B0"):
-            axins.annotate(name.replace("EfficientNet-B0", "Eff-B0").replace("ShuffleNet-x0.5", "Shuffle"), (x, y), textcoords="offset points", xytext=(4, 3), fontsize=6.5, color=C["ink"])
-    axins.set_xscale("log")
-    axins.set_xlim(3, 300)
-    axins.set_ylim(0.60, 0.80)
-    axins.set_title("Panel A inset", fontsize=8, pad=3)
-    axins.grid(True, alpha=0.2, color=C["rule"])
-    axins.tick_params(labelsize=7)
-
-    fig.subplots_adjust(left=0.10, right=0.98, bottom=0.12, top=0.90)
+    fig.legend(
+        handles=handles,
+        loc="lower center",
+        ncol=4,
+        frameon=True,
+        fancybox=False,
+        edgecolor=C["rule"],
+        fontsize=fs,
+        bbox_to_anchor=(0.5, 0.0),
+    )
+    fig.suptitle(
+        "Accuracy-efficiency operating points (marker size ~ Params)",
+        fontsize=fs,
+        fontweight="semibold",
+        y=0.98,
+    )
+    fig.subplots_adjust(left=0.07, right=0.99, bottom=0.16, top=0.88, wspace=0.28)
     save(fig, "fig2_pareto_ufd_macro.png")
     plt.close(fig)
+
 
 
 def fig_jpeg_forest():
@@ -271,7 +350,7 @@ def fig_jpeg_forest():
     ax.set_yticklabels([LABELS[k] for k in order])
     ax.set_xlabel(r"$\Delta$AUC $= \mathrm{AUC}_{Q70}-\mathrm{AUC}_{\mathrm{clean}}$ (paired bootstrap 95% CI)")
     ax.set_title("JPEG Q70 effect on ID AUC", loc="left", fontweight="semibold")
-    ax.set_xlim(-0.02, 0.02)
+    ax.set_xlim(-0.015, 0.015)
     ax.grid(True, axis="x", alpha=0.25, color=C["rule"])
     for spine in ("top", "right"):
         ax.spines[spine].set_visible(False)

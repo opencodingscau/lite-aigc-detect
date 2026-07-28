@@ -1,4 +1,4 @@
-# Lite AIGC Detect
+﻿# Lite AIGC Detect
 
 Protocol-locked comparison of **compact CNN**, **frequency-aware**, and **study-specific SSM** detectors for still-image real/fake classification.
 
@@ -78,7 +78,7 @@ Source: `freeze/frozen_numbers.json` (one RTX 4090D FP32 session). A preliminary
 | SHA256 surface | `hashes/SHA256SUMS` |
 | Checkpoint layout + hashes | `checkpoints/README.md` (weights via release if license-cleared) |
 | Raw third-party images | **not redistributed** |
-| Zenodo (version DOI) | [10.5281/zenodo.21604045](https://doi.org/10.5281/zenodo.21604045) (`v1.0.0-paper.2`) |
+| Zenodo (version DOI) | [10.5281/zenodo.21604045](https://doi.org/10.5281/zenodo.21604045) (`v1.0.0-paper.3`) |
 | Zenodo (concept DOI) | [10.5281/zenodo.21604044](https://doi.org/10.5281/zenodo.21604044) |
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21604045.svg)](https://doi.org/10.5281/zenodo.21604045)
@@ -93,7 +93,7 @@ Source: `freeze/frozen_numbers.json` (one RTX 4090D FP32 session). A preliminary
 
 ## Citation
 
-See `CITATION.cff`. Archival release: GitHub [`v1.0.0-paper.2`](https://github.com/opencodingscau/lite-aigc-detect/releases/tag/v1.0.0-paper.2), Zenodo version DOI [10.5281/zenodo.21604045](https://doi.org/10.5281/zenodo.21604045).
+See `CITATION.cff`. Archival release: GitHub [`v1.0.0-paper.3`](https://github.com/opencodingscau/lite-aigc-detect/releases/tag/v1.0.0-paper.3), Zenodo version DOI [10.5281/zenodo.21604045](https://doi.org/10.5281/zenodo.21604045).
 
 ## License
 

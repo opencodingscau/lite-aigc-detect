@@ -310,89 +310,14 @@ def fig_architecture():
 # Fig: Pareto
 # ---------------------------------------------------------------------------
 def fig_pareto(frozen: dict, ext: dict | None, lat: dict | None):
-    fig, ax = plt.subplots(figsize=(9.0, 5.8))
-    models = frozen["models"]
+    """Prefer figures from render_analysis_figures.fig_pareto_inset.
+    Skip overwrite here so re-running this script does not regress label layout."""
+    target = OUT_DIRS[0] / "fig2_pareto_ufd_macro.png"
+    if target.exists():
+        print(f"skip fig_pareto (keep existing {target.name}; regenerate via render_analysis_figures.py)")
+        return
+    raise FileNotFoundError("Missing Pareto figure; run scripts/render_analysis_figures.py first")
 
-    ax.axvspan(3, 12, color="#F5F5F4", zorder=0)
-    ax.axvspan(100, 300, color="#F0FDFA", zorder=0)
-    ax.text(5.5, 0.988, "low latency", fontsize=8.0, color=C["muted"], ha="center")
-    ax.text(170, 0.988, "SSM operating region", fontsize=8.0, color=C["ssm"], ha="center")
-
-    for key in ORDER:
-        name = LABELS[key]
-        m = models[name]
-        x = float(m["batch1_p50_ms"])
-        y = float(m["ufd_macro_auc"])
-        s = max(90.0, float(m["params_M"]) * 95)
-        arch = ARCH[key]
-        edge = C["ink"] if name == "LiteSSM-A" else "white"
-        lw = 1.8 if name == "LiteSSM-A" else 0.9
-        ax.scatter([x], [y], s=s, c=ARCH_COLOR[arch], alpha=0.85, edgecolors=edge, linewidths=lw, zorder=3)
-
-    offsets = {
-        "LiteSSM-A": (14, 12),
-        "LiteSSM-B": (14, -18),
-        "EfficientNet-B0": (10, 14),
-        "LiteFreqNet v2": (10, -16),
-        "MobileNetV3-S": (-62, -18),
-        "ShuffleNet-x0.5": (10, 12),
-    }
-    for key in ORDER:
-        name = LABELS[key]
-        m = models[name]
-        ox, oy = offsets[name]
-        weight = "semibold" if name == "LiteSSM-A" else "regular"
-        label = name + ("  ★" if name == "LiteSSM-A" else "")
-        ax.annotate(
-            label,
-            (m["batch1_p50_ms"], m["ufd_macro_auc"]),
-            textcoords="offset points",
-            xytext=(ox, oy),
-            fontsize=8.6,
-            fontweight=weight,
-            color=C["ink"],
-            arrowprops=dict(arrowstyle="-", color=C["rule"], lw=0.7, shrinkA=0, shrinkB=4)
-            if name in ("LiteSSM-A", "LiteSSM-B", "MobileNetV3-S")
-            else None,
-        )
-
-    if ext:
-        for key, lab, dxy in [("univfd", "UnivFD (ref)", (10, 8)), ("npr", "NPR (ref)", (10, -14))]:
-            rep = ext[key]
-            x = float(rep["latency_batch1"]["p50_ms"])
-            y = float(rep["splits"]["ufd_eval"]["ufd_macro_auc"])
-            ax.scatter([x], [y], s=70, facecolors="none", edgecolors=C["ref"], linewidths=1.5, marker="D", zorder=4, alpha=0.95)
-            ax.annotate(lab, (x, y), textcoords="offset points", xytext=dxy, fontsize=8.2, color=C["ref"])
-
-    ax.set_xscale("log")
-    ax.set_xlim(2.2, 320)
-    ax.set_ylim(0.60, 1.02)
-    ax.set_xlabel("Batch-1 latency (ms/image, FP32, model-only p50; log scale)")
-    ax.set_ylabel("UFD Macro AUC")
-    ax.set_title("Accuracy–efficiency operating points", loc="left", fontweight="semibold")
-    ax.grid(True, which="major", axis="both", alpha=0.22, color=C["rule"])
-    ax.grid(True, which="minor", axis="x", alpha=0.12, color=C["rule"])
-    handles = [
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["ssm"], markersize=9, label="SSM (Panel A)"),
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["cnn"], markersize=9, label="CNN (Panel A)"),
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=C["freq"], markersize=9, label="CNN+FFT (Panel A)"),
-        Line2D([0], [0], marker="D", color=C["ref"], markerfacecolor="none", markersize=7, label="External ref (Panel B)"),
-    ]
-    ax.legend(handles=handles, loc="lower right", frameon=True, fancybox=False, edgecolor=C["rule"], fontsize=8.2)
-    ax.text(
-        0.02,
-        0.03,
-        "Marker size ∝ Params (M)\n★ preferred Panel-A operating point",
-        transform=ax.transAxes,
-        fontsize=7.6,
-        color=C["muted"],
-        va="bottom",
-    )
-    for spine in ax.spines.values():
-        spine.set_color(C["rule"])
-    fig.tight_layout()
-    save(fig, "fig2_pareto_ufd_macro.png")
-    plt.close(fig)
 
 
 # ---------------------------------------------------------------------------

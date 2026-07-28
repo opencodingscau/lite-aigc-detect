@@ -1,4 +1,4 @@
-# SUPERSEDED — use `COVER_LETTER.md`
+﻿# SUPERSEDED — use `COVER_LETTER.md`
 
 This draft is kept only for history. Authoritative cover letter: **`COVER_LETTER.md`**.
 
@@ -18,7 +18,7 @@ This work is an empirical, deployment-oriented study of compact detectors for **
 
 We believe the manuscript fits *Applied Sciences* because it prioritizes **reproducible measurement and practical operating-point selection** over claims of state-of-the-art accuracy. Our main recommendation is **LiteSSM-A** as the preferred generalization–efficiency operating point in the training-matched panel (UFD Macro 0.718; locked batch-32 throughput 226 images/s), while we explicitly document remaining boundaries (near-chance DALL·E AUCs; hard bedroom domain; non-universal frequency gains).
 
-All quantitative tables are derived from a frozen prediction package with bootstrap confidence intervals. We clearly distinguish **UFD Macro AUC** (primary cross-generator metric) from **OOD Pooled AUC** to avoid ambiguous generalization claims. Code and frozen artifacts are available at https://github.com/opencodingscau/lite-aigc-detect (release `v1.0.0-paper.2`) and archived at Zenodo (https://doi.org/10.5281/zenodo.21604045).
+All quantitative tables are derived from a frozen prediction package with bootstrap confidence intervals. We clearly distinguish **UFD Macro AUC** (primary cross-generator metric) from **OOD Pooled AUC** to avoid ambiguous generalization claims. Code and frozen artifacts are available at https://github.com/opencodingscau/lite-aigc-detect (release `v1.0.0-paper.3`) and archived at Zenodo (https://doi.org/10.5281/zenodo.21604045).
 
 This manuscript is original and not under consideration elsewhere. The author has approved the submission and declares no conflicts of interest related to this work.
 

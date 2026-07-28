@@ -1,4 +1,4 @@
-# Submission gates (objective definition)
+﻿# Submission gates (objective definition)
 
 Aligned with the pre-submission plan: scientific evidence is largely frozen;
 remaining work is **auditability**. Do not submit until all boxes below pass.
@@ -16,8 +16,8 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 - [x] `.gitattributes` LF normalization for hash-stable text files
 - [x] `checkpoints/README.md` distribution / license policy (weights not in git)
 - [x] `scripts/make_sha256sums.py` → `hashes/SHA256SUMS`
-- [x] Tag `v1.0.0-paper` / `v1.0.0-paper.2` + GitHub Release published
-- [x] Zenodo version DOI **10.5281/zenodo.21604045** (concept **10.5281/zenodo.21604044**) back-filled
+- [x] Tag `v1.0.0-paper` / `v1.0.0-paper.2` published; `v1.0.0-paper.3` in progress
+- [ ] Zenodo version DOI for `v1.0.0-paper.3` back-filled after GitHub Release archival (concept **10.5281/zenodo.21604044**)
 - [ ] Panel A checkpoints published only if dataset license allows derived weights
 - [x] Data Availability contains real GitHub + Zenodo URLs
 
@@ -42,7 +42,7 @@ remaining work is **auditability**. Do not submit until all boxes below pass.
 - [x] Clean compile (local MiKTeX; 15-page PDF after literature rewrite)
 - [x] PDF vs freeze numbers checklist (see `docs/PDF_NUMBER_CHECKLIST.md`)
 - [x] Cover letter finalized (`COVER_LETTER.md`; single author; LAID/LOTA positioning noted)
-- [x] Zenodo DOI + GitHub release already in Data Availability (`v1.0.0-paper.2`, `10.5281/zenodo.21604045`)
+- [ ] Data Availability cites `v1.0.0-paper.3` + new Zenodo version DOI (concept DOI unchanged)
 
 **Pre-submit reminder:** re-upload Overleaf `latex/` after this rewrite and spot-check Related Work + Refs.
 

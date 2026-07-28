@@ -1,4 +1,4 @@
-# Release v1.0.0-paper
+﻿# Release v1.0.0-paper
 
 **Manuscript (working title):** Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift: A Reproducible Study of CNN, Frequency-Aware, and State-Space Models
 
@@ -56,6 +56,6 @@ Expected: `[PASS] max_abs_err=0`, Tables 2–5 CSV under `reproduced_tables/`, h
 
 ## Zenodo
 
-- **Version DOI (cite this):** https://doi.org/10.5281/zenodo.21604045 (`v1.0.0-paper.2`)
+- **Version DOI (cite this):** https://doi.org/10.5281/zenodo.21604045 (`v1.0.0-paper.2`; superseded by `v1.0.0-paper.3`)
 - **Concept DOI:** https://doi.org/10.5281/zenodo.21604044
 

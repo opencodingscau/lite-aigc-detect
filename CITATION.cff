@@ -1,4 +1,4 @@
-cff-version: 1.2.0
+﻿cff-version: 1.2.0
 title: "Lightweight AI-Generated Image Detection under Compression and Cross-Generator Shift"
 message: >-
   If you use this software or the frozen table-rebuild package, please cite it
@@ -27,9 +27,9 @@ doi: 10.5281/zenodo.21604045
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21604045
-    description: Zenodo version DOI for GitHub release v1.0.0-paper.2
+    description: Zenodo version DOI (temporary: paper.2; backfill after paper.3 archival)
   - type: doi
     value: 10.5281/zenodo.21604044
     description: Zenodo concept DOI (all versions)
-version: "1.0.0-paper.2"
-date-released: "2026-07-26"
+version: "1.0.0-paper.3"
+date-released: "2026-07-28"

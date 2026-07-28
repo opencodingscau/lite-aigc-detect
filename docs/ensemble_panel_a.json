@@ -1,0 +1,196 @@
+{
+  "note": "Computed from frozen formal/_paper_assets preds; equal-weight probability mean; no UFD/test-set weight tuning; does not alter freeze/frozen_numbers.json",
+  "singles": {
+    "LiteSSM-A": {
+      "id_auc": 0.9462499999999998,
+      "ufd_macro": 0.7184390624999999,
+      "worst": 0.503675,
+      "dalle": 0.503675,
+      "by_source": {
+        "ufd_dalle": 0.503675,
+        "ufd_glide_100_10": 0.8778875,
+        "ufd_glide_100_27": 0.85488125,
+        "ufd_glide_50_27": 0.88903125,
+        "ufd_guided": 0.7661874999999998,
+        "ufd_ldm_100": 0.6562875,
+        "ufd_ldm_200": 0.63433125,
+        "ufd_ldm_200_cfg": 0.56523125
+      }
+    },
+    "LiteSSM-B": {
+      "id_auc": 0.945125,
+      "ufd_macro": 0.6997125,
+      "worst": 0.48349999999999993,
+      "dalle": 0.48349999999999993,
+      "by_source": {
+        "ufd_dalle": 0.48349999999999993,
+        "ufd_glide_100_10": 0.85945625,
+        "ufd_glide_100_27": 0.8314187500000001,
+        "ufd_glide_50_27": 0.868225,
+        "ufd_guided": 0.7875062500000001,
+        "ufd_ldm_100": 0.62225625,
+        "ufd_ldm_200": 0.6107374999999999,
+        "ufd_ldm_200_cfg": 0.5346
+      }
+    },
+    "EfficientNet-B0": {
+      "id_auc": 0.9286,
+      "ufd_macro": 0.66688671875,
+      "worst": 0.518825,
+      "dalle": 0.518825,
+      "by_source": {
+        "ufd_dalle": 0.518825,
+        "ufd_glide_100_10": 0.7726062499999999,
+        "ufd_glide_100_27": 0.7819125,
+        "ufd_glide_50_27": 0.794775,
+        "ufd_guided": 0.72008125,
+        "ufd_ldm_100": 0.6131562500000001,
+        "ufd_ldm_200": 0.5769375,
+        "ufd_ldm_200_cfg": 0.5568
+      }
+    },
+    "LiteFreqNet v2": {
+      "id_auc": 0.9064000000000001,
+      "ufd_macro": 0.6454875,
+      "worst": 0.45130000000000003,
+      "dalle": 0.45130000000000003,
+      "by_source": {
+        "ufd_dalle": 0.45130000000000003,
+        "ufd_glide_100_10": 0.7862625000000001,
+        "ufd_glide_100_27": 0.76304375,
+        "ufd_glide_50_27": 0.8084500000000001,
+        "ufd_guided": 0.6781187499999999,
+        "ufd_ldm_100": 0.59414375,
+        "ufd_ldm_200": 0.55130625,
+        "ufd_ldm_200_cfg": 0.5312749999999999
+      }
+    },
+    "MobileNetV3-S": {
+      "id_auc": 0.890225,
+      "ufd_macro": 0.6356296875,
+      "worst": 0.45465000000000005,
+      "dalle": 0.45465000000000005,
+      "by_source": {
+        "ufd_dalle": 0.45465000000000005,
+        "ufd_glide_100_10": 0.746125,
+        "ufd_glide_100_27": 0.73925,
+        "ufd_glide_50_27": 0.7704125,
+        "ufd_guided": 0.6561625,
+        "ufd_ldm_100": 0.62109375,
+        "ufd_ldm_200": 0.57963125,
+        "ufd_ldm_200_cfg": 0.5177125
+      }
+    },
+    "ShuffleNet-x0.5": {
+      "id_auc": 0.8799250000000001,
+      "ufd_macro": 0.6735249999999999,
+      "worst": 0.46660624999999994,
+      "dalle": 0.46660624999999994,
+      "by_source": {
+        "ufd_dalle": 0.46660624999999994,
+        "ufd_glide_100_10": 0.8050625,
+        "ufd_glide_100_27": 0.80239375,
+        "ufd_glide_50_27": 0.8351500000000001,
+        "ufd_guided": 0.75504375,
+        "ufd_ldm_100": 0.6170875,
+        "ufd_ldm_200": 0.57018125,
+        "ufd_ldm_200_cfg": 0.536675
+      }
+    }
+  },
+  "ensembles_prob_mean": {
+    "E_all6_mean": {
+      "members": [
+        "LiteSSM-A",
+        "LiteSSM-B",
+        "EfficientNet-B0",
+        "LiteFreqNet v2",
+        "MobileNetV3-S",
+        "ShuffleNet-x0.5"
+      ],
+      "id_auc": 0.943,
+      "ufd_macro": 0.70291875,
+      "worst": 0.4714625,
+      "dalle": 0.4714625
+    },
+    "E_ssm_cnn_mean": {
+      "members": [
+        "LiteSSM-A",
+        "EfficientNet-B0"
+      ],
+      "id_auc": 0.94495,
+      "ufd_macro": 0.70858515625,
+      "worst": 0.5242687500000001,
+      "dalle": 0.5242687500000001
+    },
+    "E_top3_mean": {
+      "members": [
+        "LiteSSM-A",
+        "LiteSSM-B",
+        "EfficientNet-B0"
+      ],
+      "id_auc": 0.949575,
+      "ufd_macro": 0.71177265625,
+      "worst": 0.51083125,
+      "dalle": 0.51083125
+    },
+    "E_ssm_pair_mean": {
+      "members": [
+        "LiteSSM-A",
+        "LiteSSM-B"
+      ],
+      "id_auc": 0.948125,
+      "ufd_macro": 0.7128546875000001,
+      "worst": 0.49491875,
+      "dalle": 0.49491875
+    }
+  },
+  "ensembles_majority": {
+    "E_all6_mean": {
+      "id_acc": 0.8275,
+      "ufd_acc": 0.659375
+    },
+    "E_ssm_cnn_mean": {
+      "id_acc": 0.8225,
+      "ufd_acc": 0.6521875
+    },
+    "E_top3_mean": {
+      "id_acc": 0.855,
+      "ufd_acc": 0.6690625
+    },
+    "E_ssm_pair_mean": {
+      "id_acc": 0.86,
+      "ufd_acc": 0.6728125
+    }
+  },
+  "double_fault_vs_litessm_a_ufd": {
+    "LiteSSM-B": {
+      "double_fault_rate": 0.29125,
+      "error_jaccard": 0.7702479338842976
+    },
+    "EfficientNet-B0": {
+      "double_fault_rate": 0.26359375,
+      "error_jaccard": 0.5946422277053225
+    },
+    "LiteFreqNet v2": {
+      "double_fault_rate": 0.25734375,
+      "error_jaccard": 0.555668016194332
+    },
+    "MobileNetV3-S": {
+      "double_fault_rate": 0.16171875,
+      "error_jaccard": 0.2771826459560793
+    },
+    "ShuffleNet-x0.5": {
+      "double_fault_rate": 0.26265625,
+      "error_jaccard": 0.5988599928749555
+    }
+  },
+  "thresholds_used": {
+    "LiteSSM-A": 0.43,
+    "LiteSSM-B": 0.63,
+    "EfficientNet-B0": 0.54,
+    "LiteFreqNet v2": 0.94,
+    "MobileNetV3-S": 0.5,
+    "ShuffleNet-x0.5": 0.5
+  }
+}

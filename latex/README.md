@@ -13,12 +13,19 @@ latex/
     fig3_generator_heatmap.png
     fig_jpeg_quality_sweep.png
     fig_seed_sensitivity.png
+    fig_qual_bedroom.png
+    fig_qual_ufd_dalle_glide.png
+    fig_confusion_litesm_a.png
+    fig_training_dynamics.png
+    fig_error_kappa_ufd.png
+    fig_threshold_sweep_id.png
     fig_graphical_abstract.png   # MDPI graphical abstract upload (not inlined)
   sections/
     01_introduction.tex … 06_conclusions.tex
     A_flux_appendix.tex
     B_jpeg_appendix.tex
     C_seed_appendix.tex
+    D_diagnostics_appendix.tex
   mdpi_official/           # 原始 template 备份
   README.md                # 本文件
 ```
@@ -26,8 +33,10 @@ latex/
 ## 重新生成图
 ```bash
 python scripts/render_paper_figures.py
+python scripts/render_analysis_figures.py
+python scripts/render_supplementary_figures.py
 ```
-（从仓库根目录运行；数字来自 `freeze/` / `jpeg_results/` / `docs/seed_sweep_summary.json`。）
+（从仓库根目录运行；数字/预测来自 `freeze/`、`formal/_paper_assets/`、`jpeg_results/`、`docs/`。）
 
 ## 编译
 在 `latex/` 目录下：

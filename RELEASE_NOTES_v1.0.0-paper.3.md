@@ -1,4 +1,4 @@
-# Release v1.0.0-paper.3
+﻿# Release v1.0.0-paper.3
 
 **Manuscript:** Compact AI-Generated Image Detection under Compression and Cross-Generator Shift
 
@@ -36,4 +36,4 @@ python scripts/verify_sha256sums.py
 ## Zenodo
 
 - **Concept DOI (all versions):** https://doi.org/10.5281/zenodo.21604044
-- **Version DOI:** back-filled in `CITATION.cff` / Data Availability after this GitHub Release is archived by Zenodo
+- **Version DOI:** https://doi.org/10.5281/zenodo.21643045 (via successor tag `v1.0.0-paper.3.1`) in `CITATION.cff` / Data Availability after this GitHub Release is archived by Zenodo

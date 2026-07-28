@@ -23,13 +23,13 @@ keywords:
   - reproducible benchmarking
 license: MIT
 repository-code: "https://github.com/opencodingscau/lite-aigc-detect"
-doi: "10.5281/zenodo.21604044"
+doi: "10.5281/zenodo.21643045"
 identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21643045"
+    description: "Zenodo version DOI for GitHub release v1.0.0-paper.3.1"
   - type: doi
     value: "10.5281/zenodo.21604044"
     description: "Zenodo concept DOI (all versions; resolves to latest)"
-  - type: doi
-    value: "10.5281/zenodo.21604045"
-    description: "Zenodo version DOI for GitHub release v1.0.0-paper.2"
 version: "v1.0.0-paper.3.1"
 date-released: "2026-07-28"
